@@ -2,7 +2,7 @@ import fastify from "fastify";
 import cors from "@fastify/cors";
 import oauthPlugin, { fastifyOauth2, OAuth2Namespace } from "@fastify/oauth2";
 import cookie from "@fastify/cookie";
-import fastifyEnvModule from "./src/plugins/fastifyEnv.js";
+import fastifyEnvModule from "./plugins/fastifyEnv.js";
 
 declare module "fastify" {
   interface FastifyInstance {
