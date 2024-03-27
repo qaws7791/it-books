@@ -1,0 +1,61 @@
+import db from "@server/src/db/db";
+import { SelectUser, users } from "@server/src/db/schema";
+import { eq } from "drizzle-orm";
+
+export interface GoogleProfile {
+  id: string;
+  email: string;
+  verified_email: boolean;
+  name: string;
+  given_name: string;
+  family_name: string;
+  picture: string;
+  locale: string;
+}
+
+class UsersService {
+  private static instance: UsersService;
+  public static getInstance(): UsersService {
+    if (!UsersService.instance) {
+      UsersService.instance = new UsersService();
+    }
+    return UsersService.instance;
+  }
+
+  findOrCreateUser = async (googleProfile: GoogleProfile) => {
+    let existUser = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, googleProfile.email));
+
+    if (existUser.length === 0) {
+      existUser = await db
+        .insert(users)
+        .values({
+          email: googleProfile.email,
+          name: googleProfile.name,
+          picture: googleProfile.picture,
+          providerId: googleProfile.id,
+        })
+        .returning();
+    }
+    return existUser[0];
+  };
+
+  findUserById = async (id: SelectUser["id"]) => {
+    const user = await db.select().from(users).where(eq(users.id, id));
+
+    if (user.length === 0) {
+      throw new Error("User not found");
+    }
+
+    return {
+      id: user[0].id,
+      email: user[0].email,
+      name: user[0].name,
+      picture: user[0].picture,
+    };
+  };
+}
+
+export default UsersService;

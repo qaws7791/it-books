@@ -1,10 +1,15 @@
 import fp from "fastify-plugin";
 import fastifyEnv from "@fastify/env";
 
-const fastifyEnvModule = fp(async (fastify, opts) => {
+const fastifyEnvPlugin = fp(async (fastify, opts) => {
   const schema = {
     type: "object",
-    required: ["COOKIE_SECRET", "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET"],
+    required: [
+      "COOKIE_SECRET",
+      "GOOGLE_CLIENT_ID",
+      "GOOGLE_CLIENT_SECRET",
+      "JWT_SECRET",
+    ],
     properties: {
       COOKIE_SECRET: {
         type: "string",
@@ -13,6 +18,9 @@ const fastifyEnvModule = fp(async (fastify, opts) => {
         type: "string",
       },
       GOOGLE_CLIENT_SECRET: {
+        type: "string",
+      },
+      JWT_SECRET: {
         type: "string",
       },
     },
@@ -27,4 +35,4 @@ const fastifyEnvModule = fp(async (fastify, opts) => {
   await fastify.register(fastifyEnv, options);
 });
 
-export default fastifyEnvModule;
+export default fastifyEnvPlugin;
