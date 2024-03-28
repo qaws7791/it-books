@@ -7,6 +7,8 @@ import authRoutes from "@server/src/routes/auth.routes.js";
 import profileRoutes from "@server/src/routes/profile.routes.js";
 import usersRoutes from "@server/src/routes/users.routes.js";
 import fastifyJwtPlugin from "@server/src/plugins/fastifyJwt.js";
+import errorPlugin from "@server/src/plugins/error.plugin.js";
+import AppError from "@server/src/lib/AppError.js";
 
 const server = fastify({
   maxParamLength: 5000,
@@ -18,6 +20,8 @@ await server.register(fastifyEnvPlugin);
 await server.register(cors, {
   origin: "*",
 });
+
+server.register(errorPlugin);
 
 server.register(fastifyJwtPlugin);
 
