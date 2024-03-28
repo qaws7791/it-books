@@ -49,12 +49,7 @@ class UsersService {
       throw new Error("User not found");
     }
 
-    return {
-      id: user[0].id,
-      email: user[0].email,
-      name: user[0].name,
-      picture: user[0].picture,
-    };
+    return user[0];
   };
 }
 

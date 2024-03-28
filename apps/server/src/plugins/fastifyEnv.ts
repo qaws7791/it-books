@@ -8,7 +8,8 @@ const fastifyEnvPlugin = fp(async (fastify, opts) => {
       "COOKIE_SECRET",
       "GOOGLE_CLIENT_ID",
       "GOOGLE_CLIENT_SECRET",
-      "JWT_SECRET",
+      "JWT_ACCESS_SECRET",
+      "JWT_REFRESH_SECRET",
     ],
     properties: {
       COOKIE_SECRET: {
@@ -20,7 +21,10 @@ const fastifyEnvPlugin = fp(async (fastify, opts) => {
       GOOGLE_CLIENT_SECRET: {
         type: "string",
       },
-      JWT_SECRET: {
+      JWT_ACCESS_SECRET: {
+        type: "string",
+      },
+      JWT_REFRESH_SECRET: {
         type: "string",
       },
     },

@@ -1,8 +1,10 @@
+import LogoutButton from "@web/app/account/logout-button";
+import RefreshButton from "@web/app/account/refresh-button";
 import { cookies } from "next/headers";
 export default async function AccountPage() {
   const cookieStore = cookies();
   const token = cookieStore.get("access_token");
-  console.log("token", token);
+
   if (!token) {
     return <div>Not authorized</div>;
   }
@@ -14,16 +16,18 @@ export default async function AccountPage() {
         Authorization: `Bearer ${token.value}`,
       },
     });
-    console.log("res", res);
+
     if (!res.ok) {
       throw new Error("Not authorized");
     }
     const profile = await res.json();
-    console.log("profile", profile);
+
     return (
       <div>
         <h1>Account</h1>
         <pre>{JSON.stringify(profile, null, 2)}</pre>
+        <LogoutButton />
+        <RefreshButton />
       </div>
     );
   } catch (err) {

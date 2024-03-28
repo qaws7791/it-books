@@ -2,7 +2,7 @@ import { onRequestHookHandler } from "fastify";
 
 const requireAuthHook: onRequestHookHandler = async (request, reply, done) => {
   try {
-    await request.jwtVerify();
+    await request.accessVerify();
     if (!request.user) {
       throw new Error("Unauthorized");
     }
