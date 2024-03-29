@@ -8,6 +8,7 @@ import profileRoutes from "@server/src/routes/profile.routes.js";
 import usersRoutes from "@server/src/routes/users.routes.js";
 import fastifyJwtPlugin from "@server/src/plugins/fastifyJwt.js";
 import errorPlugin from "@server/src/plugins/error.plugin.js";
+import crawlRoutes from "@server/src/routes/crawl.routes.js";
 
 const server = fastify({
   maxParamLength: 5000,
@@ -49,24 +50,8 @@ server.register(oauthPlugin, {
 server.register(authRoutes, { prefix: "/auth" });
 server.register(profileRoutes, { prefix: "/profile" });
 server.register(usersRoutes, { prefix: "/users" });
+server.register(crawlRoutes, { prefix: "/crawl" });
 
-server.get("/cookies", async (request, reply) => {
-  const token = await reply.jwtSign({
-    name: "John Doe",
-    role: ["admin", "user"],
-  });
-
-  reply
-    .setCookie("token", token, {
-      path: "/",
-      domain: "localhost",
-      secure: true,
-      httpOnly: true,
-      sameSite: true,
-    })
-    .code(200)
-    .send("Cookie set!");
-});
 server.get("/", async (request, reply) => {
   return { root: "root" };
 });
