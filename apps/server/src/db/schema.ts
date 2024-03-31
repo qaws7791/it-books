@@ -24,3 +24,12 @@ export const users = pgTable("users", {
 });
 
 export type SelectUser = typeof users.$inferSelect;
+
+export const categories = pgTable("categories", {
+  id: serial("id").primaryKey(),
+  name: varchar("name").unique().notNull(),
+  slug: varchar("slug").unique().notNull(),
+  createdAt: timestamp("created_at", { precision: 6, withTimezone: true })
+    .notNull()
+    .defaultNow(),
+});

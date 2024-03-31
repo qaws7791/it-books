@@ -22,6 +22,7 @@ const authRoute: FastifyPluginAsync = async (fastify, opts) => {
         id: user.id,
         role: user.role,
         type: "access",
+        email: user.email,
       },
       {
         expiresIn: "1h",
@@ -33,6 +34,7 @@ const authRoute: FastifyPluginAsync = async (fastify, opts) => {
         id: user.id,
         role: user.role,
         type: "refresh",
+        email: user.email,
       },
       {
         expiresIn: "7d",
@@ -85,6 +87,7 @@ const authRoute: FastifyPluginAsync = async (fastify, opts) => {
           id: user.id,
           role: user.role,
           type: "access",
+          email: user.email,
         },
         {
           expiresIn: "1h",

@@ -9,6 +9,7 @@ import usersRoutes from "@server/src/routes/users.routes.js";
 import fastifyJwtPlugin from "@server/src/plugins/fastifyJwt.js";
 import errorPlugin from "@server/src/plugins/error.plugin.js";
 import crawlRoutes from "@server/src/routes/crawl.routes.js";
+import categoriesRoutes from "@server/src/routes/categories.routes.js";
 
 const server = fastify({
   maxParamLength: 5000,
@@ -51,6 +52,7 @@ server.register(authRoutes, { prefix: "/auth" });
 server.register(profileRoutes, { prefix: "/profile" });
 server.register(usersRoutes, { prefix: "/users" });
 server.register(crawlRoutes, { prefix: "/crawl" });
+server.register(categoriesRoutes, { prefix: "/categories" });
 
 server.get("/", async (request, reply) => {
   return { root: "root" };

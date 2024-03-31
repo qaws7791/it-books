@@ -1,7 +1,8 @@
 export interface Token {
   id: number;
-  role: "user" | "admin";
+  email: string;
   type: "access" | "refresh";
+  role: "user" | "admin";
   iat: number;
   exp: number;
 }
