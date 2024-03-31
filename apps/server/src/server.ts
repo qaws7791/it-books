@@ -48,11 +48,11 @@ server.register(oauthPlugin, {
   callbackUri: "http://localhost:4000/auth/google/callback",
 });
 
-server.register(authRoutes, { prefix: "/auth" });
-server.register(profileRoutes, { prefix: "/profile" });
-server.register(usersRoutes, { prefix: "/users" });
-server.register(crawlRoutes, { prefix: "/crawl" });
-server.register(categoriesRoutes, { prefix: "/categories" });
+server.register(authRoutes, { prefix: "/api/auth" });
+server.register(profileRoutes, { prefix: "/api/profile" });
+server.register(usersRoutes, { prefix: "/api/users" });
+server.register(crawlRoutes, { prefix: "/api/crawl" });
+server.register(categoriesRoutes, { prefix: "/api/categories" });
 
 server.get("/", async (request, reply) => {
   return { root: "root" };
