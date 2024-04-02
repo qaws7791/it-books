@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
+// import "@material-design-icons/font";
 import { Suspense } from "react";
 import QueryProvider from "@web/src/components/QueryProvider";
 import { ErrorBoundary } from "react-error-boundary";
 import SonnerToaster from "@web/src/components/ui/SonnerToaster";
+import GlobalHeader from "@web/src/components/global/GlobalHeader";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,7 +24,8 @@ export default function RootLayout({
           <ErrorBoundary fallback={<div>Something went wrong</div>}>
             <Suspense fallback="loading...">
               <SonnerToaster />
-              {children}
+              <GlobalHeader />
+              <main>{children}</main>
             </Suspense>
           </ErrorBoundary>
         </QueryProvider>

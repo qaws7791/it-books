@@ -1,6 +1,6 @@
 /* @import url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2"); */
 /* @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css'); */
-
+@import '@material-design-icons/font';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
