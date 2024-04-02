@@ -44,8 +44,8 @@ server.register(oauthPlugin, {
     },
     auth: fastifyOauth2.GOOGLE_CONFIGURATION,
   },
-  startRedirectPath: "/auth/google",
-  callbackUri: "http://localhost:4000/auth/google/callback",
+  startRedirectPath: "/api/auth/google",
+  callbackUri: "http://localhost:4000/api/auth/google/callback",
 });
 
 server.register(authRoutes, { prefix: "/api/auth" });

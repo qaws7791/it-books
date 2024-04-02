@@ -10,7 +10,11 @@ const errorPlugin = fp(async (fastify, opts) => {
         message: error.message,
       });
     } else {
-      reply.code(500).send({ message: "Internal Server Error" });
+      reply.code(500).send({
+        statusCode: 500,
+        name: "InternalServerError",
+        message: "Internal Server Error",
+      });
     }
   });
 });

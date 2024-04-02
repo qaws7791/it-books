@@ -12,7 +12,11 @@ class CategoriesService {
   }
   findAll = async () => {
     const allCategories = await db
-      .select()
+      .select({
+        id: categories.id,
+        name: categories.name,
+        slug: categories.slug,
+      })
       .from(categories)
       .orderBy(asc(categories.name));
     return allCategories;
@@ -45,7 +49,11 @@ class CategoriesService {
   };
 
   create = async (dto: { name: string; slug: string }) => {
-    const newCategory = await db.insert(categories).values(dto).returning();
+    const newCategory = await db.insert(categories).values(dto).returning({
+      id: categories.id,
+      name: categories.name,
+      slug: categories.slug,
+    });
 
     return newCategory[0];
   };
