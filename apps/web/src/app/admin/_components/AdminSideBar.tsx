@@ -1,3 +1,4 @@
+import { List, ListItem } from "@web/src/components/ui/List";
 import Link from "next/link";
 
 interface SidebarItem {
@@ -22,21 +23,14 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
 
 export default function AdminSideBar() {
   return (
-    <aside className="w-56">
-      <nav>
-        <ul className="max-w-80 w-full flex flex-col gap-4">
-          {SIDEBAR_ITEMS.map((item) => (
-            <li key={item.path} className="flex">
-              <Link
-                href={`/admin${item.path}`}
-                className="text-lg font-bold p-4 indent-4 w-full hover:bg-neutral-100 rounded-full"
-              >
-                {item.title}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </aside>
+    <List className="max-w-80 p-4 w-56 rounded-3xl">
+      {SIDEBAR_ITEMS.map((item) => (
+        <ListItem key={item.path} className="flex" asChild>
+          <Link href={`/admin${item.path}`} className="">
+            {item.title}
+          </Link>
+        </ListItem>
+      ))}
+    </List>
   );
 }

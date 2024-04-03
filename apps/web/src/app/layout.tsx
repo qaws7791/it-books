@@ -19,13 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="">
+      <body className="bg-[#f1ede7] min-h-screen flex flex-col">
         <QueryProvider>
           <ErrorBoundary fallback={<div>Something went wrong</div>}>
             <Suspense fallback="loading...">
               <SonnerToaster />
               <GlobalHeader />
-              <main>{children}</main>
+              <main className="flex-auto flex p-4">{children}</main>
             </Suspense>
           </ErrorBoundary>
         </QueryProvider>

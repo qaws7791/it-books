@@ -13,7 +13,7 @@ const NAV_ITEMS: { name: string; href: string }[] = [
 export default function GlobalHeader() {
   return (
     <>
-      <header className="fixed w-full h-[4.5rem] shadow-sm flex items-center justify-between px-3">
+      <header className="fixed w-full h-[4.5rem] bg-[#f1ede7] shadow-sm flex items-center justify-between px-3">
         <nav className="flex items-center gap-4">
           <Link href={"/"}>
             <Image src="/logo.svg" alt="it books" width={160} height={41} />
