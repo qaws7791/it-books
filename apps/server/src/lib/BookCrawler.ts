@@ -1,3 +1,4 @@
+import AppError from "@server/src/lib/AppError";
 import { load } from "cheerio";
 
 const removeAuthorSuffix = (text: string) => {
@@ -35,32 +36,36 @@ export const crawlBookInfo = async (url: string) => {
       ).text()
     );
     // Find all h1 tags
-    const bookInfo: Record<string, number | string> = {
-      title: $("div.gd_titArea h2.gd_name").text(),
+    const bookInfo = {
+      title: trimAndRemoveNewLine($("div.gd_titArea h2.gd_name").text()),
       price: convertPriceToNumber(
         $(
           "#yDetailTopWrap > div.topColRgt > div.gd_infoBot > div.gd_infoTbArea > div:nth-child(3) > table > tbody > tr:nth-child(1) > td > span > em"
         ).text()
       ),
-      image: $("span.gd_img img.gImg").attr("src") || "",
-      contents: $("div#infoset_toc div.infoWrap_txt textarea").text(),
-      intro: $("div#infoset_introduce div.infoWrap_txt textarea").text(),
-      authors: removeAuthorSuffix($("span.gd_pubArea span.gd_auth").text()),
-      publisher: $("span.gd_pubArea span.gd_pub a").text(),
-      pubDate: $("span.gd_pubArea span.gd_date").text(),
-      isbn: $(
-        "#infoset_specific > div.infoSetCont_wrap > div > table > tbody > tr:nth-child(3) > td"
-      ).text(),
+      image: trimAndRemoveNewLine($("span.gd_img img.gImg").attr("src") || ""),
+      contents: trimAndRemoveNewLine(
+        $("div#infoset_toc div.infoWrap_txt textarea").text()
+      ),
+      intro: trimAndRemoveNewLine(
+        $("div#infoset_introduce div.infoWrap_txt textarea").text()
+      ),
+      authors: trimAndRemoveNewLine(
+        removeAuthorSuffix($("span.gd_pubArea span.gd_auth").text())
+      ),
+      publisher: trimAndRemoveNewLine(
+        $("span.gd_pubArea span.gd_pub a").text()
+      ),
+      pubDate: trimAndRemoveNewLine($("span.gd_pubArea span.gd_date").text()),
+      isbn: trimAndRemoveNewLine(
+        $(
+          "#infoset_specific > div.infoSetCont_wrap > div > table > tbody > tr:nth-child(3) > td"
+        ).text()
+      ),
     };
-
-    for (const key in bookInfo) {
-      if (typeof bookInfo[key] === "string") {
-        bookInfo[key] = trimAndRemoveNewLine(bookInfo[key]);
-      }
-    }
     return bookInfo;
   } catch (e) {
     console.error(e);
-    return null;
+    throw new AppError("CrawlBookNotFound");
   }
 };

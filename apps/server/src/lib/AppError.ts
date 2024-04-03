@@ -1,4 +1,8 @@
-type ErrorType = "UserExists" | "UserNotFound" | "Unauthorized";
+type ErrorType =
+  | "UserExists"
+  | "UserNotFound"
+  | "Unauthorized"
+  | "CrawlBookNotFound";
 
 interface ErrorInfo {
   message: string;
@@ -17,6 +21,10 @@ const ERRORS: Record<ErrorType, ErrorInfo> = {
   Unauthorized: {
     message: "You are not authorized to access this resource",
     statusCode: 401,
+  },
+  CrawlBookNotFound: {
+    message: "Book not found",
+    statusCode: 404,
   },
 };
 
