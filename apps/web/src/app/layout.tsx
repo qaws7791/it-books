@@ -5,7 +5,8 @@ import { Suspense } from "react";
 import QueryProvider from "@web/src/components/QueryProvider";
 import { ErrorBoundary } from "react-error-boundary";
 import SonnerToaster from "@web/src/components/ui/SonnerToaster";
-import GlobalHeader from "@web/src/components/global/GlobalHeader";
+import GlobalHeader from "@web/src/components/layout/GlobalHeader";
+import GlobalSidebar from "@web/src/components/layout/GlobalSidebar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,13 +20,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[#f1ede7] min-h-screen flex flex-col">
+      <body className="bg-surface-container min-h-screen flex flex-col text-on-surface-variant">
         <QueryProvider>
           <ErrorBoundary fallback={<div>Something went wrong</div>}>
             <Suspense fallback="loading...">
               <SonnerToaster />
               <GlobalHeader />
-              <main className="flex-auto flex p-4">{children}</main>
+              <div className="flex h-full flex-auto">
+                <div className="w-0 lg:w-64 transition-all">
+                  <GlobalSidebar className="w-0 lg:w-64 transition-all" />
+                </div>
+                <main className="flex-auto flex p-4 pt-0">{children}</main>
+              </div>
             </Suspense>
           </ErrorBoundary>
         </QueryProvider>

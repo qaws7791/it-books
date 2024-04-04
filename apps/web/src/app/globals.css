@@ -1,5 +1,5 @@
-/* @import url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2"); */
-/* @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css'); */
+/* @import url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2"; */
+/* @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css'; */
 @import '@material-design-icons/font';
 @tailwind base;
 @tailwind components;
@@ -13,4 +13,63 @@
     font-style: normal;
     font-display: swap;
 }
+
+:root{
+  /* base */
+  --color-white: 255 255 255;
+  --color-black: 0 0 0;
+
+
+  /* background */
+--color-background: 254 249 242;
+--color-on-background: 29 27 24;
+
+/* elevated button */
+--color-surface: 254 249 242;
+--color-surface-dim: 222 217 211;
+--color-surface-bright: 254 249 242;
+--color-surface-container-lowest: 255 255 255;
+--color-surface-container-low: 248 243 237;
+--color-surface-container: 242 237 231;
+--color-surface-container-high: 236 231 225;
+--color-surface-container-highest: 230 226 220;
+--color-on-surface: 29 27 24;
+--color-surface-variant: 232 226 211;
+--color-on-surface-variant: 74 71 60;
+--color-inverse-surface: 50 48 44;
+--color-inverse-on-surface: 245 240 234;
+--color-outline: 123 119 106;
+--color-outline-variant: 203 198 184;
+--color-shadow: 0 0 0;
+--color-scrim: 0 0 0;
+--color-surface-tint: 102 95 54;
+
+/* primary */
+--color-primary: 102 95 54;
+--color-on-primary: 255 255 255;
+--color-primary-container: 255 245 199;
+--color-on-primary-container: 89 83 43;
+--color-inverse-primary: 209 199 149;
+
+/* secondary */
+--color-secondary: 99 95 75;
+--color-on-secondary: 255 255 255;
+--color-secondary-container: 235 228 203;
+--color-on-secondary-container: 77 73 55;
+
+/* error */
+--color-error: 186 26 26;
+--color-on-error: 255 255 255;
+--color-error-container: 255 218 214;
+--color-on-error-container: 65 0 2;
+
+  }
+}
+
+
+@layer components {
+  .scrollbar {
+    scrollbar-color: var(--color-primary) transparent;
+    scrollbar-width: thin;
+  }
 }

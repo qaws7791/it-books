@@ -1,4 +1,5 @@
 "use client";
+import GlobalSidebarModalButton from "@web/src/components/layout/GlobalSidebarModalButton";
 import Avatar from "@web/src/components/ui/Avatar";
 import Button from "@web/src/components/ui/Button";
 import Image from "next/image";
@@ -13,8 +14,9 @@ const NAV_ITEMS: { name: string; href: string }[] = [
 export default function GlobalHeader() {
   return (
     <>
-      <header className="fixed w-full h-[4.5rem] bg-[#f1ede7] shadow-sm flex items-center justify-between px-3">
+      <header className="fixed w-full h-16 bg-surface-container flex items-center justify-between px-3">
         <nav className="flex items-center gap-4">
+          <GlobalSidebarModalButton />
           <Link href={"/"}>
             <Image src="/logo.svg" alt="it books" width={160} height={41} />
           </Link>
@@ -32,7 +34,7 @@ export default function GlobalHeader() {
           <Button variant="ghost" size="icon" className="md:hidden">
             <span className="material-icons-outlined">search</span>
           </Button>
-          <button className="bg-neutral-200 p-3 w-60 rounded-full hidden gap-2 items-center md:flex">
+          <button className="bg-white p-3 w-60 rounded-full hidden gap-2 items-center md:flex">
             <span className="material-icons-outlined">search</span>
             <p>책 검색</p>
           </button>
@@ -42,7 +44,7 @@ export default function GlobalHeader() {
           </Avatar>
         </div>
       </header>
-      <div className="w-full h-[4.5rem]"></div>
+      <div className="w-full h-16"></div>
     </>
   );
 }
