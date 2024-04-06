@@ -6,7 +6,7 @@ export default function BooksPage() {
   return (
     <Page>
       <h1 className="sr-only">Books</h1>
-      <div className="grid grid-cols-card gap-4 overflow-y-auto h-full max-h-full">
+      <div className="grid grid-cols-card gap-4 overflow-y-auto">
         {DUMMY.BOOKS.map((book) => (
           <Link
             href={`/books/${book.slug}`}
