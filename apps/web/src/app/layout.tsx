@@ -20,15 +20,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-surface-container min-h-screen flex flex-col text-on-surface-variant">
+      <body className="bg-surface-container min-h-screen flex flex-col text-on-background">
         <QueryProvider>
           <ErrorBoundary fallback={<div>Something went wrong</div>}>
             <Suspense fallback="loading...">
               <SonnerToaster />
               <GlobalHeader />
               <div className="flex h-full flex-auto">
-                <div className="w-0 lg:w-64 transition-all">
-                  <GlobalSidebar className="w-0 lg:w-64 transition-all" />
+                <div className="w-0 xl:w-64 transition-all">
+                  <GlobalSidebar className="w-0 xl:w-64 transition-all" />
                 </div>
                 <main className="flex-auto flex p-4 pt-0">{children}</main>
               </div>
