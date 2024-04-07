@@ -3,19 +3,23 @@ import DUMMY from "@web/src/dummy";
 import { cn } from "@web/src/lib/utils";
 import Link from "next/link";
 
-export default function GlobalSidebar({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
+  links: {
+    name: string;
+    href: string;
+  }[];
+}
+
+export default function Sidebar({ className, links, ...props }: SidebarProps) {
   return (
     <div
       className={cn(
-        "bg-surface-container flex flex-col w-64 rounded-r-3xl h-full transition-all p-4 gap-2",
+        "bg-surface-container flex flex-col h-main p-4 gap-2 w-sidebar transition-all rounded-r-3xl",
         className
       )}
       {...props}
     >
-      {DUMMY.SIDEBAR_LINKS.map((link) => (
+      {links.map((link) => (
         <Link
           key={link.href}
           href={link.href}

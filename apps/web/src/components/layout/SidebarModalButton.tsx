@@ -1,10 +1,11 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import GlobalSidebar from "@web/src/components/layout/GlobalSidebar";
+import Sidebar from "@web/src/components/layout/Sidebar";
 import Button from "@web/src/components/ui/Button";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import DUMMY from "@web/src/dummy";
 
-export default function GlobalSidebarModalButton() {
+export default function SidebarModalButton() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -37,7 +38,7 @@ export default function GlobalSidebarModalButton() {
                 transition={{ duration: 0.4, ease: "easeInOut" }}
                 className="fixed left-0 h-full mt-16"
               >
-                <GlobalSidebar className="" />
+                <Sidebar links={DUMMY.SIDEBAR_LINKS} />
               </motion.div>
             </Dialog.Content>
           </Dialog.Portal>

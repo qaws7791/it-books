@@ -32,13 +32,13 @@ export default function BooksDetailPage({ params }: BookDetailPageProps) {
 
   return (
     <Page>
-      <div className="flex flex-col max-w-screen-lg mx-auto gap-8 lg:flex-row">
+      <div className="flex flex-col max-w-screen-lg mx-auto gap-12 lg:flex-row justify-around">
         <div>
           <img
             src={book.picture}
             alt={book.title}
             width={500}
-            height={700}
+            height={642}
             className="mx-auto"
           />
         </div>

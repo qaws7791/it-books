@@ -1,5 +1,6 @@
 "use client";
-import GlobalSidebarModalButton from "@web/src/components/layout/GlobalSidebarModalButton";
+
+import SidebarModalButton from "@web/src/components/layout/SidebarModalButton";
 import Avatar from "@web/src/components/ui/Avatar";
 import Button from "@web/src/components/ui/Button";
 import Image from "next/image";
@@ -11,12 +12,12 @@ const NAV_ITEMS: { name: string; href: string }[] = [
   { name: "관리자", href: "/admin" },
 ];
 
-export default function GlobalHeader() {
+export default function Header() {
   return (
     <>
-      <header className="fixed w-full h-16 bg-surface-container flex items-center justify-between px-3">
+      <header className="fixed w-full h-header bg-surface-container flex items-center justify-between px-3">
         <nav className="flex items-center gap-4">
-          <GlobalSidebarModalButton />
+          <SidebarModalButton />
           <Link href={"/"}>
             <Image src="/logo.svg" alt="it books" width={160} height={41} />
           </Link>
@@ -44,7 +45,7 @@ export default function GlobalHeader() {
           </Avatar>
         </div>
       </header>
-      <div className="w-full h-16"></div>
+      <div className="w-full h-header"></div>
     </>
   );
 }

@@ -9,12 +9,12 @@ export default function Page({
   return (
     <div
       className={cn(
-        "w-full bg-surface rounded-4xl p-8 max-h-full h-appbar overflow-y-auto",
+        "w-full bg-surface rounded-4xl p-8 max-h-full h-appbar overflow-y-auto scrollbar",
         className
       )}
       {...props}
     >
-      {children}
+      <div>{children}</div>
     </div>
   );
 }

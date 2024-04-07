@@ -52,7 +52,7 @@ const config: Config = {
       // => @media (min-width: 840px) { ... }
       lg: "1024px",
       // => @media (min-width: 1024px) { ... }
-      xl: "1240px",
+      xl: "1440px",
       // => @media (min-width: 1240px) { ... }
     },
     borderRadius: {
@@ -69,6 +69,13 @@ const config: Config = {
       full: "9999px",
     },
     extend: {
+      width: {
+        sidebar: "16rem",
+      },
+      height: {
+        header: "4rem",
+        main: "calc(100vh - 4rem)",
+      },
       fontFamily: {
         sans: ["NanumSquareNeo-Variable", ...defaultTheme.fontFamily.sans],
       },

@@ -64,6 +64,24 @@ const SIDEBAR_LINKS = [
   },
 ];
 
+const ADMIN_SIDEBAR_LINKS = [
+  {
+    id: 1,
+    name: "대시보드",
+    href: "/admin/dashboard",
+  },
+  {
+    id: 2,
+    name: "카테고리 관리",
+    href: "/admin/categories",
+  },
+  {
+    id: 3,
+    name: "도서 관리",
+    href: "/admin/books",
+  },
+];
+
 const BOOKS = [
   {
     id: 1,
@@ -147,6 +165,7 @@ const DUMMY = {
   CATEGORIES,
   SIDEBAR_LINKS,
   BOOKS,
+  ADMIN_SIDEBAR_LINKS,
 };
 
 export default DUMMY;

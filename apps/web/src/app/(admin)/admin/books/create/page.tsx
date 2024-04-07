@@ -1,4 +1,4 @@
-import BookCreateForm from "@web/src/app/admin/books/create/_components/BookCreateForm";
+import BookCreateForm from "@web/src/app/(admin)/admin/books/create/_components/BookCreateForm";
 
 export default function AdminBookCreatePage() {
   return (
