@@ -1,15 +1,15 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/utils";
-
-const descriptionVariants = cva("text-sm text-neutral-400 leading-none mt-2");
 
 const Description = React.forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement> &
-    VariantProps<typeof descriptionVariants>
+  React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p className={cn(descriptionVariants(), className)} ref={ref} {...props} />
+  <p
+    className={cn("text-sm text-neutral-400 leading-none mt-2", className)}
+    ref={ref}
+    {...props}
+  />
 ));
 Description.displayName = "Description";
 
