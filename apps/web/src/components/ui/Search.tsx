@@ -85,7 +85,7 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
             id="search"
             type="search"
             className={cn(
-              "bg-transparent h-full outline-none w-full",
+              "bg-transparent h-full outline-none w-full placeholder:text-primary",
               className
             )}
             placeholder={placeholder}
