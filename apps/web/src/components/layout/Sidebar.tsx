@@ -1,5 +1,4 @@
 "use client";
-import DUMMY from "@web/src/dummy";
 import { cn } from "@web/src/lib/utils";
 import Link from "next/link";
 
@@ -12,7 +11,7 @@ interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default function Sidebar({ className, links, ...props }: SidebarProps) {
   return (
-    <div
+    <nav
       className={cn(
         "bg-surface-container flex flex-col h-main p-4 gap-2 w-sidebar transition-all rounded-r-3xl",
         className
@@ -28,6 +27,6 @@ export default function Sidebar({ className, links, ...props }: SidebarProps) {
           {link.name}
         </Link>
       ))}
-    </div>
+    </nav>
   );
 }

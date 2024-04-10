@@ -12,6 +12,7 @@ interface SearchProps {
   placeholder?: string;
   ariaLabel?: string;
   focus?: boolean;
+  size?: "sm" | "md" | "lg";
 }
 
 const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
@@ -25,6 +26,7 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
     placeholder = "Search",
     ariaLabel = "Search input",
     focus = false,
+    size = "md",
     ...props
   },
   ref
@@ -63,7 +65,13 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
 
   return (
     <search
-      className={cn("bg-surface-container h-14 rounded-full group", className)}
+      className={cn(
+        "bg-surface-container-highest rounded-full",
+        size === "sm" && "h-10",
+        size === "md" && "h-12",
+        size === "lg" && "h-14",
+        className
+      )}
       tabIndex={0}
       ref={ref}
       aria-label={ariaLabel}
@@ -71,19 +79,7 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
     >
       <form className="h-full" onSubmit={handleSubmit}>
         <label htmlFor="search" className="flex items-center h-full">
-          <button
-            type="button"
-            className="hidden mx-4 group-focus-within:flex"
-            onClick={handleClose}
-            aria-label="
-            Close search input
-            "
-          >
-            <span className="material-icons ">arrow_back</span>
-          </button>
-          <span className="material-icons mx-4 inline-block group-focus-within:hidden">
-            search
-          </span>
+          <span className="material-icons mx-4 inline-block">search</span>
           <input
             ref={inputRef}
             id="search"

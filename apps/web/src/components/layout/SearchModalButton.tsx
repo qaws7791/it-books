@@ -24,7 +24,7 @@ export default function SearchModalButton() {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <Button variant="ghost" size="icon" className="xl:hidden">
+        <Button variant="ghost" size="icon">
           <span className="material-icons-outlined">search</span>
         </Button>
       </Dialog.Trigger>
@@ -44,10 +44,11 @@ export default function SearchModalButton() {
             <motion.div
               initial={{ y: "-16px" }}
               animate={{ y: 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="fixed top-1/4 left-0 right-0 mx-8"
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="fixed top-1/4 left-0 right-0 px-6 mx-auto max-w-screen-md"
             >
               <Search
+                size="lg"
                 placeholder="책 제목이나 저자를 검색해보세요"
                 onSubmit={handleSearch}
                 onClose={() => setOpen(false)}

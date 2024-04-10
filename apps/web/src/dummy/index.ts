@@ -97,6 +97,7 @@ const BOOKS = [
     picture: "https://image.yes24.com/goods/119712582/XL",
     likes: 10,
     tags: ["데이터 엔지니어링", "빅데이터", "데이터 파이프라인"],
+    updatedAt: "2023-06-26",
   },
   {
     id: 2,
@@ -113,6 +114,7 @@ const BOOKS = [
     picture: "https://image.yes24.com/goods/116438200/XL",
     likes: 30,
     tags: ["NGINX", "웹 서버", "리버스 프록시"],
+    updatedAt: "2022-12-20",
   },
   {
     id: 3,
@@ -128,6 +130,7 @@ const BOOKS = [
     picture: "https://image.yes24.com/goods/116585556/XL",
     likes: 4,
     tags: ["타입스크립트", "웹 개발", "자바스크립트", "프론트엔드"],
+    updatedAt: "2022-12-20",
   },
   {
     id: 4,
@@ -143,6 +146,7 @@ const BOOKS = [
     picture: "https://image.yes24.com/goods/104491433/XL",
     likes: 4,
     tags: ["소프트웨어 아키텍처", "소프트웨어 공학", "시스템 디자인"],
+    updatedAt: "2021-11-01",
   },
   {
     id: 5,
@@ -158,6 +162,7 @@ const BOOKS = [
     picture: "https://image.yes24.com/goods/102277805/XL",
     likes: 546,
     tags: ["리액트", "프론트엔드", "자바스크립트", "웹 개발"],
+    updatedAt: "2021-07-01",
   },
 ];
 

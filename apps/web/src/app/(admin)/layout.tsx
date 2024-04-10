@@ -9,7 +9,7 @@ export default function AdminLayout({
 }>) {
   return (
     <div className="flex h-full flex-auto">
-      <div className="w-0 xl:w-sidebar transition-all">
+      <div className="w-0 2xl:w-sidebar transition-all">
         <Sidebar links={DUMMY.ADMIN_SIDEBAR_LINKS} />
       </div>
       <main className="flex-auto flex p-4 pt-0 h-main">{children}</main>

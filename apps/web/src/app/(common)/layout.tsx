@@ -9,10 +9,10 @@ export default function CommonLayout({
 }>) {
   return (
     <div className="flex h-full flex-auto">
-      <div className="w-0 xl:w-sidebar transition-all">
+      <div className="w-0 2xl:w-sidebar transition-all">
         <Sidebar links={DUMMY.SIDEBAR_LINKS} />
       </div>
-      <main className="flex-auto flex p-4 pt-0 h-main">{children}</main>
+      <main className="flex-auto flex md:p-4 md:pt-0 h-main">{children}</main>
     </div>
   );
 }

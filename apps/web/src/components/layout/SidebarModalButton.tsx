@@ -11,7 +11,7 @@ export default function SidebarModalButton() {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
-        <Button variant="ghost" size="icon" className="xl:hidden">
+        <Button variant="ghost" size="icon" className="2xl:hidden">
           <span className="material-icons-outlined">
             {open ? "menu_open" : "menu"}
           </span>
