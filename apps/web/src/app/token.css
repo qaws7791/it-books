@@ -1,5 +1,5 @@
 :root{
-    --color-background:#fef9f2;
+  --color-background:#fef9f2;
   --color-on-background:#1d1b18;
   /* elevated button */
   --color-surface:#fef9f2;
@@ -21,15 +21,20 @@
   --color-scrim:#000000;
   --color-surface-tint:#665f36;
   /* primary */
+  --color-primary-light:#837a45;
   --color-primary:#665f36;
+  --color-primary-dark: #504b2b;
   --color-on-primary:#ffffff;
   --color-primary-container:#fff5c7;
   --color-on-primary-container:#59532b;
   --color-inverse-primary:#d1c795;
   /* secondary */
+  --color-secondary-light:#7b765d;
   --color-secondary:#635f4b;
+  --color-secondary-dark:#4f4c3b;
   --color-on-secondary:#ffffff;
   --color-secondary-container:#ebe4cb;
+  --color-secondary-container-dark:#d6d0bb;
   --color-on-secondary-container:#4d4937;
   /* tertiary */
   --color-tertiary:#576340;

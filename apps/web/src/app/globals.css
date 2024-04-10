@@ -54,16 +54,21 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 --color-surface-tint: 102 95 54;
 
 /* primary */
+--color-primary-light: 131 122 69;
 --color-primary: 102 95 54;
+--color-primary-dark: 80 75 43;
 --color-on-primary: 255 255 255;
 --color-primary-container: 255 245 199;
 --color-on-primary-container: 89 83 43;
 --color-inverse-primary: 209 199 149;
 
 /* secondary */
+--color-secondary-light: 123 118 93;
 --color-secondary: 99 95 75;
+--color-secondary-dark: 79 76 59;
 --color-on-secondary: 255 255 255;
 --color-secondary-container: 235 228 203;
+--color-secondary-container-dark: 214 208 187;
 --color-on-secondary-container: 77 73 55;
 
 /* error */
