@@ -3,63 +3,101 @@ import AuthService from "@server/src/services/auth.services";
 import UsersService from "@server/src/services/users.services";
 import { RefreshToken } from "@server/src/types/jwt.types";
 import { FastifyPluginAsync } from "fastify";
+import { OAuth2Client } from "google-auth-library";
 
 const authRoute: FastifyPluginAsync = async (fastify, opts) => {
   const usersService = UsersService.getInstance();
   const authService = AuthService.getInstance();
 
-  fastify.get("/google/callback", async function (request, reply) {
-    const { token } =
-      await this.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(request);
+  fastify.post<{
+    Body: {
+      credential: string;
+      select_by: string;
+    };
+  }>("/google/one-tap", async function (request, reply) {
+    try {
+      const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+      const ticket = await client.verifyIdToken({
+        idToken: request.body.credential,
+        audience: process.env.GOOGLE_CLIENT_ID,
+      });
 
-    const googleProfile = await authService.getGoogleProfile(
-      token.access_token
-    );
+      const payload = ticket.getPayload();
 
-    const user = await usersService.findOrCreateUser(googleProfile);
-    const accessToken = await reply.accessSign(
-      {
-        id: user.id,
-        role: user.role,
-        type: "access",
-        email: user.email,
-      },
-      {
-        expiresIn: "1h",
+      if (!payload) {
+        throw new AppError("Unauthorized");
       }
-    );
 
-    const refreshToken = await reply.refreshSign(
-      {
-        id: user.id,
-        role: user.role,
-        type: "refresh",
-        email: user.email,
-      },
-      {
-        expiresIn: "7d",
+      if (!payload.email || !payload.name || !payload.picture || !payload.sub) {
+        throw new AppError("Unauthorized");
       }
-    );
 
-    reply
-      .setCookie("access_token", accessToken, {
-        path: "/",
-        domain: "localhost",
-        secure: true,
-        httpOnly: true,
-        expires: new Date(Date.now() + 60 * 60 * 1000),
-      })
-      .setCookie("refresh_token", refreshToken, {
-        path: "/",
-        domain: "localhost",
-        secure: true,
-        httpOnly: true,
-        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-      })
-      .redirect("http://localhost:3000/login");
+      const googleProfile = {
+        email: payload.email,
+        name: payload.name,
+        picture: payload.picture,
+        id: payload.sub,
+      };
+
+      const user = await usersService.findOrCreateUser(googleProfile);
+
+      const accessToken = await reply.accessSign(
+        {
+          id: user.id,
+          role: user.role,
+          type: "access",
+          email: user.email,
+        },
+        {
+          expiresIn: "1h",
+        }
+      );
+
+      const refreshToken = await reply.refreshSign(
+        {
+          id: user.id,
+          role: user.role,
+          type: "refresh",
+          email: user.email,
+        },
+        {
+          expiresIn: "7d",
+        }
+      );
+
+      reply
+        .setCookie("access_token", accessToken, {
+          path: "/",
+          domain: "localhost",
+          secure: true,
+          httpOnly: true,
+          sameSite: "strict",
+          expires: new Date(Date.now() + 60 * 60 * 1000),
+        })
+        .setCookie("refresh_token", refreshToken, {
+          path: "/",
+          domain: "localhost",
+          secure: true,
+          httpOnly: true,
+          sameSite: "strict",
+          expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+        });
+
+      if (request.body.select_by === "btn") {
+        reply.redirect("http://localhost:3000/login");
+      } else {
+        reply.send({ message: "Logged in" });
+      }
+    } catch (e) {
+      console.log(e);
+      if (e instanceof AppError) {
+        throw e;
+      }
+      throw new AppError("Unauthorized");
+    }
   });
 
-  fastify.post("/logout", async function (request, reply) {
+  fastify.post("/google/logout", async function (request, reply) {
     reply
       .clearCookie("access_token", {
         path: "/",

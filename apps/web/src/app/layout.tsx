@@ -6,8 +6,9 @@ import QueryProvider from "@web/src/components/QueryProvider";
 import { ErrorBoundary } from "react-error-boundary";
 import SonnerToaster from "@web/src/components/ui/SonnerToaster";
 import Header from "@web/src/components/layout/Header";
-import Sidebar from "@web/src/components/layout/Sidebar";
-import DUMMY from "@web/src/dummy";
+import GoogleLoginScript from "@web/src/auth/components/GoogleLoginScript";
+import { GoogleLoginProvider } from "@web/src/auth/hooks/useGoogleLogin";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,16 +22,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <meta name="referrer" content="no-referrer-when-downgrade" />
+      </Head>
       <body className="bg-surface-container min-h-screen flex flex-col text-on-background">
-        <QueryProvider>
-          <ErrorBoundary fallback={<div>Something went wrong</div>}>
-            <Suspense fallback="loading...">
-              <SonnerToaster />
-              <Header />
-              {children}
-            </Suspense>
-          </ErrorBoundary>
-        </QueryProvider>
+        <ErrorBoundary fallback={<div>Something went wrong</div>}>
+          <QueryProvider>
+            <GoogleLoginProvider>
+              <Suspense fallback="loading...">
+                <SonnerToaster />
+                <Header />
+                {children}
+              </Suspense>
+            </GoogleLoginProvider>
+          </QueryProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

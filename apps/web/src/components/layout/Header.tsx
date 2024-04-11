@@ -1,12 +1,13 @@
 "use client";
 
+import UserButton from "@web/src/auth/components/UserButton";
 import SearchModalButton from "@web/src/components/layout/SearchModalButton";
 import SidebarModalButton from "@web/src/components/layout/SidebarModalButton";
-import Avatar from "@web/src/components/ui/Avatar";
 import Search from "@web/src/components/ui/Search";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Suspense } from "react";
 
 export default function Header() {
   const router = useRouter();
@@ -33,10 +34,7 @@ export default function Header() {
           <div className="block md:hidden">
             <SearchModalButton />
           </div>
-          <Avatar>
-            <Avatar.Image src="https://placehold.co/40" alt="avatar" />
-            <Avatar.Fallback>IT</Avatar.Fallback>
-          </Avatar>
+          <UserButton />
         </div>
       </div>
       <div className="w-full h-header"></div>

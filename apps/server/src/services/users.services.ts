@@ -5,12 +5,8 @@ import { eq } from "drizzle-orm";
 export interface GoogleProfile {
   id: string;
   email: string;
-  verified_email: boolean;
   name: string;
-  given_name: string;
-  family_name: string;
   picture: string;
-  locale: string;
 }
 
 class UsersService {
@@ -49,7 +45,13 @@ class UsersService {
       throw new Error("User not found");
     }
 
-    return user[0];
+    return {
+      id: user[0].id,
+      email: user[0].email,
+      name: user[0].name,
+      picture: user[0].picture,
+      role: user[0].role,
+    };
   };
 }
 

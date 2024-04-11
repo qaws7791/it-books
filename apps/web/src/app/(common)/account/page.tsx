@@ -9,7 +9,7 @@ export default async function AccountPage() {
     return <div>Not authorized</div>;
   }
   try {
-    const res = await fetch("http://localhost:4000/profile", {
+    const res = await fetch("http://localhost:4000/api/profile", {
       method: "GET",
       credentials: "include",
       headers: {

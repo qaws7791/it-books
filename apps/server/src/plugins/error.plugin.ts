@@ -3,6 +3,7 @@ import fp from "fastify-plugin";
 
 const errorPlugin = fp(async (fastify, opts) => {
   fastify.setErrorHandler((error, request, reply) => {
+    console.error("Error: ", error);
     if (error instanceof AppError) {
       reply.code(error.statusCode).send({
         statusCode: error.statusCode,

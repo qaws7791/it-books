@@ -10,13 +10,14 @@ import fastifyJwtPlugin from "@server/src/plugins/fastifyJwt.js";
 import errorPlugin from "@server/src/plugins/error.plugin.js";
 import crawlRoutes from "@server/src/routes/crawl.routes.js";
 import categoriesRoutes from "@server/src/routes/categories.routes.js";
-
+import formBodyPlugin from "@fastify/formbody";
 const server = fastify({
   maxParamLength: 5000,
   logger: true,
 });
 
 await server.register(fastifyEnvPlugin);
+server.register(formBodyPlugin);
 
 await server.register(cors, {
   origin: ["http://localhost:3000"],
