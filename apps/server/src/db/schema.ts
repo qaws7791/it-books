@@ -1,14 +1,16 @@
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
   date,
   integer,
   pgEnum,
   pgTable,
+  primaryKey,
   serial,
   text,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
+import { createInsertSchema } from "drizzle-zod";
 
 export const roleEnum = pgEnum("role", ["admin", "user"]);
 
@@ -48,6 +50,7 @@ export const books = pgTable("books", {
   id: serial("id").primaryKey(),
   isbn: varchar("isbn", { length: 13 }).unique().notNull(),
   title: varchar("title", { length: 200 }).notNull(),
+  description: varchar("description", { length: 1000 }).notNull(),
   slug: varchar("slug", { length: 200 }).unique().notNull(),
   image: text("image").notNull(),
   author: varchar("author", { length: 200 }).notNull(),
@@ -59,16 +62,43 @@ export const books = pgTable("books", {
   ...baseColumns,
 });
 
-export type InsertBook = typeof books.$inferInsert;
+export const insertBookSchema = createInsertSchema(books);
 
-export const bookTags = pgTable("book_tags", {
-  bookId: integer("book_id")
-    .notNull()
-    .references(() => books.id),
-  tagId: integer("tag_id")
-    .notNull()
-    .references(() => tags.id),
-});
+export const booksToTags = pgTable(
+  "book_tags",
+  {
+    bookId: integer("book_id")
+      .notNull()
+      .references(() => books.id),
+    tagId: integer("tag_id")
+      .notNull()
+      .references(() => tags.id),
+  },
+  (t) => ({
+    pk: primaryKey({
+      columns: [t.bookId, t.tagId],
+    }),
+  })
+);
+
+export const booksRelations = relations(books, ({ many }) => ({
+  booksToTags: many(booksToTags),
+}));
+
+export const tagsRelations = relations(tags, ({ many }) => ({
+  booksToTags: many(booksToTags),
+}));
+
+export const booksToTagsRelations = relations(booksToTags, ({ one }) => ({
+  book: one(books, {
+    fields: [booksToTags.bookId],
+    references: [books.id],
+  }),
+  tag: one(tags, {
+    fields: [booksToTags.tagId],
+    references: [tags.id],
+  }),
+}));
 
 export const bookLikes = pgTable("book_likes", {
   bookId: integer("book_id")

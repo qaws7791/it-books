@@ -24,6 +24,7 @@
     "cheerio": "1.0.0-rc.12",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.4",
+    "drizzle-zod": "^0.5.1",
     "fastify": "^4.26.2",
     "fastify-plugin": "^4.5.1",
     "google-auth-library": "^9.7.0",
