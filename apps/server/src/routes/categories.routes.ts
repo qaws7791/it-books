@@ -11,16 +11,10 @@ const categoriesRoutes: FastifyPluginAsync = async (fastify, opts) => {
 
   fastify.post<{
     Body: { name: string; slug: string };
-  }>(
-    "/",
-    {
-      onRequest: requireAdminHook,
-    },
-    async function (request, reply) {
-      const category = await categoriesService.create(request.body);
-      reply.send(category);
-    }
-  );
+  }>("/", async function (request, reply) {
+    const category = await categoriesService.create(request.body);
+    reply.send(category);
+  });
 
   fastify.patch<{
     Body: { name: string; slug: string };

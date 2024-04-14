@@ -11,6 +11,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
+import { z } from "zod";
 
 export const roleEnum = pgEnum("role", ["admin", "user"]);
 
@@ -57,12 +58,24 @@ export const books = pgTable("books", {
   translator: varchar("translator", { length: 200 }),
   publisher: varchar("publisher", { length: 200 }).notNull(),
   publicationDate: date("publication_date").notNull(),
-  pages: integer("pages").notNull(),
   categoryId: integer("category_id").references(() => categories.id),
   ...baseColumns,
 });
 
-export const insertBookSchema = createInsertSchema(books);
+export const insertBookSchema = z.object({
+  isbn: z.string().min(13).max(13),
+  title: z.string().min(1).max(200),
+  description: z.string().min(1).max(1000),
+  slug: z.string().min(1).max(200),
+  image: z.string().url(),
+  author: z.string().min(1).max(200),
+  translator: z.string().min(1).max(200).optional(),
+  publisher: z.string().min(1).max(200),
+  publicationDate: z.string().datetime(),
+  categoryId: z.number(),
+  tags: z.array(z.string().min(1).max(200)),
+});
+export type insertBookType = typeof insertBookSchema._type;
 
 export const booksToTags = pgTable(
   "book_tags",
@@ -80,6 +93,12 @@ export const booksToTags = pgTable(
     }),
   })
 );
+export const insertBookToTagSchema = z.object({
+  bookId: z.number(),
+  tagId: z.number(),
+});
+
+export type insertBookToTagType = typeof insertBookToTagSchema._type;
 
 export const booksRelations = relations(books, ({ many }) => ({
   booksToTags: many(booksToTags),

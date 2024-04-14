@@ -2,7 +2,9 @@ type ErrorType =
   | "UserExists"
   | "UserNotFound"
   | "Unauthorized"
-  | "CrawlBookNotFound";
+  | "CrawlBookNotFound"
+  | "BadRequest"
+  | "BookNotFound";
 
 interface ErrorInfo {
   message: string;
@@ -23,6 +25,14 @@ const ERRORS: Record<ErrorType, ErrorInfo> = {
     statusCode: 401,
   },
   CrawlBookNotFound: {
+    message: "Book not found",
+    statusCode: 404,
+  },
+  BadRequest: {
+    message: "Bad Request",
+    statusCode: 400,
+  },
+  BookNotFound: {
     message: "Book not found",
     statusCode: 404,
   },

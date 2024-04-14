@@ -11,10 +11,27 @@ import errorPlugin from "@server/src/plugins/error.plugin.js";
 import crawlRoutes from "@server/src/routes/crawl.routes.js";
 import categoriesRoutes from "@server/src/routes/categories.routes.js";
 import formBodyPlugin from "@fastify/formbody";
+import {
+  serializerCompiler,
+  validatorCompiler,
+  ZodTypeProvider,
+} from "fastify-type-provider-zod";
+import booksRoutes from "@server/src/routes/books.routes.js";
+import multipart from "@fastify/multipart";
+import fs from "fs";
+import { pipeline } from "stream";
+import { promisify } from "util";
+const pump = promisify(pipeline);
+
 const server = fastify({
   maxParamLength: 5000,
   logger: true,
-});
+}).withTypeProvider<ZodTypeProvider>();
+
+server.setValidatorCompiler(validatorCompiler);
+server.setSerializerCompiler(serializerCompiler);
+
+server.register(multipart);
 
 await server.register(fastifyEnvPlugin);
 server.register(formBodyPlugin);
@@ -49,11 +66,27 @@ server.register(oauthPlugin, {
   callbackUri: "http://localhost:4000/api/auth/google/callback",
 });
 
+server.post("/api/upload", async (request, reply) => {
+  const parts = request.parts();
+
+  for await (const part of parts) {
+    if (part.type === "file") {
+      await pump(part.file, fs.createWriteStream(`./uploads/${part.filename}`));
+      console.log("File: ", part.filename);
+    } else {
+      console.log("Field: ", part.fieldname, "/ Value: ", part.value);
+    }
+  }
+
+  reply.send();
+});
+
 server.register(authRoutes, { prefix: "/api/auth" });
 server.register(profileRoutes, { prefix: "/api/profile" });
 server.register(usersRoutes, { prefix: "/api/users" });
 server.register(crawlRoutes, { prefix: "/api/crawl" });
 server.register(categoriesRoutes, { prefix: "/api/categories" });
+server.register(booksRoutes, { prefix: "/api/books" });
 
 server.get("/", async (request, reply) => {
   return { root: "root" };
