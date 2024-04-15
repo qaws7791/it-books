@@ -1,5 +1,7 @@
-import db from "@server/src/db/db";
-import { booksToTags, insertBookToTagType } from "@server/src/db/schema";
+import db from "@server/src/database";
+import { booksToTags } from "@server/src/database/models";
+import { insertBookToTagType } from "@server/src/schemas/bookToTags.schema";
+
 import { eq } from "drizzle-orm";
 
 class BooksToTagsService {

@@ -1,5 +1,5 @@
-import db from "@server/src/db/db";
-import { categories } from "@server/src/db/schema";
+import db from "@server/src/database";
+import { categories } from "@server/src/database/models";
 import { asc, eq } from "drizzle-orm";
 
 class CategoriesService {

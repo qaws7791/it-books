@@ -1,92 +1,70 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
-import oauthPlugin, { fastifyOauth2 } from "@fastify/oauth2";
 import cookie from "@fastify/cookie";
-import fastifyEnvPlugin from "./plugins/fastifyEnv.js";
-import authRoutes from "@server/src/routes/auth.routes.js";
-import profileRoutes from "@server/src/routes/profile.routes.js";
-import usersRoutes from "@server/src/routes/users.routes.js";
-import fastifyJwtPlugin from "@server/src/plugins/fastifyJwt.js";
-import errorPlugin from "@server/src/plugins/error.plugin.js";
-import crawlRoutes from "@server/src/routes/crawl.routes.js";
-import categoriesRoutes from "@server/src/routes/categories.routes.js";
-import formBodyPlugin from "@fastify/formbody";
+import jwtPlugin from "@server/src/plugins/jwt.plugin.js";
+import errorHandlePlugin from "@server/src/plugins/error.plugin.js";
 import {
   serializerCompiler,
   validatorCompiler,
   ZodTypeProvider,
 } from "fastify-type-provider-zod";
-import booksRoutes from "@server/src/routes/books.routes.js";
-import multipart from "@fastify/multipart";
-import fs from "fs";
-import { pipeline } from "stream";
-import { promisify } from "util";
-const pump = promisify(pipeline);
+import { postgresClient } from "@server/src/database/index.js";
+import routesPlugin from "@server/src/plugins/routes.plugin.js";
+import envPlugin from "./plugins/env.plugin.js";
+import oauthPlugin from "@server/src/plugins/ouath.plugin.js";
 
+// initialize fastify server with type provider zod
 const server = fastify({
   maxParamLength: 5000,
   logger: true,
 }).withTypeProvider<ZodTypeProvider>();
-
 server.setValidatorCompiler(validatorCompiler);
 server.setSerializerCompiler(serializerCompiler);
 
-server.register(multipart);
+// plugin for multipart form data
+await server.register(import("@fastify/multipart"), {
+  limits: {
+    fieldNameSize: 100, // Max field name size in bytes
+    fieldSize: 100, // Max field value size in bytes
+    fields: 10, // Max number of non-file fields
+    fileSize: 1000000, // For multipart forms, the max file size in bytes
+    files: 1, // Max number of file fields
+    headerPairs: 2000, // Max number of header key=>value pairs
+    parts: 1000, // For multipart forms, the max number of parts (fields + files)
+  },
+  attachFieldsToBody: "keyValues",
+});
 
-await server.register(fastifyEnvPlugin);
-server.register(formBodyPlugin);
+// plugin for environment variables
+await server.register(envPlugin);
 
+// plugin for parsing form body
+await server.register(import("@fastify/formbody"));
+
+// plugin for cors
 await server.register(cors, {
   origin: ["http://localhost:3000"],
   credentials: true,
 });
 
-server.register(errorPlugin);
+// plugin for server error handling
+await server.register(errorHandlePlugin);
 
-server.register(fastifyJwtPlugin);
+// plugin for json web token authentication
+await server.register(jwtPlugin);
 
-server.register(cookie, {
+// plugin for cookie
+await server.register(cookie, {
   secret: server.config.COOKIE_SECRET,
   hook: "onRequest",
   parseOptions: {},
 });
 
-server.register(oauthPlugin, {
-  name: "googleOAuth2",
-  scope: ["profile", "email"],
-  userAgent: "fastify",
-  credentials: {
-    client: {
-      id: server.config.GOOGLE_CLIENT_ID,
-      secret: server.config.GOOGLE_CLIENT_SECRET,
-    },
-    auth: fastifyOauth2.GOOGLE_CONFIGURATION,
-  },
-  startRedirectPath: "/api/auth/google",
-  callbackUri: "http://localhost:4000/api/auth/google/callback",
-});
+// plugin for oauth2
+await server.register(oauthPlugin);
 
-server.post("/api/upload", async (request, reply) => {
-  const parts = request.parts();
-
-  for await (const part of parts) {
-    if (part.type === "file") {
-      await pump(part.file, fs.createWriteStream(`./uploads/${part.filename}`));
-      console.log("File: ", part.filename);
-    } else {
-      console.log("Field: ", part.fieldname, "/ Value: ", part.value);
-    }
-  }
-
-  reply.send();
-});
-
-server.register(authRoutes, { prefix: "/api/auth" });
-server.register(profileRoutes, { prefix: "/api/profile" });
-server.register(usersRoutes, { prefix: "/api/users" });
-server.register(crawlRoutes, { prefix: "/api/crawl" });
-server.register(categoriesRoutes, { prefix: "/api/categories" });
-server.register(booksRoutes, { prefix: "/api/books" });
+// plugin for routes
+await server.register(routesPlugin);
 
 server.get("/", async (request, reply) => {
   return { root: "root" };
@@ -101,6 +79,7 @@ const start = async () => {
     console.log(`Server listening at http://localhost:${port}`);
   } catch (err) {
     server.log.error(err);
+    await postgresClient.end();
     process.exit(1);
   }
 };

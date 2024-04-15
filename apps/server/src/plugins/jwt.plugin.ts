@@ -1,7 +1,7 @@
 import fp from "fastify-plugin";
 import fastifyJWT from "@fastify/jwt";
 
-const fastifyJwtPlugin = fp(async (fastify, opts) => {
+const jwtPlugin = fp(async (fastify, opts) => {
   fastify.register(fastifyJWT, {
     secret: fastify.config.JWT_ACCESS_SECRET,
     namespace: "access",
@@ -29,4 +29,4 @@ const fastifyJwtPlugin = fp(async (fastify, opts) => {
   fastify.decorate("user", null);
 });
 
-export default fastifyJwtPlugin;
+export default jwtPlugin;

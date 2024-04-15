@@ -1,8 +1,12 @@
-import { insertBookSchema, insertBookType, tags } from "@server/src/db/schema";
 import AppError from "@server/src/lib/AppError";
+import {
+  CreateBookSchema,
+  createBookSchema,
+} from "@server/src/schemas/books.schema";
 import BooksService from "@server/src/services/books.services";
 import BooksToTagsService from "@server/src/services/booksToTags.services";
 import TagsService from "@server/src/services/tags.services";
+import { saveBookImage } from "@server/src/storage/books.storage";
 import { FastifyPluginAsync } from "fastify";
 
 const booksRoutes: FastifyPluginAsync = async (fastify, opts) => {
@@ -11,22 +15,30 @@ const booksRoutes: FastifyPluginAsync = async (fastify, opts) => {
   const booksToTagsService = BooksToTagsService.getInstance();
 
   fastify.post<{
-    Body: insertBookType;
+    Body: CreateBookSchema;
   }>(
     "/",
     {
       schema: {
-        body: insertBookSchema,
+        body: createBookSchema,
       },
     },
     async (request, reply) => {
-      const body = request.body;
-      const { tags, ...book } = body;
+      const { tags, image, ...book } = request.body;
+      const decodedTags = tags.split(",").map((tag) => tag.trim());
       const newTags = await Promise.all(
-        body.tags.map((tag) => tagsService.findOrCreate(tag))
+        decodedTags.map((tag) => tagsService.findOrCreate(tag))
       );
 
-      const newBook = await booksService.create(book);
+      const bookImage = await saveBookImage({
+        buffer: image,
+      });
+
+      const newBook = await booksService.create({
+        ...book,
+        image: bookImage.filename,
+        categoryId: Number(book.categoryId),
+      });
 
       await Promise.all(
         newTags.map((tag) =>

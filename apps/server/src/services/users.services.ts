@@ -1,5 +1,6 @@
-import db from "@server/src/db/db";
-import { SelectUser, users } from "@server/src/db/schema";
+import db from "@server/src/database";
+import { SelectUser, users } from "@server/src/database/models";
+
 import { eq } from "drizzle-orm";
 
 export interface GoogleProfile {

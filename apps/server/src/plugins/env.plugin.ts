@@ -1,7 +1,7 @@
 import fp from "fastify-plugin";
 import fastifyEnv from "@fastify/env";
 
-const fastifyEnvPlugin = fp(async (fastify, opts) => {
+const envPlugin = fp(async (fastify, opts) => {
   const schema = {
     type: "object",
     required: [
@@ -39,4 +39,4 @@ const fastifyEnvPlugin = fp(async (fastify, opts) => {
   await fastify.register(fastifyEnv, options);
 });
 
-export default fastifyEnvPlugin;
+export default envPlugin;

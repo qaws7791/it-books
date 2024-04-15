@@ -4,7 +4,9 @@ type ErrorType =
   | "Unauthorized"
   | "CrawlBookNotFound"
   | "BadRequest"
-  | "BookNotFound";
+  | "BookNotFound"
+  | "FailedToSaveBookImage"
+  | "InvalidImageType";
 
 interface ErrorInfo {
   message: string;
@@ -35,6 +37,14 @@ const ERRORS: Record<ErrorType, ErrorInfo> = {
   BookNotFound: {
     message: "Book not found",
     statusCode: 404,
+  },
+  FailedToSaveBookImage: {
+    message: "Failed to save book image",
+    statusCode: 500,
+  },
+  InvalidImageType: {
+    message: "Invalid image type",
+    statusCode: 400,
   },
 };
 

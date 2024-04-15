@@ -10,7 +10,7 @@ const errorFormatter = (error: ZodError) => {
   }));
 };
 
-const errorPlugin = fp(async (fastify, opts) => {
+const errorHandlePlugin = fp(async (fastify, opts) => {
   fastify.setErrorHandler((error, request, reply) => {
     console.error("Error: ", error);
 
@@ -37,4 +37,4 @@ const errorPlugin = fp(async (fastify, opts) => {
   });
 });
 
-export default errorPlugin;
+export default errorHandlePlugin;

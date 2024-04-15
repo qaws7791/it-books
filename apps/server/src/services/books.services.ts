@@ -1,5 +1,6 @@
-import db from "@server/src/db/db";
-import { books } from "@server/src/db/schema";
+import db from "@server/src/database";
+import { books } from "@server/src/database/models/books.model";
+
 import AppError from "@server/src/lib/AppError";
 import { eq } from "drizzle-orm";
 
