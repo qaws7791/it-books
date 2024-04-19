@@ -2,7 +2,7 @@ import db from "@server/src/database";
 import { books } from "@server/src/database/models/books.model";
 
 import AppError from "@server/src/lib/AppError";
-import { eq } from "drizzle-orm";
+import { desc, eq, gt } from "drizzle-orm";
 
 class BooksService {
   private static instance: BooksService;
@@ -51,6 +51,17 @@ class BooksService {
   delete = async (id: number) => {
     const result = await db.delete(books).where(eq(books.id, id)).returning();
     return result[0];
+  };
+
+  getNextPage = async (size: number, cursor?: number) => {
+    const result = await db
+      .select()
+      .from(books)
+      .where(cursor ? gt(books.id, cursor) : undefined)
+      .limit(size)
+      .orderBy(desc(books.id));
+
+    return result;
   };
 }
 

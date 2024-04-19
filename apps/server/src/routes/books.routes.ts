@@ -63,6 +63,17 @@ const booksRoutes: FastifyPluginAsync = async (fastify, opts) => {
     }
     return book;
   });
+
+  fastify.get<{
+    Querystring: {
+      cursor?: string;
+      size?: string;
+    };
+  }>("/", async (request, reply) => {
+    const cursor = Number(request.query.cursor) || undefined;
+    const size = Number(request.query.size) || 3;
+    return booksService.getNextPage(size, cursor);
+  });
 };
 
 export default booksRoutes;
