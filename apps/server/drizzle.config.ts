@@ -5,6 +5,10 @@ export default {
   out: "./drizzle",
   driver: "pg",
   dbCredentials: {
-    connectionString: `postgres://${env.POSTGRES_USER}:${env.POSTGRES_PASSWORD}@${env.POSTGRES_HOST}:${env.POSTGRES_PORT}/${env.POSTGRES_DB}`,
+    user: env.POSTGRES_USER,
+    host: env.POSTGRES_HOST,
+    database: env.POSTGRES_DB,
+    password: env.POSTGRES_PASSWORD,
+    port: Number(env.POSTGRES_PORT),
   },
 } satisfies Config;
