@@ -2,7 +2,7 @@ import db from "@server/src/database";
 import { books } from "@server/src/database/models/books.model";
 
 import AppError from "@server/src/lib/AppError";
-import { desc, eq, gt } from "drizzle-orm";
+import { asc, eq, gt } from "drizzle-orm";
 
 class BooksService {
   private static instance: BooksService;
@@ -53,13 +53,13 @@ class BooksService {
     return result[0];
   };
 
-  getNextPage = async (size: number, cursor?: number) => {
+  getNextPage = async (limit: number, cursor?: number) => {
     const result = await db
       .select()
       .from(books)
       .where(cursor ? gt(books.id, cursor) : undefined)
-      .limit(size)
-      .orderBy(desc(books.id));
+      .limit(limit)
+      .orderBy(asc(books.id));
 
     return result;
   };
