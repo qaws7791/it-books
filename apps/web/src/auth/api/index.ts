@@ -7,7 +7,7 @@ export const googleLogin = ({
   credential: string;
   select_by: string;
 }) => {
-  return api.post("/auth/google/one-tap", { credential, select_by });
+  return api.post("/auth/google/one-tap/callback", { credential, select_by });
 };
 
 export const googleLogout = (): Promise<{ message: string }> => {
