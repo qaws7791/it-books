@@ -81,7 +81,7 @@ export const LoggedInUserButton = ({ user }: { user?: UserProfile }) => {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon">
           <Avatar>
-            <AvatarImage src={user.picture} alt={user.name} />
+            <AvatarImage src={user.photo} alt={user.name} />
             <AvatarFallback>{user.name[0]}</AvatarFallback>
           </Avatar>
         </Button>
@@ -90,7 +90,7 @@ export const LoggedInUserButton = ({ user }: { user?: UserProfile }) => {
         <DropdownMenuLabel className="font-normal">
           <div className="flex items-center gap-2">
             <Avatar>
-              <AvatarImage src={user.picture} alt={user.name} />
+              <AvatarImage src={user.photo} alt={user.name} />
               <AvatarFallback>{user.name[0]}</AvatarFallback>
             </Avatar>
             <div className="flex flex-col space-y-1">
