@@ -7,7 +7,7 @@ export const createBookSchema = z.object({
   slug: z.string().min(1).max(200),
   image: z.instanceof(Buffer),
   author: z.string().min(1).max(200),
-  translator: z.string().min(1).max(200).optional(),
+  translator: z.string().max(200).optional(),
   publisher: z.string().min(1).max(200),
   publicationDate: z.string().datetime(),
   categoryId: z.string(),
