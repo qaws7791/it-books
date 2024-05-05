@@ -11,20 +11,22 @@ import { useCreateCategoryMutation } from "@web/src/categories/api/createCategor
 import { useQueryClient } from "@tanstack/react-query";
 import { ApiError } from "@web/src/shared/api";
 import { Textarea } from "@web/src/components/ui/Textarea";
-import Image from "next/image";
 import Description from "@web/src/components/ui/Description";
 import { FormRow, FormColumn } from "@web/src/components/ui/Form";
 import TagInput from "@web/src/components/ui/TagInput";
+import getBookImagePresignedUrl from "@web/src/books/api/getBookImagePresignedUrl";
+import axios from "axios";
+import createBook from "@web/src/books/api/createBook";
 const bookSchema = z.object({
   title: z.string().min(2),
   categoryId: z.string(),
   slug: z.string().min(2),
-  author: z.string().min(2),
+  authors: z.string().min(2),
   isbn: z.string().min(10),
   publisher: z.string().min(2),
-  publicationDate: z.string().min(2),
-  tags: z.string().optional(),
-  picture: z.string().url(),
+  publishedDate: z.string().datetime(),
+  tags: z.array(z.string()),
+  coverImage: z.string().url(),
   description: z.string().min(10),
   translator: z.string().optional(),
 });
@@ -43,25 +45,58 @@ export default function BookCreateForm() {
       title: "",
       categoryId: "",
       slug: "",
-      picture: "",
+      coverImage: "",
     },
   });
   const queryClient = useQueryClient();
   const mutation = useCreateCategoryMutation();
 
   const onSubmit = async (data: z.infer<typeof bookSchema>) => {
-    alert(JSON.stringify(data));
-    // try {
-    //   const result = await mutation.mutateAsync(data);
-    //   queryClient.invalidateQueries({
-    //     queryKey: ["categories"],
-    //   });
-    // } catch (error) {
-    //   if (error instanceof ApiError) {
-    //     alert(error.message);
-    //     return;
-    //   }
-    // }
+    console.log(data);
+    try {
+      const reqData = {
+        ...data,
+        categoryId: parseInt(data.categoryId),
+      };
+      await createBook(reqData);
+      alert("책이 성공적으로 등록되었습니다.");
+    } catch (error) {
+      if (error instanceof ApiError) {
+        alert(error.message);
+        return;
+      }
+    }
+  };
+
+  const onChangeImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    console.log(file);
+    if (!["image/jpeg", "image/png", "image/gif"].includes(file.type)) {
+      alert("이미지 파일만 업로드 가능합니다.");
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      alert("이미지 파일은 10MB 이하만 업로드 가능합니다.");
+      return;
+    }
+
+    try {
+      const res = await getBookImagePresignedUrl({
+        type: file.type,
+        size: file.size,
+      });
+
+      await axios.put(res.uploadUrl, file, {
+        headers: {
+          "Content-Type": file.type,
+        },
+      });
+
+      setValue("coverImage", res.publicUrl);
+    } catch (error) {
+      alert("이미지 업로드에 실패했습니다.");
+    }
   };
 
   const getErrorMessage = (field: keyof typeof errors) => {
@@ -78,23 +113,25 @@ export default function BookCreateForm() {
     <form onSubmit={handleSubmit(onSubmit)} onKeyDown={checkKeydown}>
       <div className="w-80 h-80">
         <img
-          src={watch("picture") || ""}
+          src={watch("coverImage") || ""}
           alt="이미지 미리보기"
           className="w-80 h-80 object-contain rounded-md"
           width={200}
           height={200}
         />
       </div>
-
       <FormRow>
-        <Label htmlFor="picture" require>
+        <Label htmlFor="coverImage" require>
           이미지
         </Label>
-        <Input id="picture" {...register("picture")} />
-        <Description>
-          이미지 URL을 입력해주세요. 미리보기는 320x320 사이즈로 보여집니다.
-        </Description>
-        <ErrorMessage>{getErrorMessage("picture")}</ErrorMessage>
+        <Input id="coverImage" type="file" onChange={onChangeImage} />
+      </FormRow>
+      <FormRow>
+        <Label htmlFor="categoryId" require>
+          카테고리
+        </Label>
+        <Input id="categoryId" {...register("categoryId")} />
+        <ErrorMessage>{getErrorMessage("categoryId")}</ErrorMessage>
       </FormRow>
       <FormRow>
         <Label htmlFor="title" require>
@@ -116,12 +153,12 @@ export default function BookCreateForm() {
       </FormRow>
       <FormColumn>
         <FormRow>
-          <Label htmlFor="author" require>
+          <Label htmlFor="authors" require>
             저자
           </Label>
-          <Input id="author" {...register("author")} />
+          <Input id="authors" {...register("authors")} />
           <Description>저자 이름은 필수입니다.</Description>
-          <ErrorMessage>{getErrorMessage("author")}</ErrorMessage>
+          <ErrorMessage>{getErrorMessage("authors")}</ErrorMessage>
         </FormRow>
         <FormRow>
           <Label htmlFor="translator">번역가</Label>
@@ -145,11 +182,11 @@ export default function BookCreateForm() {
         <ErrorMessage>{getErrorMessage("publisher")}</ErrorMessage>
       </FormRow>
       <FormRow>
-        <Label htmlFor="publicationDate" require>
+        <Label htmlFor="publishedDate" require>
           출판일
         </Label>
-        <Input id="publicationDate" {...register("publicationDate")} />
-        <ErrorMessage>{getErrorMessage("publicationDate")}</ErrorMessage>
+        <Input id="publishedDate" {...register("publishedDate")} />
+        <ErrorMessage>{getErrorMessage("publishedDate")}</ErrorMessage>
       </FormRow>
 
       <FormRow>
@@ -161,7 +198,11 @@ export default function BookCreateForm() {
       </FormRow>
       <FormRow>
         <Label htmlFor="tags">태그</Label>
-        <TagInput />
+        <TagInput
+          onChangeTag={(tags) => {
+            setValue("tags", tags);
+          }}
+        />
         <Description>태그는 쉼표(,)로 구분하여 입력해주세요.</Description>
         <ErrorMessage>{getErrorMessage("tags")}</ErrorMessage>
       </FormRow>
