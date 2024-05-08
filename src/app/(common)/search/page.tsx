@@ -1,6 +1,7 @@
 import Page from "@/src/shared/components/layout/Page";
 import DUMMY from "@/src/dummy";
 import Link from "next/link";
+import NextImage from "@/src/shared/components/NextImage";
 
 interface SearchPageProps {
   searchParams: {
@@ -31,11 +32,12 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
             className="rounded-xl overflow-hidden hover:bg-outline/10 p-4"
           >
             <div>
-              <img
+              <NextImage
                 src={book.picture}
                 alt={book.title}
                 className="shadow-md mx-auto"
                 width={200}
+                height={300}
               />
             </div>
             <h2 className="font-semibold text-center mt-2">{book.title}</h2>
