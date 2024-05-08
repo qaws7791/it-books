@@ -1,6 +1,6 @@
-import api, { ApiError } from "@web/src/shared/api";
-import { renewAccessToken } from "@web/src/shared/api/auth";
-import { ErrorResponse } from "@web/src/shared/type/api";
+import api, { ApiError } from "@/src/shared/api";
+import { renewAccessToken } from "@/src/shared/api/auth";
+import { ErrorResponse } from "@/src/shared/type/api";
 import { AxiosError, AxiosResponse } from "axios";
 
 export const normalResponseHandler = (response: AxiosResponse) => {

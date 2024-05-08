@@ -1,9 +1,9 @@
 "use client";
 import * as Dialog from "@radix-ui/react-dialog";
-import Button from "@web/src/components/ui/Button";
+import Button from "@/src/shared/components/ui/Button";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Search from "@web/src/components/ui/Search";
+import Search from "@/src/shared/components/ui/Search";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function SearchModalButton() {

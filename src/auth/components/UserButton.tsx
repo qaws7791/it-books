@@ -2,9 +2,9 @@
 
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { useQueryClient } from "@tanstack/react-query";
-import { googleLogout } from "@web/src/auth/api";
-import Avatar from "@web/src/components/ui/Avatar";
-import Button from "@web/src/components/ui/Button";
+import { googleLogout } from "@/src/auth/api";
+import Avatar from "@/src/shared/components/ui/Avatar";
+import Button from "@/src/shared/components/ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,10 +14,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@web/src/components/ui/DropdownMenu";
-import useCurrentPath from "@web/src/shared/hooks/useCurrentPath";
-import { useUserProfile } from "@web/src/user/queries";
-import { UserProfile } from "@web/src/user/types";
+} from "@/src/shared/components/ui/DropdownMenu";
+import useCurrentPath from "@/src/shared/hooks/useCurrentPath";
+import { useUserProfile } from "@/src/user/queries";
+import { UserProfile } from "@/src/user/types";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

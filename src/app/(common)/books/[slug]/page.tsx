@@ -1,12 +1,11 @@
-import Page from "@web/src/components/layout/Page";
-import Button from "@web/src/components/ui/Button";
-import DUMMY from "@web/src/dummy";
-import { toKoreanDateString } from "@web/src/lib/utils";
+import Page from "@/src/shared/components/layout/Page";
+import NextImage from "@/src/shared/components/NextImage";
+import Button from "@/src/shared/components/ui/Button";
+import Tags from "@/src/tags/components/Tags";
 import Link from "next/link";
-
-const getBook = (slug: string) => {
-  return DUMMY.BOOKS.find((book) => book.slug === slug);
-};
+import GetBookBySlug from "@/src/books/api/getBookBySlug";
+import BookBuyLinks from "@/src/books/components/BookBuyLinks";
+import { toKoreanDateString } from "@/src/shared/lib/utils";
 
 interface BookDetailPageProps {
   params: {
@@ -14,9 +13,9 @@ interface BookDetailPageProps {
   };
 }
 
-export default function BooksDetailPage({ params }: BookDetailPageProps) {
+export default async function BooksDetailPage({ params }: BookDetailPageProps) {
   const decodedSlug = decodeURIComponent(params.slug);
-  const book = getBook(decodedSlug);
+  const book = await GetBookBySlug(decodedSlug);
 
   if (!book) {
     return (
@@ -36,8 +35,8 @@ export default function BooksDetailPage({ params }: BookDetailPageProps) {
       <div className="flex flex-col max-w-screen-lg mx-auto gap-12 lg:flex-row justify-around">
         <div>
           <figure>
-            <img
-              src={book.picture}
+            <NextImage
+              src={book.coverImage}
               alt={book.title + "책 표지"}
               width={500}
               height={642}
@@ -50,7 +49,7 @@ export default function BooksDetailPage({ params }: BookDetailPageProps) {
           <header>
             <h1 className="text-4xl font-medium">{book.title}</h1>
             <div className="text-xl mt-3">
-              <h2 className="inline-block">{book.author}</h2>&nbsp;
+              <h2 className="inline-block">{book.authors}</h2>&nbsp;
               {book.translator && <span>(번역: {book.translator})</span>}
               <h2 className="text-base mt-1">{book.publisher}</h2>
             </div>
@@ -61,47 +60,10 @@ export default function BooksDetailPage({ params }: BookDetailPageProps) {
           </section>
 
           <h2 className="text-2xl mt-8">구매</h2>
-          <div className="flex flex-col gap-4 mt-2">
-            <Button asChild variant="outline">
-              <Link
-                href={`https://www.yes24.com/product/search?query=${book.isbn}`}
-                target="_blank"
-              >
-                YES24에서 구매하기
-              </Link>
-            </Button>
-            <Button asChild variant="outline">
-              <Link
-                href={`https://search.kyobobook.co.kr/search?keyword=${book.isbn}`}
-                target="_blank"
-              >
-                교보문고에서 구매하기
-              </Link>
-            </Button>
-            <Button asChild variant="outline">
-              <Link
-                href={`https://www.aladin.co.kr/search/wsearchresult.aspx?SearchTarget=Book&SearchWord=${book.isbn}`}
-                target="_blank"
-              >
-                알라딘에서 구매하기
-              </Link>
-            </Button>
-          </div>
+          <BookBuyLinks isbn={book.isbn} />
 
           <h2 className="text-2xl mt-12">태그</h2>
-          <div className="flex gap-4 mt-2 flex-wrap">
-            {book.tags.map((tag) => (
-              <span
-                key={tag}
-                className="flex border border-primary rounded-lg text-sm line-clamp-1 whitespace-nowrap"
-              >
-                <Link href={`/tags/${tag}`} className="px-4 py-1">
-                  {tag}
-                </Link>
-              </span>
-            ))}
-          </div>
-
+          <Tags tags={book.tags} />
           <footer className="mt-12">
             <p>
               업데이트 날짜:&nbsp;

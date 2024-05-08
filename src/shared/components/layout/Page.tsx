@@ -1,4 +1,4 @@
-import { cn } from "@web/src/lib/utils";
+import { cn } from "@/src/shared/lib/utils";
 import React from "react";
 
 export default function Page({

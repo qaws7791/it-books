@@ -1,4 +1,4 @@
-import api from "@web/src/shared/api";
+import api from "@/src/shared/api";
 
 export interface PutBookInput {
   title: string;

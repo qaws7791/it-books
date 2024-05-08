@@ -1,8 +1,8 @@
 import {
   errorResponseHandler,
   normalResponseHandler,
-} from "@web/src/shared/api/interceptors";
-import { ErrorResponse } from "@web/src/shared/type/api";
+} from "@/src/shared/api/interceptors";
+import { ErrorResponse } from "@/src/shared/type/api";
 import axios from "axios";
 
 export class ApiError extends Error {

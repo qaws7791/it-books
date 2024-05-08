@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "@web/src/lib/utils";
+import { cn } from "@/src/shared/lib/utils";
 import Link from "next/link";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {

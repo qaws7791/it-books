@@ -1,5 +1,5 @@
 "use client";
-import Button from "@web/src/components/ui/Button";
+import Button from "@/src/shared/components/ui/Button";
 import { toast } from "sonner";
 
 export default function ToastForm() {

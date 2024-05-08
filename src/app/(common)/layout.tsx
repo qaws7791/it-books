@@ -1,5 +1,5 @@
-import Sidebar from "@web/src/components/layout/Sidebar";
-import DUMMY from "@web/src/dummy";
+import Sidebar from "@/src/shared/components/layout/Sidebar";
+import DUMMY from "@/src/dummy";
 import React from "react";
 
 export default function CommonLayout({

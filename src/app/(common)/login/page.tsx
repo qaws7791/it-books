@@ -1,5 +1,5 @@
-import GoogleLoginButton from "@web/src/auth/components/GoogleLoginButton";
-import Page from "@web/src/components/layout/Page";
+import GoogleLoginButton from "@/src/auth/components/GoogleLoginButton";
+import Page from "@/src/shared/components/layout/Page";
 
 export default function LoginPage() {
   return (

@@ -1,22 +1,22 @@
 "use client";
 
-import Button from "@web/src/components/ui/Button";
-import { Input } from "@web/src/components/ui/Input";
-import Label from "@web/src/components/ui/Label";
+import Button from "@/src/shared/components/ui/Button";
+import { Input } from "@/src/shared/components/ui/Input";
+import Label from "@/src/shared/components/ui/Label";
 import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import ErrorMessage from "@web/src/components/ui/ErrorMessage";
-import { useCreateCategoryMutation } from "@web/src/categories/api/createCategory";
+import ErrorMessage from "@/src/shared/components/ui/ErrorMessage";
+import { useCreateCategoryMutation } from "@/src/categories/api/createCategory";
 import { useQueryClient } from "@tanstack/react-query";
-import { ApiError } from "@web/src/shared/api";
-import { Textarea } from "@web/src/components/ui/Textarea";
-import Description from "@web/src/components/ui/Description";
-import { FormRow, FormColumn } from "@web/src/components/ui/Form";
-import TagInput from "@web/src/components/ui/TagInput";
-import getBookImagePresignedUrl from "@web/src/books/api/getBookImagePresignedUrl";
+import { ApiError } from "@/src/shared/api";
+import { Textarea } from "@/src/shared/components/ui/Textarea";
+import Description from "@/src/shared/components/ui/Description";
+import { FormRow, FormColumn } from "@/src/shared/components/ui/Form";
+import TagInput from "@/src/shared/components/ui/TagInput";
+import getBookImagePresignedUrl from "@/src/books/api/getBookImagePresignedUrl";
 import axios from "axios";
-import createBook, { CreateBookInput } from "@web/src/books/api/createBook";
+import createBook, { CreateBookInput } from "@/src/books/api/createBook";
 import {
   Select,
   SelectContent,
@@ -25,8 +25,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@web/src/components/ui/Select";
-import { useCategoriesQuery } from "@web/src/categories/api/getCategories";
+} from "@/src/shared/components/ui/Select";
+import { useCategoriesQuery } from "@/src/categories/api/getCategories";
 const bookSchema = z.object({
   title: z.string().min(2, "책 제목은 2글자 이상이어야 합니다."),
   categoryId: z.string().min(1, "카테고리를 선택해주세요."),

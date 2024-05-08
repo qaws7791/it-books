@@ -1,6 +1,8 @@
+import Page from "@/src/shared/components/layout/Page";
+
 export default function FontTestPage() {
   return (
-    <div>
+    <Page className="font-sans">
       <h1 className="text-9xl">Text 9xl</h1>
       <h1 className="text-8xl">Text 8xl</h1>
       <h1 className="text-7xl">Text 7xl</h1>
@@ -15,15 +17,15 @@ export default function FontTestPage() {
       <h1 className="text-sm">Text sm</h1>
       <h1 className="text-xs">Text xs</h1>
 
-      <h1 className="font-black">Font Black</h1>
-      <h1 className="font-extrabold">Font Extra Bold</h1>
-      <h1 className="font-bold">Font Bold</h1>
-      <h1 className="font-semibold">Font Semi Bold</h1>
-      <h1 className="font-medium">Font Medium</h1>
-      <h1 className="font-normal">Font Normal</h1>
-      <h1 className="font-light">Font Light</h1>
-      <h1 className="font-extralight">Font Extra Light</h1>
-      <h1 className="font-thin">Font Thin</h1>
-    </div>
+      <h1 className="text-3xl font-black">Font Black</h1>
+      <h1 className="text-3xl font-extrabold">Font Extra Bold</h1>
+      <h1 className="text-3xl font-bold">Font Bold</h1>
+      <h1 className="text-3xl font-semibold">Font Semi Bold</h1>
+      <h1 className="text-3xl font-medium">Font Medium</h1>
+      <h1 className="text-3xl font-normal">Font Normal</h1>
+      <h1 className="text-3xl font-light">Font Light</h1>
+      <h1 className="text-3xl font-extralight">Font Extra Light</h1>
+      <h1 className="text-3xl font-thin">Font Thin</h1>
+    </Page>
   );
 }

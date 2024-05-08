@@ -1,7 +1,7 @@
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import type { Meta, StoryObj } from "@storybook/react";
-import Avatar from "@web/src/components/ui/Avatar";
-import Button from "@web/src/components/ui/Button";
+import Avatar from "@/src/shared/components/ui/Avatar";
+import Button from "@/src/shared/components/ui/Button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@web/src/components/ui/DropdownMenu";
+} from "@/src/shared/components/ui/DropdownMenu";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

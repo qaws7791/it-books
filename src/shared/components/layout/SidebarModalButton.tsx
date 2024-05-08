@@ -1,10 +1,10 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import Sidebar from "@web/src/components/layout/Sidebar";
-import Button from "@web/src/components/ui/Button";
+import Sidebar from "@/src/shared/components/layout/Sidebar";
+import Button from "@/src/shared/components/ui/Button";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import DUMMY from "@web/src/dummy";
-import useWindowSize from "@web/src/shared/hooks/useWindowSize";
+import DUMMY from "@/src/dummy";
+import useWindowSize from "@/src/shared/hooks/useWindowSize";
 
 export default function SidebarModalButton() {
   const [open, setOpen] = useState(false);

@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Category } from "@web/src/categories/types";
-import api from "@web/src/shared/api";
+import { Category } from "@/src/categories/types";
+import api from "@/src/shared/api";
 import { AxiosPromise } from "axios";
 
 interface GetCategoriesResponse {

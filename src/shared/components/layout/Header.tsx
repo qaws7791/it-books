@@ -1,9 +1,9 @@
 "use client";
 
-import UserButton from "@web/src/auth/components/UserButton";
-import SearchModalButton from "@web/src/components/layout/SearchModalButton";
-import SidebarModalButton from "@web/src/components/layout/SidebarModalButton";
-import Search from "@web/src/components/ui/Search";
+import UserButton from "@/src/auth/components/UserButton";
+import SearchModalButton from "@/src/shared/components/layout/SearchModalButton";
+import SidebarModalButton from "@/src/shared/components/layout/SidebarModalButton";
+import Search from "@/src/shared/components/ui/Search";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

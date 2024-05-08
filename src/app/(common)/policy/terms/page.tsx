@@ -1,4 +1,4 @@
-import Page from "@web/src/components/layout/Page";
+import Page from "@/src/shared/components/layout/Page";
 
 export default function ServiceTermsPage() {
   return (

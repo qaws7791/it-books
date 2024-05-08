@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Search from "@web/src/components/ui/Search";
+import Search from "@/src/shared/components/ui/Search";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

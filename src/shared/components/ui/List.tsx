@@ -1,5 +1,5 @@
 import * as React from "react";
-import { cn } from "../../lib/utils";
+import { cn } from "@/src/shared/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 
 export function List({

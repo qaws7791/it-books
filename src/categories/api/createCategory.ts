@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Category, CreateCategoryDto } from "@web/src/categories/types";
-import api from "@web/src/shared/api";
+import { Category, CreateCategoryDto } from "@/src/categories/types";
+import api from "@/src/shared/api";
 import { toast } from "sonner";
 
 const createCategory = (dto: CreateCategoryDto): Promise<Category> => {

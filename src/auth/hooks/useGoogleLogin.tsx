@@ -1,7 +1,7 @@
 "use client";
 import { useQueryClient } from "@tanstack/react-query";
-import { googleLogin } from "@web/src/auth/api";
-import { useUserProfile } from "@web/src/user/queries";
+import { googleLogin } from "@/src/auth/api";
+import { useUserProfile } from "@/src/user/queries";
 import { CredentialResponse } from "google-one-tap";
 import Script from "next/script";
 import { createContext, useContext, useEffect, useState } from "react";

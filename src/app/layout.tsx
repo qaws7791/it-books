@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 // import "@material-design-icons/font";
 import { Suspense } from "react";
-import QueryProvider from "@web/src/components/QueryProvider";
+import QueryProvider from "@/src/shared/components/QueryProvider";
 import { ErrorBoundary } from "react-error-boundary";
-import SonnerToaster from "@web/src/components/ui/SonnerToaster";
-import Header from "@web/src/components/layout/Header";
-import GoogleLoginScript from "@web/src/auth/components/GoogleLoginScript";
-import { GoogleLoginProvider } from "@web/src/auth/hooks/useGoogleLogin";
+import SonnerToaster from "@/src/shared/components/ui/SonnerToaster";
+import Header from "@/src/shared/components/layout/Header";
+import GoogleLoginScript from "@/src/auth/components/GoogleLoginScript";
+import { GoogleLoginProvider } from "@/src/auth/hooks/useGoogleLogin";
 import Head from "next/head";
 
 export const metadata: Metadata = {

@@ -1,5 +1,5 @@
-import BookUpdateClient from "@web/src/app/(admin)/admin/books/update/_components/BookUpdateClient";
-import Page from "@web/src/components/layout/Page";
+import BookUpdateClient from "@/src/app/(admin)/admin/books/update/_components/BookUpdateClient";
+import Page from "@/src/shared/components/layout/Page";
 
 interface AdminBookUpdatePageProps {
   searchParams: {

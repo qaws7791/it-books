@@ -1,5 +1,5 @@
-import LogoutButton from "@web/src/app/(common)/account/logout-button";
-import RefreshButton from "@web/src/app/(common)/account/refresh-button";
+import LogoutButton from "@/src/app/(common)/account/logout-button";
+import RefreshButton from "@/src/app/(common)/account/refresh-button";
 import { cookies } from "next/headers";
 export default async function AccountPage() {
   const cookieStore = cookies();

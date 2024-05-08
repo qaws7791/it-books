@@ -1,6 +1,6 @@
 "use client";
 
-import { useCategoriesQuery } from "@web/src/categories/api/getCategories";
+import { useCategoriesQuery } from "@/src/categories/api/getCategories";
 
 export default function CategoryList() {
   const { data } = useCategoriesQuery();

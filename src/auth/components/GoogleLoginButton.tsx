@@ -1,6 +1,6 @@
 "use client";
 
-import useGoogleLogin from "@web/src/auth/hooks/useGoogleLogin";
+import useGoogleLogin from "@/src/auth/hooks/useGoogleLogin";
 import { useEffect, useRef } from "react";
 
 export default function GoogleLoginButton() {

@@ -1,4 +1,4 @@
-import { debounce } from "@web/src/shared/utils";
+import { debounce } from "@/src/shared/utils";
 import { useSyncExternalStore } from "react";
 
 type Callback = () => void;

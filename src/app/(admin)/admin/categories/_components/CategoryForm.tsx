@@ -1,17 +1,17 @@
 "use client";
 
-import Button from "@web/src/components/ui/Button";
-import { Input } from "@web/src/components/ui/Input";
-import Label from "@web/src/components/ui/Label";
+import Button from "@/src/shared/components/ui/Button";
+import { Input } from "@/src/shared/components/ui/Input";
+import Label from "@/src/shared/components/ui/Label";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import ErrorMessage from "@web/src/components/ui/ErrorMessage";
-import { useCreateCategoryMutation } from "@web/src/categories/api/createCategory";
+import ErrorMessage from "@/src/shared/components/ui/ErrorMessage";
+import { useCreateCategoryMutation } from "@/src/categories/api/createCategory";
 import { useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { ErrorResponse } from "@web/src/shared/type/api";
-import { ApiError } from "@web/src/shared/api";
+import { ErrorResponse } from "@/src/shared/type/api";
+import { ApiError } from "@/src/shared/api";
 const categorySchema = z.object({
   name: z.string().min(2),
   slug: z.string().min(2),

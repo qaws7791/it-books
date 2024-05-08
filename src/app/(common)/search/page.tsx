@@ -1,5 +1,5 @@
-import Page from "@web/src/components/layout/Page";
-import DUMMY from "@web/src/dummy";
+import Page from "@/src/shared/components/layout/Page";
+import DUMMY from "@/src/dummy";
 import Link from "next/link";
 
 interface SearchPageProps {

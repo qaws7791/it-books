@@ -1,6 +1,6 @@
 "use client";
-import BookUpdateForm from "@web/src/app/(admin)/admin/books/update/_components/BookUpdateForm";
-import { useBookById } from "@web/src/books/api/getBookById";
+import BookUpdateForm from "@/src/app/(admin)/admin/books/update/_components/BookUpdateForm";
+import { useBookById } from "@/src/books/api/getBookById";
 
 interface BookUpdateClientProps {
   bookId: number;

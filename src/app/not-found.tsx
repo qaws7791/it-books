@@ -1,4 +1,4 @@
-import Button from "@web/src/components/ui/Button";
+import Button from "@/src/shared/components/ui/Button";
 import Link from "next/link";
 
 export default function NotFound() {

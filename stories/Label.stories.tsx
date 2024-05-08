@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Label from "@web/src/components/ui/Label";
+import Label from "@/src/shared/components/ui/Label";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

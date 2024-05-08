@@ -10,3 +10,8 @@ export const debounce = <F extends (...args: any[]) => void>(
     }, delay);
   };
 };
+
+export const imageLoader = ({ src }: { src: string }) => {
+  console.log(process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN);
+  return `https://${process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN}/${src}`;
+};
