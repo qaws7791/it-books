@@ -38,7 +38,7 @@ export default function TaggedBooksPage({ params }: BookDetailPageProps) {
                 height={300}
               />
             </div>
-            <h2 className="font-semibold text-center mt-2">{book.title}</h2>
+            <h2 className="font-bold text-center mt-2">{book.title}</h2>
             <p className="text-outline text-center">{book.author}</p>
           </Link>
         ))}

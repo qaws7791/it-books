@@ -27,7 +27,7 @@ export const ListItem = React.forwardRef<HTMLLIElement, ListItemProps>(
     return (
       <Comp
         className={cn(
-          "text-lg font-semibold p-4 w-full hover:bg-[#eceae5] rounded-full",
+          "text-lg font-bold p-4 w-full hover:bg-[#eceae5] rounded-full",
           className
         )}
         ref={ref}

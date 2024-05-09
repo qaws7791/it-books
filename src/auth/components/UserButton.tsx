@@ -87,7 +87,7 @@ export const LoggedInUserButton = ({ user }: { user?: UserProfile }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
-        <DropdownMenuLabel className="font-normal">
+        <DropdownMenuLabel className="font-light">
           <div className="flex items-center gap-2">
             <Avatar>
               <AvatarImage src={user.photo} alt={user.name} />
