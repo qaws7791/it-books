@@ -4,6 +4,12 @@ import defaultTheme from "tailwindcss/defaultTheme";
 const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
+    fontWeight: {
+      light: "300",
+      medium: "500",
+      bold: "700",
+      extrabold: "800",
+    },
     gridTemplateColumns: {
       card: "repeat(auto-fill, minmax(250px, 1fr))",
     },
@@ -86,7 +92,7 @@ const config: Config = {
         main: "calc(100vh - 4rem)",
       },
       fontFamily: {
-        sans: ["NanumSquareNeo-Variable", ...defaultTheme.fontFamily.sans],
+        sans: ["NanumSquareNeo", ...defaultTheme.fontFamily.sans],
       },
     },
   },
