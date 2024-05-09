@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import DUMMY from "@/src/dummy";
 import useWindowSize from "@/src/shared/hooks/useWindowSize";
+import usePathChange from "@/src/shared/hooks/usePathChange";
 
 export default function SidebarModalButton() {
   const [open, setOpen] = useState(false);
   const windowSize = useWindowSize();
+  usePathChange(() => setOpen(false));
 
   useEffect(() => {
     if (windowSize.width > 1440) {
