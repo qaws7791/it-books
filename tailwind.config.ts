@@ -12,6 +12,7 @@ const config: Config = {
     },
     gridTemplateColumns: {
       card: "repeat(auto-fill, minmax(250px, 1fr))",
+      "card-lg": "repeat(auto-fill, minmax(400px, 1fr))",
     },
     screens: {
       sm: "640px",
