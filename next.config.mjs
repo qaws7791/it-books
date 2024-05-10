@@ -8,6 +8,12 @@ const nextConfig = {
         port: "",
         pathname: "/uploads/**",
       },
+      {
+        protocol: "https",
+        hostname: "image.yes24.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
