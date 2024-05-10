@@ -5,8 +5,6 @@ import { Suspense } from "react";
 import QueryProvider from "@/src/shared/components/QueryProvider";
 import { ErrorBoundary } from "react-error-boundary";
 import SonnerToaster from "@/src/shared/components/ui/SonnerToaster";
-import Header from "@/src/shared/components/layout/Header";
-import GoogleLoginScript from "@/src/auth/components/GoogleLoginScript";
 import { GoogleLoginProvider } from "@/src/auth/hooks/useGoogleLogin";
 import Head from "next/head";
 
@@ -31,7 +29,6 @@ export default function RootLayout({
             <GoogleLoginProvider>
               <Suspense fallback="loading...">
                 <SonnerToaster />
-                <Header />
                 {children}
               </Suspense>
             </GoogleLoginProvider>
