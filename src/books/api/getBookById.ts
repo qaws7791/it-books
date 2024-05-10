@@ -1,4 +1,3 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
 import api from "@/src/shared/api";
 
 export interface GetBookByIdOutput {
@@ -28,15 +27,8 @@ export interface GetBookByIdOutput {
   }[];
 }
 
-export default function GetBookById(
+export default function getBookById(
   bookId: number
 ): Promise<GetBookByIdOutput> {
   return api.get("/books/" + bookId);
 }
-
-export const useBookById = (bookId: number) => {
-  return useSuspenseQuery({
-    queryKey: ["book", bookId],
-    queryFn: () => GetBookById(bookId),
-  });
-};

@@ -1,12 +1,11 @@
 "use client";
-
-import { useBooksPagination } from "@/src/books/api/getBooksPagination";
+import { useBooksPagination } from "@/src/books/queries";
 import { imageLoader } from "@/src/shared/utils";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function BooksClient() {
-  const { data, isLoading } = useBooksPagination();
+  const { data } = useBooksPagination();
   const books = data?.data;
   return (
     <div className="grid grid-cols-card gap-4 overflow-y-auto">
