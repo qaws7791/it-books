@@ -26,7 +26,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/shared/components/ui/Select";
-import { useCategoriesQuery } from "@/src/categories/api/getCategories";
+import { useCategoriesQuery } from "@/src/categories/queries";
+
 const bookSchema = z.object({
   title: z.string().min(2, "책 제목은 2글자 이상이어야 합니다."),
   categoryId: z.string().min(1, "카테고리를 선택해주세요."),
