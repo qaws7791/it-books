@@ -131,4 +131,10 @@
       width: 12px;
     }
   }
+
+  .book-border {
+    @apply before:content-[''] before:absolute before:inset-0 before:border-solid before:border-black/10 before:top-0 before:left-0 before:right-0 before:bottom-0 before:border-l-2 before:border-l-black/40 before:z-10 before:outline before:outline-1 before:outline-black/10;
+
+    @apply after:content-[''] after:absolute after:inset-0 after:top-0 after:left-1.5 after:bottom-0 after:w-0.5 after:bg-black/25 after:blur-xxs;
+  }
 }

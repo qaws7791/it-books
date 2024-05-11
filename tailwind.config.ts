@@ -95,6 +95,15 @@ const config: Config = {
       fontFamily: {
         sans: ["NanumSquareNeo", ...defaultTheme.fontFamily.sans],
       },
+      boxShadow: {
+        elevation: `-1px 1px 1.7px rgb(0 0 0 / 0.09),
+      -3.9px 3.9px 6.7px -0.6px rgb(0 0 0 / 0.11),
+      -9.1px 9.1px 15.7px -1.2px rgb(0 0 0 / 0.12),
+      -21.2px 21.2px 36.7px -1.8px rgb(0 0 0 / 0.14)`,
+      },
+      blur: {
+        xxs: "1px",
+      },
     },
   },
   plugins: [],
