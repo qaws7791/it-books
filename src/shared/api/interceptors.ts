@@ -1,21 +1,18 @@
-import api, { ApiError } from "@/src/shared/api";
-import { renewAccessToken } from "@/src/shared/api/auth";
 import { ErrorResponse } from "@/src/shared/type/api";
 import { AxiosError, AxiosResponse } from "axios";
 
 export const normalResponseHandler = (response: AxiosResponse) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return response.data;
 };
 
-export const errorResponseHandler = async (
-  error: AxiosError<ErrorResponse>
-) => {
-  const originalRequest = error.config;
+export const errorResponseHandler = (error: AxiosError<ErrorResponse>) => {
+  // const originalRequest = error.config;
   console.log("errorResponseHandler", error.config?.url);
   if (error.response?.status === 401) {
     console.log("errorResponseHandler 401");
   }
-  return Promise.reject(error);
+  throw error;
   // if (originalRequest && error.response?.status === 401) {
   //   try {
   //     await renewAccessToken();

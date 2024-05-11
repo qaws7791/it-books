@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 // import "@material-design-icons/font";
 import { Suspense } from "react";
-import QueryProvider from "@/src/shared/components/QueryProvider";
+import QueryProvider from "@/src/shared/components/query-provider";
 import { ErrorBoundary } from "react-error-boundary";
-import SonnerToaster from "@/src/shared/components/ui/SonnerToaster";
-import { GoogleLoginProvider } from "@/src/auth/hooks/useGoogleLogin";
+import SonnerToaster from "@/src/shared/components/ui/sonner-toaster";
+import { GoogleLoginProvider } from "@/src/auth/hooks/use-google-login";
 import Head from "next/head";
 
 export const metadata: Metadata = {

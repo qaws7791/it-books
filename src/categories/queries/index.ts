@@ -1,4 +1,4 @@
-import { getCategories } from "@/src/categories/api/getCategories";
+import { getCategories } from "@/src/categories/api/get-categories";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 import { useSuspenseQuery } from "@tanstack/react-query";
 

@@ -1,9 +1,9 @@
-import Page from "@/src/shared/components/layout/Page";
+import PageContainer from "@/src/shared/components/layout/page-container";
 import DUMMY from "@/src/dummy";
 import Link from "next/link";
-import NextImage from "@/src/shared/components/NextImage";
+import NextImage from "@/src/shared/components/next-image";
 
-interface SearchPageProps {
+interface SearchPageProperties {
   searchParams: {
     query: string;
   };
@@ -11,16 +11,16 @@ interface SearchPageProps {
 
 const searchBooks = (query: string) => {
   return DUMMY.BOOKS.filter(
-    (book) => book.title.includes(query) || book.author.includes(query)
+    (book) => book.title.includes(query) || book.authors.includes(query),
   );
 };
 
-export default function SearchPage({ searchParams }: SearchPageProps) {
+export default function SearchPage({ searchParams }: SearchPageProperties) {
   const decodedQuery = decodeURIComponent(searchParams.query);
   const books = searchBooks(decodedQuery);
 
   return (
-    <Page>
+    <PageContainer>
       <h1 className="text-4xl text-center">
         &quot;{decodedQuery}&quot; 검색 결과
       </h1>
@@ -33,7 +33,7 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
           >
             <div>
               <NextImage
-                src={book.picture}
+                src={book.coverImage}
                 alt={book.title}
                 className="shadow-md mx-auto"
                 width={200}
@@ -41,10 +41,10 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
               />
             </div>
             <h2 className="font-bold text-center mt-2">{book.title}</h2>
-            <p className="text-outline text-center">{book.author}</p>
+            <p className="text-outline text-center">{book.authors}</p>
           </Link>
         ))}
       </div>
-    </Page>
+    </PageContainer>
   );
 }

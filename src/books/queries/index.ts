@@ -1,9 +1,9 @@
-import getBookById from "@/src/books/api/getBookById";
+import getBookById from "@/src/books/api/get-book-by-id";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createQueryKeys } from "@lukemorales/query-key-factory";
-import getBookBySlug from "@/src/books/api/getBookBySlug";
+import getBookBySlug from "@/src/books/api/get-book-by-slug";
 import { PaginationCommonInput } from "@/src/shared/type/api";
-import getBooksPagination from "@/src/books/api/getBooksPagination";
+import getBooksPagination from "@/src/books/api/get-books-pagination";
 export const bookQueryKeys = createQueryKeys("books", {
   fetchBookById: (bookId: number) => ["id", bookId],
   fetchBookBySlug: (bookSlug: string) => ["slug", bookSlug],
@@ -28,11 +28,12 @@ export const useBookBySlug = (bookSlug: string) => {
   });
 };
 
-export function useBooksPagination(
-  input: PaginationCommonInput = { page: 1, limit: 10 }
-) {
+export function useBooksPagination({
+  page = 1,
+  limit = 10,
+}: PaginationCommonInput) {
   return useSuspenseQuery({
-    queryKey: bookQueryKeys.fetchBooksPagination(input).queryKey,
-    queryFn: () => getBooksPagination(input),
+    queryKey: bookQueryKeys.fetchBooksPagination({ page, limit }).queryKey,
+    queryFn: () => getBooksPagination({ page, limit }),
   });
 }

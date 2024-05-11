@@ -1,37 +1,39 @@
-import Page from "@/src/shared/components/layout/Page";
-import NextImage from "@/src/shared/components/NextImage";
-import Button from "@/src/shared/components/ui/Button";
-import Tags from "@/src/tags/components/Tags";
+import PageContainer from "@/src/shared/components/layout/page-container";
+import NextImage from "@/src/shared/components/next-image";
+import Button from "@/src/shared/components/ui/button";
+import Tags from "@/src/tags/components/tags";
 import Link from "next/link";
-import GetBookBySlug from "@/src/books/api/getBookBySlug";
-import BookBuyLinks from "@/src/books/components/BookBuyLinks";
+import GetBookBySlug from "@/src/books/api/get-book-by-slug";
+import BookBuyLinks from "@/src/books/components/book-buy-links";
 import { toKoreanDateString } from "@/src/shared/lib/utils";
 
-interface BookDetailPageProps {
+interface BookDetailPageProperties {
   params: {
     slug: string;
   };
 }
 
-export default async function BooksDetailPage({ params }: BookDetailPageProps) {
+export default async function BooksDetailPage({
+  params,
+}: BookDetailPageProperties) {
   const decodedSlug = decodeURIComponent(params.slug);
   const book = await GetBookBySlug(decodedSlug);
 
   if (!book) {
     return (
-      <Page>
+      <PageContainer>
         Book not found
         <Button asChild>
           <Link href="/books" replace>
             Back to Books
           </Link>
         </Button>
-      </Page>
+      </PageContainer>
     );
   }
 
   return (
-    <Page>
+    <PageContainer>
       <div className="flex flex-col max-w-screen-lg mx-auto gap-12 lg:flex-row justify-around">
         <div>
           <figure>
@@ -74,6 +76,6 @@ export default async function BooksDetailPage({ params }: BookDetailPageProps) {
           </footer>
         </article>
       </div>
-    </Page>
+    </PageContainer>
   );
 }

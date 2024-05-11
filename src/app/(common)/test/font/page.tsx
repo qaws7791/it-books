@@ -1,8 +1,8 @@
-import Page from "@/src/shared/components/layout/Page";
+import PageContainer from "@/src/shared/components/layout/page-container";
 
 export default function FontTestPage() {
   return (
-    <Page className="font-sans">
+    <PageContainer className="font-sans">
       <h2 className="text-9xl">Text 9xl</h2>
       <h2 className="text-8xl">Text 8xl</h2>
       <h2 className="text-7xl">Text 7xl</h2>
@@ -41,6 +41,6 @@ export default function FontTestPage() {
         <br />
         The quick brown fox jumps over the lazy dog
       </p>
-    </Page>
+    </PageContainer>
   );
 }

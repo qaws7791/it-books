@@ -1,5 +1,6 @@
 import LogoutButton from "@/src/app/(common)/account/logout-button";
 import RefreshButton from "@/src/app/(common)/account/refresh-button";
+import { getProfile } from "@/src/user/api";
 import { cookies } from "next/headers";
 export default async function AccountPage() {
   const cookieStore = cookies();
@@ -9,29 +10,19 @@ export default async function AccountPage() {
     return <div>Not authorized</div>;
   }
   try {
-    const res = await fetch("http://localhost:4000/api/profile", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Authorization: `Bearer ${token.value}`,
-      },
-    });
-
-    if (!res.ok) {
-      throw new Error("Not authorized");
-    }
-    const profile = await res.json();
+    const profile = await getProfile();
 
     return (
       <div>
         <h1>Account</h1>
-        <pre>{JSON.stringify(profile, null, 2)}</pre>
+        <p>Username: {profile.name}</p>
+        <p>Email: {profile.email}</p>
         <LogoutButton />
         <RefreshButton />
       </div>
     );
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     return <div>Error</div>;
   }
 }

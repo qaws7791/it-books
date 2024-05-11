@@ -1,4 +1,4 @@
-import ToastForm from "@/src/app/(common)/test/toast/ToastForm";
+import ToastForm from "@/src/app/(common)/test/toast/toast-form";
 
 export default function ToastTestPage() {
   return (

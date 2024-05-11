@@ -20,7 +20,7 @@ export class ApiError extends Error {
 
 const api = axios.create({
   baseURL: "http://localhost:4000/api",
-  timeout: 10000,
+  timeout: 10_000,
   withCredentials: true,
 });
 

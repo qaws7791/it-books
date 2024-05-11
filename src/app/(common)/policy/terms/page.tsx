@@ -1,9 +1,9 @@
-import Page from "@/src/shared/components/layout/Page";
+import PageContainer from "@/src/shared/components/layout/page-container";
 
 export default function ServiceTermsPage() {
   return (
-    <Page>
+    <PageContainer>
       <h1>서비스 이용약관</h1>
-    </Page>
+    </PageContainer>
   );
 }

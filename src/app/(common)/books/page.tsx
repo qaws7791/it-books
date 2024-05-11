@@ -1,11 +1,23 @@
-import BooksClient from "@/src/app/(common)/books/BooksClient";
-import Page from "@/src/shared/components/layout/Page";
+import BooksClient from "@/src/app/(common)/books/books-client";
+import getBooksPagination from "@/src/books/api/get-books-pagination";
+import PageContainer from "@/src/shared/components/layout/page-container";
 
-export default function BooksPage() {
+interface BooksPageProps {
+  searchParams: {
+    page?: string;
+    limit?: string;
+  };
+}
+
+export default async function BooksPage({ searchParams }: BooksPageProps) {
+  const page = searchParams.page ? Number.parseInt(searchParams.page) : 1;
+  const limit = searchParams.limit ? Number.parseInt(searchParams.limit) : 10;
+  const { data } = await getBooksPagination({ page, limit });
+
   return (
-    <Page>
+    <PageContainer>
       <h1 className="sr-only">Books</h1>
-      <BooksClient />
-    </Page>
+      <BooksClient books={data} />
+    </PageContainer>
   );
 }

@@ -1,5 +1,5 @@
-import CategoryForm from "@/src/app/(admin)/admin/categories/_components/CategoryForm";
-import CategoryList from "@/src/app/(admin)/admin/categories/_components/CategoryList";
+import CategoryForm from "@/src/app/(admin)/admin/categories/_components/category-form";
+import CategoryList from "@/src/app/(admin)/admin/categories/_components/category-list";
 
 export default function AdminCategoriesPage() {
   return (

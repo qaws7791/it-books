@@ -1,11 +1,11 @@
-import CollectionsClient from "@/src/app/(common)/collections/CollectionsClient";
-import Page from "@/src/shared/components/layout/Page";
+import CollectionsClient from "@/src/app/(common)/collections/collections-client";
+import PageContainer from "@/src/shared/components/layout/page-container";
 
 export default function CollectionsPage() {
   return (
-    <Page>
+    <PageContainer>
       <h1 className="sr-only">Collections</h1>
       <CollectionsClient />
-    </Page>
+    </PageContainer>
   );
 }

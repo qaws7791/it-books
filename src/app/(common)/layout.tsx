@@ -1,7 +1,7 @@
-import Sidebar from "@/src/shared/components/layout/Sidebar";
+import Sidebar from "@/src/shared/components/layout/sidebar";
 import DUMMY from "@/src/dummy";
 import React from "react";
-import Header from "@/src/shared/components/layout/Header";
+import Header from "@/src/shared/components/layout/header";
 
 export default function CommonLayout({
   children,

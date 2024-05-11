@@ -1,7 +1,7 @@
-import BookUpdateClient from "@/src/app/(admin)/admin/books/update/_components/BookUpdateClient";
-import Page from "@/src/shared/components/layout/Page";
+import BookUpdateClient from "@/src/app/(admin)/admin/books/update/_components/book-update-client";
+import PageContainer from "@/src/shared/components/layout/page-container";
 
-interface AdminBookUpdatePageProps {
+interface AdminBookUpdatePageProperties {
   searchParams: {
     bookId: number;
   };
@@ -9,14 +9,14 @@ interface AdminBookUpdatePageProps {
 
 export default function AdminBookUpdatePage({
   searchParams: { bookId },
-}: AdminBookUpdatePageProps) {
+}: AdminBookUpdatePageProperties) {
   if (!bookId) {
-    return <Page>책 ID가 필요합니다.</Page>;
+    return <PageContainer>책 ID가 필요합니다.</PageContainer>;
   }
   return (
-    <Page>
+    <PageContainer>
       <h1 className="text-2xl font-bold">도서 업데이트</h1>
       <BookUpdateClient bookId={bookId} />
-    </Page>
+    </PageContainer>
   );
 }
