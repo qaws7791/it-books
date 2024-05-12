@@ -46,7 +46,7 @@ export default function SidebarModalButton() {
                 animate={{ x: 0 }}
                 exit={{ x: "-100%" }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="fixed left-0 h-full mt-16"
+                className="fixed left-0 h-full mt-16 z-40"
               >
                 <Sidebar links={DUMMY.SIDEBAR_LINKS} />
               </motion.div>
