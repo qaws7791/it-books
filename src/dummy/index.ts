@@ -263,13 +263,44 @@ const LISTS = [
     id: 1,
     name: "최신 도서",
     slug: "최신-도서",
+    description: "최신 출간된 도서들을 만나보세요.",
     books: BOOKS.slice(0, 3),
+    count: 5,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
   {
     id: 2,
     name: "인기 도서",
     slug: "인기-도서",
+    description: "많은 사람들이 읽고 있는 인기 도서들입니다.",
     books: BOOKS.slice(3, 5),
+    count: 2,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+];
+
+const LiST_DETAILS = [
+  {
+    id: 1,
+    name: "최신 도서",
+    slug: "최신-도서",
+    description: "최신 출간된 도서들을 만나보세요.",
+    books: BOOKS.slice(0, 5),
+    count: 5,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  },
+  {
+    id: 2,
+    name: "인기 도서",
+    slug: "인기-도서",
+    description: "많은 사람들이 읽고 있는 인기 도서들입니다.",
+    books: BOOKS.slice(3, 5),
+    count: 2,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   },
 ];
 
@@ -279,6 +310,7 @@ const DUMMY = {
   BOOKS,
   ADMIN_SIDEBAR_LINKS,
   LISTS,
+  LiST_DETAILS,
 };
 
 export default DUMMY;

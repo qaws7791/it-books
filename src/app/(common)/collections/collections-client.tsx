@@ -14,7 +14,7 @@ export default function CollectionsClient() {
           className="rounded-xl overflow-hidden hover:bg-outline/10 flex flex-col shadow"
         >
           <div className="p-4 rounded-xl ">
-            <BookCoversPreview books={list.books} />
+            <BookCoversPreview books={list.books} count={list.count} />
           </div>
           <h2 className="font-medium text-left text-xl p-4">{list.name}</h2>
         </Link>
