@@ -6,8 +6,8 @@ export interface PutBookInput {
   isbn: string;
   description: string;
   coverImage: string;
-  authors: string;
-  translator?: string;
+  authors: string[];
+  translator: string[];
   publisher: string;
   publishedDate: string;
   categoryId: number;
@@ -21,8 +21,8 @@ interface PutBookOutput {
   isbn: string;
   description: string;
   coverImage: string;
-  authors: string;
-  translator: string;
+  authors: string[];
+  translator: string[];
   publisher: string;
   publishedDate: string;
 }

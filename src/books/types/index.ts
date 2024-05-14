@@ -10,8 +10,8 @@ export interface Book {
   isbn: string;
   description: string;
   coverImage: string;
-  authors: string;
-  translator: string | null;
+  authors: string[];
+  translator: string[];
   publisher: string;
   publishedDate: string;
 }

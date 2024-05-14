@@ -1,18 +1,16 @@
 "use client";
 
+import createBook, { CreateBookInput } from "@/src/books/api/create-book";
+import getBookImagePresignedUrl from "@/src/books/api/get-book-image-presigned-url";
+import { useCategoriesQuery } from "@/src/categories/queries";
+import { ApiError } from "@/src/shared/api";
+import NextImage from "@/src/shared/components/next-image";
 import Button from "@/src/shared/components/ui/button";
+import Description from "@/src/shared/components/ui/description";
+import ErrorMessage from "@/src/shared/components/ui/error-message";
+import { FormColumn, FormRow } from "@/src/shared/components/ui/form";
 import { Input } from "@/src/shared/components/ui/input";
 import Label from "@/src/shared/components/ui/label";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import ErrorMessage from "@/src/shared/components/ui/error-message";
-import { Textarea } from "@/src/shared/components/ui/textarea";
-import Description from "@/src/shared/components/ui/description";
-import { FormRow, FormColumn } from "@/src/shared/components/ui/form";
-import TagInput from "@/src/shared/components/ui/tag-input";
-import getBookImagePresignedUrl from "@/src/books/api/get-book-image-presigned-url";
-import axios from "axios";
 import {
   Select,
   SelectContent,
@@ -22,9 +20,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/shared/components/ui/select";
-import { useCategoriesQuery } from "@/src/categories/queries";
-import createBook, { CreateBookInput } from "@/src/books/api/create-book";
-import { ApiError } from "@/src/shared/api";
+import TagInput from "@/src/shared/components/ui/tag-input";
+import { Textarea } from "@/src/shared/components/ui/textarea";
+import { stringToArrayByComma } from "@/src/shared/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
 
 const bookSchema = z.object({
   title: z.string().min(2, "책 제목은 2글자 이상이어야 합니다."),
@@ -71,11 +73,17 @@ export default function BookCreateForm() {
 
   const onSubmit = handleSubmit(async (data: z.infer<typeof bookSchema>) => {
     try {
+      const authorsArray = stringToArrayByComma(data.authors);
+      const translatorArray = stringToArrayByComma(data.translator || "");
+
       const requestData: CreateBookInput = {
         ...data,
+        authors: authorsArray,
+        translator: translatorArray,
         categoryId: Number(data.categoryId),
         publishedDate: new Date(data.publishedDate).toISOString(),
       };
+
       await createBook(requestData);
       alert("책이 성공적으로 등록되었습니다.");
     } catch (error) {
@@ -124,7 +132,7 @@ export default function BookCreateForm() {
   return (
     <form onSubmit={onSubmit} onKeyDown={checkKeydown}>
       <div className="w-80 h-80">
-        <img
+        <NextImage
           src={watch("coverImage") || ""}
           alt="이미지 미리보기"
           className="w-80 h-80 object-contain rounded-md"

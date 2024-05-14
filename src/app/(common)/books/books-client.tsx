@@ -1,7 +1,7 @@
 "use client";
 
 import { BookWithCategory } from "@/src/books/types";
-import { imageLoader } from "@/src/shared/utils";
+import { arrayToStringWithComma, imageLoader } from "@/src/shared/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -31,7 +31,9 @@ export default function BooksClient({ books }: BooksClientProps) {
             </div>
           </div>
           <h2 className="font-bold text-center mt-2">{book.title}</h2>
-          <p className="text-outline text-center">{book.authors}</p>
+          <p className="text-outline text-center">
+            {arrayToStringWithComma(book.authors)}
+          </p>
         </Link>
       ))}
     </div>

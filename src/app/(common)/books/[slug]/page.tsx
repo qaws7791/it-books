@@ -1,11 +1,12 @@
+import GetBookBySlug from "@/src/books/api/get-book-by-slug";
+import BookBuyLinks from "@/src/books/components/book-buy-links";
 import PageContainer from "@/src/shared/components/layout/page-container";
 import NextImage from "@/src/shared/components/next-image";
 import Button from "@/src/shared/components/ui/button";
+import { toKoreanDateString } from "@/src/shared/lib/utils";
+import { arrayToStringWithComma } from "@/src/shared/utils";
 import Tags from "@/src/tags/components/tags";
 import Link from "next/link";
-import GetBookBySlug from "@/src/books/api/get-book-by-slug";
-import BookBuyLinks from "@/src/books/components/book-buy-links";
-import { toKoreanDateString } from "@/src/shared/lib/utils";
 
 interface BookDetailPageProperties {
   params: {
@@ -51,7 +52,10 @@ export default async function BooksDetailPage({
           <header>
             <h1 className="text-4xl font-medium">{book.title}</h1>
             <div className="text-xl mt-3">
-              <h2 className="inline-block">{book.authors}</h2>&nbsp;
+              <h2 className="inline-block">
+                {arrayToStringWithComma(book.authors)}
+              </h2>
+              &nbsp;
               {book.translator && <span>(번역: {book.translator})</span>}
               <h2 className="text-base mt-1">{book.publisher}</h2>
             </div>

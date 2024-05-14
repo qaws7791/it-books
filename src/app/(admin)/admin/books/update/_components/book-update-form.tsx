@@ -1,19 +1,17 @@
 "use client";
 
+import { GetBookByIdOutput } from "@/src/books/api/get-book-by-id";
+import getBookImagePresignedUrl from "@/src/books/api/get-book-image-presigned-url";
+import putBook, { PutBookInput } from "@/src/books/api/put-book";
+import { useCategoriesQuery } from "@/src/categories/queries";
+import { ApiError } from "@/src/shared/api";
+import NextImage from "@/src/shared/components/next-image";
 import Button from "@/src/shared/components/ui/button";
+import Description from "@/src/shared/components/ui/description";
+import ErrorMessage from "@/src/shared/components/ui/error-message";
+import { FormColumn, FormRow } from "@/src/shared/components/ui/form";
 import { Input } from "@/src/shared/components/ui/input";
 import Label from "@/src/shared/components/ui/label";
-import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import ErrorMessage from "@/src/shared/components/ui/error-message";
-import { ApiError } from "@/src/shared/api";
-import { Textarea } from "@/src/shared/components/ui/textarea";
-import Description from "@/src/shared/components/ui/description";
-import { FormRow, FormColumn } from "@/src/shared/components/ui/form";
-import TagInput from "@/src/shared/components/ui/tag-input";
-import getBookImagePresignedUrl from "@/src/books/api/get-book-image-presigned-url";
-import axios from "axios";
 import {
   Select,
   SelectContent,
@@ -23,9 +21,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/shared/components/ui/select";
-import { GetBookByIdOutput } from "@/src/books/api/get-book-by-id";
-import putBook, { PutBookInput } from "@/src/books/api/put-book";
-import { useCategoriesQuery } from "@/src/categories/queries";
+import TagInput from "@/src/shared/components/ui/tag-input";
+import { Textarea } from "@/src/shared/components/ui/textarea";
+import { stringToArrayByComma } from "@/src/shared/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
 
 const checkKeydown = (event: React.KeyboardEvent<HTMLFormElement>) => {
   if (event.key === "Enter") {
@@ -45,7 +47,7 @@ const bookSchema = z.object({
   publisher: z.string().min(1, "출판사를 입력해주세요."),
   publishedDate: z.string().date("날짜를 선택해주세요."),
   tags: z.array(z.string()),
-  coverImage: z.string().url("이미지 URL을 입력해주세요."),
+  coverImage: z.string().min(1, "이미지 URL을 입력해주세요."),
   description: z.string().min(10),
   translator: z.string().optional(),
 });
@@ -69,21 +71,26 @@ export default function BookUpdateForm({ book }: BookUpdateFormProperties) {
       title: book.title,
       categoryId: book.category.id.toString(),
       slug: book.slug,
-      authors: book.authors,
+      authors: book.authors.join(","),
       isbn: book.isbn,
       publisher: book.publisher,
       publishedDate: book.publishedDate,
       tags: book.tags.map((tag) => tag.name),
       coverImage: book.coverImage,
       description: book.description,
-      translator: book.translator || undefined,
+      translator: book.translator.join(","),
     },
   });
 
   const onSubmit = async (data: z.infer<typeof bookSchema>) => {
     try {
+      const authorsArray = stringToArrayByComma(data.authors);
+      const translatorArray = stringToArrayByComma(data.translator || "");
+
       const requestData: PutBookInput = {
         ...data,
+        authors: authorsArray,
+        translator: translatorArray,
         categoryId: Number.parseInt(data.categoryId),
         publishedDate: new Date(data.publishedDate).toISOString(),
       };
@@ -136,7 +143,7 @@ export default function BookUpdateForm({ book }: BookUpdateFormProperties) {
   return (
     <form onSubmit={handleSubmit(onSubmit)} onKeyDown={checkKeydown}>
       <div className="w-80 h-80">
-        <img
+        <NextImage
           src={watch("coverImage") || ""}
           alt="이미지 미리보기"
           className="w-80 h-80 object-contain rounded-md"
