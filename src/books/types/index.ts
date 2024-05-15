@@ -1,3 +1,4 @@
+import { BookStatus } from "@/src/books/constants";
 import { Category } from "@/src/categories/types";
 import { Tag } from "@/src/tags/types";
 
@@ -14,6 +15,8 @@ export interface Book {
   translator: string[];
   publisher: string;
   publishedDate: string;
+  status: BookStatus;
+  pages: number;
 }
 
 export interface BookWithCategory extends Book {

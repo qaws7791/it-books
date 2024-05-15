@@ -1,3 +1,4 @@
+import { BookStatus } from "@/src/books/constants";
 import api from "@/src/shared/api";
 
 export interface GetBookByIdOutput {
@@ -13,6 +14,8 @@ export interface GetBookByIdOutput {
   translator: string[];
   publisher: string;
   publishedDate: string;
+  status: BookStatus;
+  pages: number;
   category: {
     id: number;
     name: string;

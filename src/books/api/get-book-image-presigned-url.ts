@@ -7,9 +7,9 @@ interface GetBookImagePresignedUrlInput {
 
 interface GetBookImagePresignedUrlOutput {
   bucket: string;
-  uploadUrl: string;
-  publicUrl: string;
   key: string;
+  path: string;
+  uploadUrl: string;
 }
 
 export default function getBookImagePresignedUrl(

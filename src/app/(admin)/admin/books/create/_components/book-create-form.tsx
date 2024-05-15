@@ -2,6 +2,7 @@
 
 import createBook, { CreateBookInput } from "@/src/books/api/create-book";
 import getBookImagePresignedUrl from "@/src/books/api/get-book-image-presigned-url";
+import { BOOK_STATUS, BOOK_STATUS_KEYS } from "@/src/books/constants";
 import { useCategoriesQuery } from "@/src/categories/queries";
 import { ApiError } from "@/src/shared/api";
 import NextImage from "@/src/shared/components/next-image";
@@ -40,9 +41,11 @@ const bookSchema = z.object({
   publisher: z.string().min(1, "출판사를 입력해주세요."),
   publishedDate: z.string().date("날짜를 선택해주세요."),
   tags: z.array(z.string()),
-  coverImage: z.string().url("이미지 URL을 입력해주세요."),
+  coverImage: z.string().min(1, "이미지 URL을 입력해주세요."),
   description: z.string().min(10),
   translator: z.string().optional(),
+  status: z.enum(BOOK_STATUS_KEYS),
+  pages: z.number().int().positive(),
 });
 
 const checkKeydown = (event: React.KeyboardEvent<HTMLFormElement>) => {
@@ -68,6 +71,7 @@ export default function BookCreateForm() {
       slug: "",
       coverImage: "",
       tags: [],
+      status: BOOK_STATUS.FOR_SALE.key,
     },
   });
 
@@ -118,7 +122,7 @@ export default function BookCreateForm() {
         },
       });
 
-      setValue("coverImage", response.publicUrl);
+      setValue("coverImage", response.path);
     } catch {
       alert("이미지 업로드에 실패했습니다.");
     }
@@ -128,6 +132,7 @@ export default function BookCreateForm() {
     return errors[field]?.message;
   };
 
+  console.log("form data:", watch());
   /* eslint-disable @next/next/no-img-element */
   return (
     <form onSubmit={onSubmit} onKeyDown={checkKeydown}>
@@ -181,6 +186,54 @@ export default function BookCreateForm() {
         />
         <ErrorMessage>{getErrorMessage("categoryId")}</ErrorMessage>
       </FormRow>
+
+      <FormColumn>
+        <FormRow>
+          <Label htmlFor="status" require>
+            상태
+          </Label>
+          <Controller
+            name="status"
+            control={control}
+            render={({ field }) => {
+              return (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select a fruit" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>책 상태</SelectLabel>
+                      {Object.entries(BOOK_STATUS).map(([key, value]) => {
+                        return (
+                          <SelectItem key={key} value={key}>
+                            {value.label}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              );
+            }}
+          />
+          <ErrorMessage>{getErrorMessage("status")}</ErrorMessage>
+        </FormRow>
+
+        <FormRow>
+          <Label htmlFor="pages" require>
+            페이지 수
+          </Label>
+          <Input
+            id="pages"
+            {...register("pages", {
+              valueAsNumber: true,
+            })}
+            type="number"
+          />
+          <ErrorMessage>{getErrorMessage("pages")}</ErrorMessage>
+        </FormRow>
+      </FormColumn>
 
       <FormRow>
         <Label htmlFor="title" require>

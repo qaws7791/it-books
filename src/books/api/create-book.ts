@@ -1,3 +1,4 @@
+import { BookStatus } from "@/src/books/constants";
 import api from "@/src/shared/api";
 
 export interface CreateBookInput {
@@ -12,6 +13,8 @@ export interface CreateBookInput {
   publishedDate: string;
   categoryId: number;
   tags: string[];
+  status: BookStatus;
+  pages: number;
 }
 
 interface CreateBookOutput {
@@ -25,6 +28,8 @@ interface CreateBookOutput {
   translator: string;
   publisher: string;
   publishedDate: string;
+  status: BookStatus;
+  pages: number;
 }
 
 export default function createBook(

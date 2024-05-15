@@ -3,6 +3,7 @@
 import { GetBookByIdOutput } from "@/src/books/api/get-book-by-id";
 import getBookImagePresignedUrl from "@/src/books/api/get-book-image-presigned-url";
 import putBook, { PutBookInput } from "@/src/books/api/put-book";
+import { BOOK_STATUS, BOOK_STATUS_KEYS } from "@/src/books/constants";
 import { useCategoriesQuery } from "@/src/categories/queries";
 import { ApiError } from "@/src/shared/api";
 import NextImage from "@/src/shared/components/next-image";
@@ -50,6 +51,8 @@ const bookSchema = z.object({
   coverImage: z.string().min(1, "이미지 URL을 입력해주세요."),
   description: z.string().min(10),
   translator: z.string().optional(),
+  status: z.enum(BOOK_STATUS_KEYS),
+  pages: z.number().int().positive(),
 });
 
 interface BookUpdateFormProperties {
@@ -79,6 +82,8 @@ export default function BookUpdateForm({ book }: BookUpdateFormProperties) {
       coverImage: book.coverImage,
       description: book.description,
       translator: book.translator.join(","),
+      status: book.status,
+      pages: book.pages,
     },
   });
 
@@ -129,7 +134,7 @@ export default function BookUpdateForm({ book }: BookUpdateFormProperties) {
         },
       });
 
-      setValue("coverImage", response.publicUrl);
+      setValue("coverImage", response.path);
     } catch {
       alert("이미지 업로드에 실패했습니다.");
     }
@@ -192,6 +197,54 @@ export default function BookUpdateForm({ book }: BookUpdateFormProperties) {
         />
         <ErrorMessage>{getErrorMessage("categoryId")}</ErrorMessage>
       </FormRow>
+
+      <FormColumn>
+        <FormRow>
+          <Label htmlFor="status" require>
+            상태
+          </Label>
+          <Controller
+            name="status"
+            control={control}
+            render={({ field }) => {
+              return (
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Select a fruit" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectLabel>책 상태</SelectLabel>
+                      {Object.entries(BOOK_STATUS).map(([key, value]) => {
+                        return (
+                          <SelectItem key={key} value={key}>
+                            {value.label}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              );
+            }}
+          />
+          <ErrorMessage>{getErrorMessage("categoryId")}</ErrorMessage>
+        </FormRow>
+
+        <FormRow>
+          <Label htmlFor="pages" require>
+            페이지 수
+          </Label>
+          <Input
+            id="pages"
+            {...register("pages", {
+              valueAsNumber: true,
+            })}
+            type="number"
+          />
+          <ErrorMessage>{getErrorMessage("pages")}</ErrorMessage>
+        </FormRow>
+      </FormColumn>
 
       <FormRow>
         <Label htmlFor="title" require>
