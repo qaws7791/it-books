@@ -1,13 +1,19 @@
-import * as Dialog from "@radix-ui/react-dialog";
+import DUMMY from "@/src/dummy";
 import Sidebar from "@/src/shared/components/layout/sidebar";
 import Button from "@/src/shared/components/ui/button";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import DUMMY from "@/src/dummy";
-import useWindowSize from "@/src/shared/hooks/use-window-size";
 import usePathChange from "@/src/shared/hooks/use-path-change";
+import useWindowSize from "@/src/shared/hooks/use-window-size";
+import * as Dialog from "@radix-ui/react-dialog";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-export default function SidebarModalButton() {
+interface SidebarModalButtonProps {
+  isAdmin?: boolean;
+}
+
+export default function SidebarModalButton({
+  isAdmin,
+}: SidebarModalButtonProps) {
   const [open, setOpen] = useState(false);
   const windowSize = useWindowSize();
   usePathChange(() => setOpen(false));
@@ -48,7 +54,11 @@ export default function SidebarModalButton() {
                 transition={{ duration: 0.4, ease: "easeInOut" }}
                 className="fixed left-0 h-full mt-16 z-40"
               >
-                <Sidebar links={DUMMY.SIDEBAR_LINKS} />
+                <Sidebar
+                  links={
+                    isAdmin ? DUMMY.ADMIN_SIDEBAR_LINKS : DUMMY.SIDEBAR_LINKS
+                  }
+                />
               </motion.div>
             </Dialog.Content>
           </Dialog.Portal>

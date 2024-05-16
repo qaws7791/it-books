@@ -6,18 +6,21 @@ import SidebarModalButton from "@/src/shared/components/layout/sidebar-modal-but
 import Search from "@/src/shared/components/ui/search";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSelectedLayoutSegment } from "next/navigation";
 
 export default function Header() {
   const router = useRouter();
+  const segment = useSelectedLayoutSegment();
   const handleSearch = (value: string) => {
     router.push(`/search?query=${value}`);
   };
+  const isAdmin = segment === "admin";
+
   return (
     <>
       <div className="fixed  w-full h-header bg-surface-container flex gap-8 items-center justify-between px-3">
         <nav className="flex items-center gap-4">
-          <SidebarModalButton />
+          <SidebarModalButton isAdmin={isAdmin} />
           <Link href={"/"}>
             <Image src="/logo.svg" alt="it books" width={160} height={41} />
           </Link>
