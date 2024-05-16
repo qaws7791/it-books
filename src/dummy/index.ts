@@ -102,6 +102,8 @@ const BOOKS: BookDetail[] = [
     translator: ["김인범"],
     isbn: "9791169211222",
     coverImage: "https://image.yes24.com/goods/119712582/XL",
+    status: "FOR_SALE",
+    pages: 384,
     tags: [
       {
         id: 1,
@@ -137,6 +139,8 @@ const BOOKS: BookDetail[] = [
     translator: ["노승헌"],
     isbn: "9791169210614",
     coverImage: "https://image.yes24.com/goods/116438200/XL",
+    status: "FOR_SALE",
+    pages: 384,
     tags: [
       {
         id: 4,
@@ -171,6 +175,8 @@ const BOOKS: BookDetail[] = [
     translator: ["고승원"],
     isbn: "9791169210638",
     coverImage: "https://image.yes24.com/goods/116585556/XL",
+    status: "FOR_SALE",
+    pages: 384,
     tags: [
       {
         id: 7,
@@ -205,6 +211,8 @@ const BOOKS: BookDetail[] = [
     translator: ["이일웅"],
     isbn: "9791162244869",
     coverImage: "https://image.yes24.com/goods/104491433/XL",
+    status: "FOR_SALE",
+    pages: 384,
     tags: [
       {
         id: 10,
@@ -239,6 +247,8 @@ const BOOKS: BookDetail[] = [
     translator: ["오현석"],
     isbn: "9791162244494",
     coverImage: "https://image.yes24.com/goods/102277805/XL",
+    status: "FOR_SALE",
+    pages: 384,
     tags: [
       {
         id: 13,
