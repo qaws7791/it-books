@@ -17,7 +17,10 @@ export const imageLoader = ({ src }: { src: string }) => {
 
 // string input to array of string
 export const stringToArrayByComma = (string_: string) => {
-  return string_.split(",").map((item) => item.trim());
+  return string_
+    .split(",")
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0);
 };
 
 export const arrayToStringWithComma = (array: string[]) => {
