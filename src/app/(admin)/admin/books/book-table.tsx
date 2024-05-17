@@ -17,6 +17,14 @@ import {
   SelectValue,
 } from "@/src/shared/components/ui/select";
 import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/src/shared/components/ui/table";
+import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
@@ -24,7 +32,7 @@ import {
   PaginationState,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const columnHelper = createColumnHelper<BookWithCategory>();
 
@@ -193,33 +201,33 @@ export default function BookTable() {
           </SelectContent>
         </Select>
       </div>
-      <table className="w-full text-left">
-        <thead className="h-12">
+      <Table>
+        <TableHead>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+            <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="px-2">
+                <TableHeader key={header.id}>
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext(),
                   )}
-                </th>
+                </TableHeader>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </thead>
-        <tbody>
+        </TableHead>
+        <TableBody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <TableRow key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="p-2">
+                <TableCell key={cell.id} className="p-2">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
     </div>
   );
 }
