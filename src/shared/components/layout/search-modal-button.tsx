@@ -1,13 +1,14 @@
 "use client";
 import Button from "@/src/shared/components/ui/button";
 import Search from "@/src/shared/components/ui/search";
+import useBoolean from "@/src/shared/hooks/use-boolean";
 import * as Dialog from "@radix-ui/react-dialog";
 import { motion } from "framer-motion";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function SearchModalButton() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useBoolean(false);
   const router = useRouter();
   const handleSearch = (value: string) => {
     router.push(`/search?query=${value}`);

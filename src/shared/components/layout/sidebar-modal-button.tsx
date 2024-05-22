@@ -1,11 +1,12 @@
 import DUMMY from "@/src/dummy";
 import Sidebar from "@/src/shared/components/layout/sidebar";
 import Button from "@/src/shared/components/ui/button";
+import useBoolean from "@/src/shared/hooks/use-boolean";
 import usePathChange from "@/src/shared/hooks/use-path-change";
 import useWindowSize from "@/src/shared/hooks/use-window-size";
 import * as Dialog from "@radix-ui/react-dialog";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 interface SidebarModalButtonProps {
   isAdmin?: boolean;
@@ -14,7 +15,7 @@ interface SidebarModalButtonProps {
 export default function SidebarModalButton({
   isAdmin,
 }: SidebarModalButtonProps) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useBoolean(false);
   const windowSize = useWindowSize();
   usePathChange(() => setOpen(false));
 

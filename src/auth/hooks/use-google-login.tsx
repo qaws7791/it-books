@@ -1,10 +1,11 @@
 "use client";
 import { googleLogin } from "@/src/auth/api";
+import useBoolean from "@/src/shared/hooks/use-boolean";
 import { useUserProfile } from "@/src/user/queries";
 import { useQueryClient } from "@tanstack/react-query";
 import { CredentialResponse } from "google-one-tap";
 import Script from "next/script";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect } from "react";
 import { toast } from "sonner";
 
 interface googleLoginContext {
@@ -22,7 +23,7 @@ export const GoogleLoginProvider = ({
   children: React.ReactNode;
 }) => {
   const queryClient = useQueryClient();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useBoolean(false);
   const { data } = useUserProfile();
   const renderGoogleLoginButton = (
     reference: React.RefObject<HTMLDivElement>,
