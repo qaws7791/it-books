@@ -6,10 +6,9 @@ import PageContainer from "@/src/shared/components/layout/page-container";
 import NextImage from "@/src/shared/components/next-image";
 import Button from "@/src/shared/components/ui/button";
 import { toKoreanDateString } from "@/src/shared/lib/utils";
-import { arrayToStringWithComma } from "@/src/shared/utils";
 import Tags from "@/src/tags/components/tags";
 import Link from "next/link";
-import { Suspense } from "react";
+import { Fragment, Suspense } from "react";
 
 interface BookDetailPageProperties {
   params: {
@@ -56,13 +55,43 @@ export default async function BooksDetailPage({
             <h1 className="text-4xl font-medium">{book.title}</h1>
             <div className="text-xl mt-3">
               <h2 className="inline-block">
-                {arrayToStringWithComma(book.authors)}
+                {book.authors.map((author, index) => (
+                  <Fragment key={author}>
+                    <Link
+                      key={author}
+                      href={`/search?query=${encodeURIComponent(author)}`}
+                    >
+                      {author}
+                    </Link>
+                    {index !== book.authors.length - 1 && ", "}
+                  </Fragment>
+                ))}
               </h2>
               &nbsp;
               {book.translator.length > 0 && (
-                <span>(번역: {book.translator})</span>
+                <span>
+                  (번역:
+                  {book.translator.map((translator, index) => (
+                    <Fragment key={translator}>
+                      <Link
+                        key={translator}
+                        href={`/search?query=${encodeURIComponent(translator)}`}
+                      >
+                        {translator}
+                      </Link>
+                      {index !== book.translator.length - 1 && ", "}
+                    </Fragment>
+                  ))}
+                  )
+                </span>
               )}
-              <h2 className="text-base mt-1">{book.publisher}</h2>
+              <h2 className="text-base mt-1">
+                <Link
+                  href={`/search?query=${encodeURIComponent(book.publisher)}`}
+                >
+                  {book.publisher}
+                </Link>
+              </h2>
             </div>
           </header>
 
