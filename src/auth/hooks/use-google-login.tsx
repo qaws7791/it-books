@@ -1,10 +1,11 @@
 "use client";
-import { useQueryClient } from "@tanstack/react-query";
 import { googleLogin } from "@/src/auth/api";
 import { useUserProfile } from "@/src/user/queries";
+import { useQueryClient } from "@tanstack/react-query";
 import { CredentialResponse } from "google-one-tap";
 import Script from "next/script";
 import { createContext, useContext, useEffect, useState } from "react";
+import { toast } from "sonner";
 
 interface googleLoginContext {
   renderGoogleLoginButton: (reference: React.RefObject<HTMLDivElement>) => void;
@@ -43,8 +44,8 @@ export const GoogleLoginProvider = ({
       await queryClient.invalidateQueries({
         queryKey: ["user"],
       });
-    } catch (error) {
-      console.error(error);
+    } catch {
+      toast.error("로그인에 실패했습니다.");
     }
   };
 
