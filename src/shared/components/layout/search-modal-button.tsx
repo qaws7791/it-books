@@ -1,10 +1,10 @@
 "use client";
-import * as Dialog from "@radix-ui/react-dialog";
 import Button from "@/src/shared/components/ui/button";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import Search from "@/src/shared/components/ui/search";
+import * as Dialog from "@radix-ui/react-dialog";
+import { motion } from "framer-motion";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function SearchModalButton() {
   const [open, setOpen] = useState(false);
@@ -43,7 +43,7 @@ export default function SearchModalButton() {
               initial={{ y: "-16px" }}
               animate={{ y: 0 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="fixed top-1/4 left-0 right-0 px-6 mx-auto max-w-screen-md"
+              className="fixed top-1/4 left-0 right-0 px-6 mx-auto max-w-screen-md z-40"
             >
               <Search
                 size="lg"
