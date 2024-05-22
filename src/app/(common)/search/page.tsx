@@ -1,50 +1,39 @@
+import SearchClient from "@/src/app/(common)/search/search-client";
 import PageContainer from "@/src/shared/components/layout/page-container";
-import DUMMY from "@/src/dummy";
-import Link from "next/link";
-import NextImage from "@/src/shared/components/next-image";
 
 interface SearchPageProperties {
   searchParams: {
-    query: string;
+    query?: string;
+    page?: string;
+    limit?: string;
   };
 }
 
-const searchBooks = (query: string) => {
-  return DUMMY.BOOKS.filter(
-    (book) => book.title.includes(query) || book.authors.includes(query),
-  );
-};
-
 export default function SearchPage({ searchParams }: SearchPageProperties) {
+  if (!searchParams.query) {
+    return (
+      <PageContainer>
+        <h1 className="text-4xl text-center">검색어를 입력해주세요.</h1>
+      </PageContainer>
+    );
+  }
+
   const decodedQuery = decodeURIComponent(searchParams.query);
-  const books = searchBooks(decodedQuery);
 
   return (
     <PageContainer>
       <h1 className="text-4xl text-center">
         &quot;{decodedQuery}&quot; 검색 결과
       </h1>
-      <div className="grid grid-cols-card gap-4 overflow-y-auto mt-4">
-        {books.map((book) => (
-          <Link
-            href={`/books/${book.slug}`}
-            key={book.id}
-            className="rounded-xl overflow-hidden hover:bg-outline/10 p-4"
-          >
-            <div>
-              <NextImage
-                src={book.coverImage}
-                alt={book.title}
-                className="shadow-md mx-auto"
-                width={200}
-                height={300}
-              />
-            </div>
-            <h2 className="font-bold text-center mt-2">{book.title}</h2>
-            <p className="text-outline text-center">{book.authors}</p>
-          </Link>
-        ))}
-      </div>
+      <SearchClient
+        query={decodedQuery}
+        page={
+          searchParams.page ? Number.parseInt(searchParams.page) : undefined
+        }
+        limit={
+          searchParams.limit ? Number.parseInt(searchParams.limit) : undefined
+        }
+      />
     </PageContainer>
   );
 }

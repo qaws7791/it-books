@@ -1,5 +1,6 @@
 import { BookStatus } from "@/src/books/constants";
 import { Category } from "@/src/categories/types";
+import { PaginationCommonInput } from "@/src/shared/type/api";
 import { Tag } from "@/src/tags/types";
 
 export interface Book {
@@ -26,4 +27,8 @@ export interface BookWithCategory extends Book {
 export interface BookDetail extends Book {
   category: Category;
   tags: Tag[];
+}
+
+export interface BookSearchParams extends PaginationCommonInput {
+  query?: string;
 }

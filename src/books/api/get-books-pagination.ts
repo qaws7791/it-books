@@ -1,9 +1,6 @@
+import { BookSearchParams, BookWithCategory } from "@/src/books/types";
 import api from "@/src/shared/api";
-import {
-  PaginationCommonInput,
-  PaginationResponse,
-} from "@/src/shared/type/api";
-import { BookWithCategory } from "@/src/books/types";
+import { PaginationResponse } from "@/src/shared/type/api";
 
 export interface GetBooksPaginationOutput {
   data: BookWithCategory[];
@@ -13,6 +10,7 @@ export interface GetBooksPaginationOutput {
 export default function getBooksPagination({
   page = 1,
   limit = 10,
-}: PaginationCommonInput): Promise<GetBooksPaginationOutput> {
-  return api.get("/books", { params: { page, limit } });
+  query,
+}: BookSearchParams): Promise<GetBooksPaginationOutput> {
+  return api.get("/books", { params: { page, limit, query } });
 }
