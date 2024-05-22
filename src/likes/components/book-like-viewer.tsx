@@ -31,6 +31,7 @@ export default function BookLikeViewer({ bookId }: BookLikeViewerProperties) {
         size="icon"
         onClick={handleLike}
         disabled={likeMutation.isPending}
+        title={liked ? "좋아요 취소" : "좋아요"}
       >
         {likeMutation.isPending ? (
           <span className="material-icons animate-spin">sync</span>
