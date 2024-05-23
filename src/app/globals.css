@@ -53,57 +53,107 @@
   }
 
   :root {
-    /* base */
-    --color-white: 255 255 255;
-    --color-black: 0 0 0;
-
-    /* background */
-    --color-background: 254 249 242;
-    --color-on-background: 29 27 24;
-
-    /* elevated button */
-    --color-surface: 254 249 242;
-    --color-surface-dim: 222 217 211;
-    --color-surface-bright: 254 249 242;
-    --color-surface-container-lowest: 255 255 255;
-    --color-surface-container-low: 248 243 237;
-    --color-surface-container: 242 237 231;
-    --color-surface-container-high: 236 231 225;
-    --color-surface-container-highest: 230 226 220;
-    --color-on-surface: 29 27 24;
-    --color-surface-variant: 232 226 211;
-    --color-on-surface-variant: 74 71 60;
-    --color-inverse-surface: 50 48 44;
-    --color-inverse-on-surface: 245 240 234;
-    --color-outline: 123 119 106;
-    --color-outline-variant: 203 198 184;
-    --color-shadow: 0 0 0;
-    --color-scrim: 0 0 0;
-    --color-surface-tint: 102 95 54;
-
-    /* primary */
-    --color-primary-light: 131 122 69;
-    --color-primary: 102 95 54;
-    --color-primary-dark: 80 75 43;
+    --color-primary: 0 104 119;
+    --color-surface-tint: 0 104 119;
     --color-on-primary: 255 255 255;
-    --color-primary-container: 255 245 199;
-    --color-on-primary-container: 89 83 43;
-    --color-inverse-primary: 209 199 149;
-
-    /* secondary */
-    --color-secondary-light: 123 118 93;
-    --color-secondary: 99 95 75;
-    --color-secondary-dark: 79 76 59;
+    --color-primary-container: 164 238 255;
+    --color-on-primary-container: 0 31 37;
+    --color-secondary: 75 98 104;
     --color-on-secondary: 255 255 255;
-    --color-secondary-container: 235 228 203;
-    --color-secondary-container-dark: 214 208 187;
-    --color-on-secondary-container: 77 73 55;
-
-    /* error */
+    --color-secondary-container: 205 231 238;
+    --color-on-secondary-container: 5 31 36;
+    --color-tertiary: 85 93 126;
+    --color-on-tertiary: 255 255 255;
+    --color-tertiary-container: 220 225 255;
+    --color-on-tertiary-container: 17 26 55;
     --color-error: 186 26 26;
     --color-on-error: 255 255 255;
     --color-error-container: 255 218 214;
     --color-on-error-container: 65 0 2;
+    --color-background: 245 250 252;
+    --color-on-background: 23 29 30;
+    --color-surface: 245 250 252;
+    --color-on-surface: 23 29 30;
+    --color-surface-variant: 219 228 231;
+    --color-on-surface-variant: 63 72 75;
+    --color-outline: 111 121 123;
+    --color-outline-variant: 191 200 203;
+    --color-shadow: 0 0 0;
+    --color-scrim: 0 0 0;
+    --color-inverse-surface: 43 49 51;
+    --color-inverse-on-surface: 236 242 243;
+    --color-inverse-primary: 131 210 228;
+    --color-primary-fixed: 164 238 255;
+    --color-on-primary-fixed: 0 31 37;
+    --color-primary-fixed-dim: 131 210 228;
+    --color-on-primary-fixed-variant: 0 78 90;
+    --color-secondary-fixed: 205 231 238;
+    --color-on-secondary-fixed: 5 31 36;
+    --color-secondary-fixed-dim: 178 203 209;
+    --color-on-secondary-fixed-variant: 51 74 80;
+    --color-tertiary-fixed: 220 225 255;
+    --color-on-tertiary-fixed: 17 26 55;
+    --color-tertiary-fixed-dim: 189 197 235;
+    --color-on-tertiary-fixed-variant: 61 69 101;
+    --color-surface-dim: 213 219 221;
+    --color-surface-bright: 245 250 252;
+    --color-surface-container-lowest: 255 255 255;
+    --color-surface-container-low: 239 244 246;
+    --color-surface-container: 233 239 240;
+    --color-surface-container-high: 228 233 235;
+    --color-surface-container-highest: 222 227 229;
+
+    .dark {
+      --color-primary: 131 210 228;
+      --color-surface-tint: 131 210 228;
+      --color-on-primary: 0 54 63;
+      --color-primary-container: 0 78 90;
+      --color-on-primary-container: 164 238 255;
+      --color-secondary: 178 203 209;
+      --color-on-secondary: 28 52 57;
+      --color-secondary-container: 51 74 80;
+      --color-on-secondary-container: 205 231 238;
+      --color-tertiary: 189 197 235;
+      --color-on-tertiary: 38 47 77;
+      --color-tertiary-container: 61 69 101;
+      --color-on-tertiary-container: 220 225 255;
+      --color-error: 255 180 171;
+      --color-on-error: 105 0 5;
+      --color-error-container: 147 0 10;
+      --color-on-error-container: 255 218 214;
+      --color-background: 14 20 22;
+      --color-on-background: 222 227 229;
+      --color-surface: 14 20 22;
+      --color-on-surface: 222 227 229;
+      --color-surface-variant: 63 72 75;
+      --color-on-surface-variant: 191 200 203;
+      --color-outline: 137 146 149;
+      --color-outline-variant: 63 72 75;
+      --color-shadow: 0 0 0;
+      --color-scrim: 0 0 0;
+      --color-inverse-surface: 222 227 229;
+      --color-inverse-on-surface: 43 49 51;
+      --color-inverse-primary: 0 104 119;
+      --color-primary-fixed: 164 238 255;
+      --color-on-primary-fixed: 0 31 37;
+      --color-primary-fixed-dim: 131 210 228;
+      --color-on-primary-fixed-variant: 0 78 90;
+      --color-secondary-fixed: 205 231 238;
+      --color-on-secondary-fixed: 5 31 36;
+      --color-secondary-fixed-dim: 178 203 209;
+      --color-on-secondary-fixed-variant: 51 74 80;
+      --color-tertiary-fixed: 220 225 255;
+      --color-on-tertiary-fixed: 17 26 55;
+      --color-tertiary-fixed-dim: 189 197 235;
+      --color-on-tertiary-fixed-variant: 61 69 101;
+      --color-surface-dim: 14 20 22;
+      --color-surface-bright: 52 58 60;
+      --color-surface-container-lowest: 9 15 17;
+      --color-surface-container-low: 23 29 30;
+      --color-surface-container: 27 33 34;
+      --color-surface-container-high: 37 43 44;
+      --color-surface-container-highest: 48 54 55;
+    }
   }
 }
 
@@ -133,8 +183,12 @@
   }
 
   .book-border {
-    @apply before:content-[''] before:absolute before:inset-0 before:border-solid before:border-black/10 before:top-0 before:left-0 before:right-0 before:bottom-0 before:border-l-2 before:border-l-black/40 before:z-10 before:outline before:outline-1 before:outline-black/10;
+    @apply before:content-[''] before:absolute before:inset-0 before:border-solid before:border-on-surface/10 before:top-0 before:left-0 before:right-0 before:bottom-0 before:border-l-2 before:border-l-on-surface/40 before:z-10 before:outline before:outline-1 before:outline-on-surface/10;
 
-    @apply after:content-[''] after:absolute after:inset-0 after:top-0 after:left-1.5 after:bottom-0 after:w-0.5 after:bg-black/25 after:blur-xxs;
+    @apply after:content-[''] after:absolute after:inset-0 after:top-0 after:left-1.5 after:bottom-0 after:w-0.5 after:bg-on-surface/25 after:blur-xxs;
+  }
+
+  .state-layer {
+    @apply relative overflow-hidden after:absolute after:left-0 after:right-0 after:bottom-0 after:top-0 after:w-full after:h-full after:pointer-events-none
   }
 }
