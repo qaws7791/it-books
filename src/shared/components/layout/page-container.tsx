@@ -9,7 +9,7 @@ export default function PageContainer({
   return (
     <div
       className={cn(
-        "w-full bg-surface rounded-4xl p-8 max-h-full h-appbar overflow-y-auto scrollbar",
+        "w-full bg-surface-container rounded-4xl p-8 max-h-full h-appbar overflow-y-auto scrollbar",
         className,
       )}
       {...properties}
