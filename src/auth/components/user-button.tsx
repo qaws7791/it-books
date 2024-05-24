@@ -1,7 +1,5 @@
 "use client";
 
-import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { useQueryClient } from "@tanstack/react-query";
 import { googleLogout } from "@/src/auth/api";
 import Avatar from "@/src/shared/components/ui/avatar";
 import Button from "@/src/shared/components/ui/button";
@@ -18,6 +16,8 @@ import {
 import useCurrentPath from "@/src/shared/hooks/use-current-path";
 import { useUserProfile } from "@/src/user/queries";
 import { UserProfile } from "@/src/user/types";
+import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 
 export const NotLoggedInUserButton = () => {
@@ -40,7 +40,7 @@ export const NotLoggedInUserButton = () => {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
-            <Link href="/policy/privacy">
+            <Link href="/policy/privacy" target="_blank">
               개인정보처리방침
               <DropdownMenuShortcut>
                 <span className="material-icons">open_in_new</span>
@@ -48,7 +48,7 @@ export const NotLoggedInUserButton = () => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/policy/terms">
+            <Link href="/policy/terms" target="_blank">
               이용약관
               <DropdownMenuShortcut>
                 <span className="material-icons">open_in_new</span>
@@ -109,7 +109,7 @@ export const LoggedInUserButton = ({ user }: { user: UserProfile }) => {
             <Link href="/account">계정</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/policy/privacy">
+            <Link href="/policy/privacy" target="_blank">
               개인정보처리방침
               <DropdownMenuShortcut>
                 <span className="material-icons">open_in_new</span>
@@ -117,7 +117,7 @@ export const LoggedInUserButton = ({ user }: { user: UserProfile }) => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/policy/terms">
+            <Link href="/policy/terms" target="_blank">
               이용약관
               <DropdownMenuShortcut>
                 <span className="material-icons">open_in_new</span>
@@ -135,16 +135,10 @@ export const LoggedInUserButton = ({ user }: { user: UserProfile }) => {
 };
 
 export default function UserButton() {
-  const { data, isError } = useUserProfile();
-  const isLoggedIn = !isError && data;
+  const { data } = useUserProfile();
+  if (data) {
+    return <LoggedInUserButton user={data} />;
+  }
 
-  return (
-    <>
-      {isLoggedIn ? (
-        <LoggedInUserButton user={data} />
-      ) : (
-        <NotLoggedInUserButton />
-      )}
-    </>
-  );
+  return <NotLoggedInUserButton />;
 }
