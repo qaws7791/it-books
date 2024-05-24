@@ -60,7 +60,7 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
   return (
     <search
       className={cn(
-        "bg-surface-container-highest rounded-full",
+        "bg-surface-container-high rounded-full",
         size === "sm" && "h-10",
         size === "md" && "h-12",
         size === "lg" && "h-14",
@@ -73,13 +73,15 @@ const Search = forwardRef<HTMLDivElement, SearchProps>(function Search(
     >
       <form className="h-full" onSubmit={handleSubmit}>
         <label htmlFor="search" className="flex items-center h-full">
-          <span className="material-icons mx-4 inline-block">search</span>
+          <span className="material-icons mx-4 inline-block text-on-surface">
+            search
+          </span>
           <input
             ref={inputRef}
             id="search"
             type="search"
             className={cn(
-              "bg-transparent h-full outline-none w-full placeholder:text-primary",
+              "bg-transparent h-full outline-none w-full text-on-surface-variant placeholder:text-on-surface-variant",
               className,
             )}
             placeholder={placeholder}
