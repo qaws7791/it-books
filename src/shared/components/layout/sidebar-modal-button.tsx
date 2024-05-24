@@ -23,7 +23,7 @@ export default function SidebarModalButton({
     if (windowSize.width > 1440) {
       setOpen(false);
     }
-  }, [windowSize]);
+  }, [windowSize, setOpen]);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>

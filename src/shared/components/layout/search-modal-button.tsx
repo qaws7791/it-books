@@ -18,7 +18,7 @@ export default function SearchModalButton() {
   const searchParams = useSearchParams();
   useEffect(() => {
     setOpen(false);
-  }, [pathname, searchParams]);
+  }, [pathname, searchParams, setOpen]);
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
