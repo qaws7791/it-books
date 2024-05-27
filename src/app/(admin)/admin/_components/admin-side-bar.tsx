@@ -19,6 +19,10 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
     title: "도서 관리",
     path: "/books",
   },
+  {
+    title: "리스트 관리",
+    path: "/lists",
+  },
 ];
 
 export default function AdminSideBar() {

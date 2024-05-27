@@ -82,6 +82,11 @@ const ADMIN_SIDEBAR_LINKS = [
     name: "도서 관리",
     href: "/admin/books",
   },
+  {
+    id: 4,
+    name: "리스트 관리",
+    href: "/admin/lists",
+  },
 ];
 
 const BOOKS: BookDetail[] = [
