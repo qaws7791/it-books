@@ -1,3 +1,4 @@
+import Chip from "@/src/shared/components/ui/chip";
 import { cn } from "@/src/shared/lib/utils";
 import React, { useState } from "react";
 
@@ -48,18 +49,14 @@ const TagInput = ({
     <label
       htmlFor="tags"
       className={cn(
-        "flex flex-wrap gap-2 border border-[#655F3A] p-4 rounded-md",
+        "flex flex-wrap gap-2 border border-outline p-4 rounded-md",
         className,
       )}
     >
       {tags.map((tag, index) => (
-        <button
-          key={index}
-          onClick={() => removeTag(index)}
-          className="text-sm rounded-full px-3 py-1 bg-[#DED8C2]"
-        >
+        <Chip key={index} onClick={() => removeTag(index)}>
           {tag}
-        </button>
+        </Chip>
       ))}
       <input
         id="tags"

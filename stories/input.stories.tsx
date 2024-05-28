@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { Input } from "@/src/shared/components/ui/input";
+import type { Meta, StoryObj } from "@storybook/react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -43,5 +43,11 @@ export const DateType: Story = {
 export const URLInput: Story = {
   args: {
     type: "url",
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
   },
 };
