@@ -9,6 +9,7 @@ const meta = {
   args: {
     children: "Label",
     "aria-label": "Tag",
+    onClick: () => alert("click"),
   },
 } satisfies Meta<typeof Chip>;
 
@@ -16,3 +17,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const WithRemove: Story = {
+  args: {
+    onRemove: () => alert("remove"),
+  },
+};
