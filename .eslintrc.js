@@ -50,5 +50,6 @@ module.exports = {
         },
       },
     ],
+    "unicorn/no-array-reduce": "off",
   },
 };
