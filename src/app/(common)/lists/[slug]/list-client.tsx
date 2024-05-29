@@ -5,11 +5,11 @@ import { arrayToStringWithComma } from "@/src/shared/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-interface CollectionClientProps {
+interface ListClientProps {
   books: BookWithCategory[];
 }
 
-export default function CollectionClient({ books }: CollectionClientProps) {
+export default function ListClient({ books }: ListClientProps) {
   return (
     <div className="grid grid-cols-card gap-4">
       {books.map((book) => (
