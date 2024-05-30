@@ -41,7 +41,7 @@ const config: Config = {
     },
     extend: {
       width: {
-        sidebar: "16rem",
+        sidebar: "18rem",
         4.5: "1.125rem",
       },
       height: {
@@ -57,6 +57,11 @@ const config: Config = {
       -3.9px 3.9px 6.7px -0.6px rgb(0 0 0 / 0.11),
       -9.1px 9.1px 15.7px -1.2px rgb(0 0 0 / 0.12),
       -21.2px 21.2px 36.7px -1.8px rgb(0 0 0 / 0.14)`,
+        1: `rgba(0, 0, 0, 0.3) 0px 1px 2px 0px, rgba(0, 0, 0, 0.15) 0px 1px 3px 1px`,
+        2: `rgba(0, 0, 0, 0.3) 0px 1px 2px 0px, rgba(0, 0, 0, 0.15) 0px 2px 6px 2px`,
+        3: `rgba(0, 0, 0, 0.3) 0px 1px 3px 0px, rgba(0, 0, 0, 0.15) 0px 4px 8px 3px`,
+        4: `rgba(0, 0, 0, 0.3) 0px 2px 3px 0px, rgba(0, 0, 0, 0.15) 0px 6px 10px 4px`,
+        5: `rgba(0, 0, 0, 0.3) 0px 4px 4px 0px, rgba(0, 0, 0, 0.15) 0px 8px 12px 6px`,
       },
       blur: {
         xxs: "1px",
