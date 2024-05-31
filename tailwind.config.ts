@@ -1,8 +1,13 @@
 import type { Config } from "tailwindcss";
 import defaultTheme from "tailwindcss/defaultTheme";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const config: Config = {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    ...(isProduction ? [] : ["./stories/**/*.{js,ts,jsx,tsx,mdx}"]),
+  ],
   theme: {
     fontWeight: {
       light: "300",
@@ -10,10 +15,7 @@ const config: Config = {
       bold: "700",
       extrabold: "800",
     },
-    gridTemplateColumns: {
-      card: "repeat(auto-fill, minmax(250px, 1fr))",
-      "card-lg": "repeat(auto-fill, minmax(400px, 1fr))",
-    },
+
     screens: {
       sm: "640px",
       // => @media (min-width: 640px) { ... }
@@ -40,6 +42,10 @@ const config: Config = {
       full: "9999px",
     },
     extend: {
+      gridTemplateColumns: {
+        card: "repeat(auto-fill, minmax(250px, 1fr))",
+        "card-lg": "repeat(auto-fill, minmax(400px, 1fr))",
+      },
       width: {
         sidebar: "18rem",
         4.5: "1.125rem",
@@ -131,4 +137,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
