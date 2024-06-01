@@ -1,5 +1,4 @@
 "use client";
-import Button from "@/src/shared/components/ui/button";
 import Search from "@/src/shared/components/ui/search";
 import useBoolean from "@/src/shared/hooks/use-boolean";
 import * as Dialog from "@radix-ui/react-dialog";
@@ -7,7 +6,11 @@ import { motion } from "framer-motion";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-export default function SearchModalButton() {
+export default function SearchModalWrapper({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [open, setOpen] = useBoolean(false);
   const router = useRouter();
   const handleSearch = (value: string) => {
@@ -22,26 +25,22 @@ export default function SearchModalButton() {
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger asChild>
-        <Button variant="ghost" size="icon">
-          <span className="material-icons-outlined">search</span>
-        </Button>
-      </Dialog.Trigger>
+      <Dialog.Trigger asChild>{children}</Dialog.Trigger>
 
       {open ? (
         <Dialog.Portal forceMount>
           <Dialog.Overlay forceMount asChild>
             <motion.div
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 0.5 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="fixed inset-0 bg-black/30"
+              className="fixed inset-0 bg-shadow/30"
             ></motion.div>
           </Dialog.Overlay>
 
           <Dialog.Content forceMount asChild>
             <motion.div
-              initial={{ y: "-16px" }}
+              initial={{ y: 0 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
               className="fixed top-1/4 left-0 right-0 px-6 mx-auto max-w-screen-md z-40"

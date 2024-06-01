@@ -55,14 +55,22 @@ const CATEGORIES = [
 
 const SIDEBAR_LINKS = [
   {
+    id: 0,
+    name: "홈",
+    href: "/",
+    icon: "home",
+  },
+  {
     id: 1,
     name: "책 찾기",
     href: "/books",
+    icon: "book",
   },
   {
     id: 2,
-    name: "컬렉션 찾기",
-    href: "/collections",
+    name: "리스트 찾기",
+    href: "/lists",
+    icon: "library_books",
   },
 ];
 
@@ -71,21 +79,25 @@ const ADMIN_SIDEBAR_LINKS = [
     id: 1,
     name: "대시보드",
     href: "/admin/dashboard",
+    icon: "dashboard",
   },
   {
     id: 2,
     name: "카테고리 관리",
     href: "/admin/categories",
+    icon: "category",
   },
   {
     id: 3,
     name: "도서 관리",
     href: "/admin/books",
+    icon: "book",
   },
   {
     id: 4,
     name: "리스트 관리",
     href: "/admin/lists",
+    icon: "library_books",
   },
 ];
 

@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 // import "@material-design-icons/font";
-import { Suspense } from "react";
-import QueryProvider from "@/src/shared/components/query-provider";
-import { ErrorBoundary } from "react-error-boundary";
-import SonnerToaster from "@/src/shared/components/ui/sonner-toaster";
 import { GoogleLoginProvider } from "@/src/auth/hooks/use-google-login";
+import QueryProvider from "@/src/shared/components/query-provider";
+import SonnerToaster from "@/src/shared/components/ui/sonner-toaster";
 import Head from "next/head";
+import { Suspense } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,7 +23,7 @@ export default function RootLayout({
       <Head>
         <meta name="referrer" content="no-referrer-when-downgrade" />
       </Head>
-      <body className="bg-surface-container min-h-screen flex flex-col text-on-background">
+      <body className="bg-surface min-h-screen flex text-on-background">
         <ErrorBoundary fallback={<div>Something went wrong</div>}>
           <QueryProvider>
             <GoogleLoginProvider>

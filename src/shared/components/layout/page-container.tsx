@@ -7,13 +7,7 @@ export default function PageContainer({
   ...properties
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div
-      className={cn(
-        "w-full bg-surface rounded-4xl p-8 max-h-full h-appbar overflow-y-auto scrollbar",
-        className,
-      )}
-      {...properties}
-    >
+    <div className={cn("w-full", className)} {...properties}>
       <div>{children}</div>
     </div>
   );
