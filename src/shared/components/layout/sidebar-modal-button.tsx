@@ -1,4 +1,5 @@
 import DUMMY from "@/src/dummy";
+import ThemeToggleButton from "@/src/shared/components/theme-toggle-button";
 import Button from "@/src/shared/components/ui/button";
 import {
   Drawer,
@@ -88,7 +89,7 @@ export default function SidebarModalButton({
                       </span>
                     </Button>
                   </Dialog.Close>
-                  <div className="mt-4">
+                  <div className="mt-4 flex-1">
                     {links.map((link) => (
                       <DrawerItem
                         key={link.href}
@@ -101,6 +102,9 @@ export default function SidebarModalButton({
                         </Link>
                       </DrawerItem>
                     ))}
+                  </div>
+                  <div className="flex justify-center mb-2">
+                    <ThemeToggleButton type="with-text" />
                   </div>
                 </Drawer>
               </motion.div>

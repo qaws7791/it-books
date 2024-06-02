@@ -1,5 +1,6 @@
 "use client";
 import SearchModalWrapper from "@/src/shared/components/layout/search-modal-button";
+import ThemeToggleButton from "@/src/shared/components/theme-toggle-button";
 import FloatingButton from "@/src/shared/components/ui/floating-button";
 import {
   NavigationRail,
@@ -73,6 +74,9 @@ export default function Sidebar({
           </NavigationRailItem>
         ))}
       </NavigationRailList>
+      <div className="flex justify-center mb-6">
+        <ThemeToggleButton />
+      </div>
     </NavigationRail>
   );
 }

@@ -3,6 +3,7 @@ import "./globals.css";
 // import "@material-design-icons/font";
 import { GoogleLoginProvider } from "@/src/auth/hooks/use-google-login";
 import QueryProvider from "@/src/shared/components/query-provider";
+import { ThemeProvider } from "@/src/shared/components/theme-provider";
 import SonnerToaster from "@/src/shared/components/ui/sonner-toaster";
 import Head from "next/head";
 import { Suspense } from "react";
@@ -19,20 +20,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <Head>
         <meta name="referrer" content="no-referrer-when-downgrade" />
       </Head>
       <body className="bg-surface min-h-screen flex text-on-background">
         <ErrorBoundary fallback={<div>Something went wrong</div>}>
-          <QueryProvider>
-            <GoogleLoginProvider>
-              <Suspense fallback="loading...">
-                <SonnerToaster />
-                {children}
-              </Suspense>
-            </GoogleLoginProvider>
-          </QueryProvider>
+          <ThemeProvider>
+            <QueryProvider>
+              <GoogleLoginProvider>
+                <Suspense fallback="loading...">
+                  <SonnerToaster />
+                  {children}
+                </Suspense>
+              </GoogleLoginProvider>
+            </QueryProvider>
+          </ThemeProvider>
         </ErrorBoundary>
       </body>
     </html>
