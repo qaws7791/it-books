@@ -1,7 +1,7 @@
 "use client";
 import ListTableActions from "@/src/app/(admin)/admin/lists/list-table-actions";
-import DUMMY from "@/src/dummy";
-import { List } from "@/src/feature/lists/types";
+import { useListsPagination } from "@/src/feature/lists/queries";
+import { ListPreview } from "@/src/feature/lists/types";
 import Button from "@/src/ui/components/button";
 import { Input } from "@/src/ui/components/input";
 import Label from "@/src/ui/components/label";
@@ -32,7 +32,7 @@ import {
 } from "@tanstack/react-table";
 import React, { useState } from "react";
 
-const columnHelper = createColumnHelper<List>();
+const columnHelper = createColumnHelper<ListPreview>();
 
 const columns = [
   columnHelper.accessor("id", {
@@ -40,12 +40,12 @@ const columns = [
     header: () => "ID",
     footer: (row) => row.column.id,
   }),
-  columnHelper.accessor("name", {
+  columnHelper.accessor("title", {
     cell: (row) => row.getValue(),
     header: () => "제목",
     footer: (row) => row.column.id,
   }),
-  columnHelper.accessor("count", {
+  columnHelper.accessor("bookCount", {
     cell: (row) => row.getValue(),
     header: () => "아이템 개수",
     footer: (row) => row.column.id,
@@ -77,10 +77,15 @@ export default function ListTable() {
     }
   };
 
+  const listsQuery = useListsPagination({
+    page: pagination.pageIndex + 1,
+    limit: pagination.pageSize,
+  });
+
   const table = useReactTable({
     columns: columns,
-    data: DUMMY.LISTS,
-    rowCount: DUMMY.LISTS.length,
+    data: listsQuery.data.data ?? [],
+    rowCount: listsQuery.data.pagination.total ?? 0,
     getCoreRowModel: getCoreRowModel(),
     onPaginationChange: setPagination,
     getPaginationRowModel: getPaginationRowModel(),
