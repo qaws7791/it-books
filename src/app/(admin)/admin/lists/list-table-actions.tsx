@@ -1,5 +1,5 @@
 "use client";
-import { List } from "@/src/feature/lists/types";
+import { ListPreview } from "@/src/feature/lists/types";
 import Button from "@/src/ui/components/button";
 import {
   DropdownMenu,
@@ -11,7 +11,7 @@ import {
 import { useRouter } from "next/navigation";
 
 interface ListTableActionsProps {
-  row: List;
+  row: ListPreview;
 }
 
 export default function ListTableActions({ row }: ListTableActionsProps) {
