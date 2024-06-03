@@ -4,7 +4,7 @@ import { type VariantProps, cva } from "class-variance-authority";
 import * as React from "react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap font-medium text-sm rounded-full disabled:cursor-not-allowed relative state-layer",
+  "inline-flex items-center justify-center whitespace-nowrap font-medium text-sm rounded-full disabled:cursor-not-allowed relative state-layer active:scale-95 transition-transform duration-75 ease-in-out ",
   {
     variants: {
       variant: {
@@ -12,6 +12,8 @@ const buttonVariants = cva(
           "bg-primary text-on-primary hover:after:bg-on-primary/8  active:after:bg-on-primary/12 focus:after:bg-on-primary/12 disabled:bg-transparent disabled:after:bg-on-surface/12 disabled:text-on-surface/40",
         secondary:
           "bg-secondary-container text-on-secondary-container hover:after:bg-on-secondary-container/8 focus:after:bg-on-secondary-container/12 active:after:bg-on-secondary-container/12 disabled:bg-transparent disabled:after:bg-on-surface/12 disabled:text-on-surface/40",
+        tertiary:
+          "bg-tertiary-container text-on-tertiary-container hover:after:bg-on-tertiary-container/8 focus:after:bg-on-tertiary-container/12 active:after:bg-on-tertiary-container/12 disabled:bg-transparent disabled:after:bg-on-surface/12 disabled:text-on-surface/40",
         outline:
           "bg-transparent text-primary border border-outline hover:after:bg-primary/8 active:after:bg-primary/12  focus:after:bg-primary/12 disabled:after:bg-transparent disabled:border-on-surface/12 disabled:text-on-surface/40",
         ghost:
