@@ -4,7 +4,6 @@ import React, { createContext } from "react";
 
 export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   asChild?: boolean;
-  children: React.ReactNode;
 }
 
 export function Drawer({
