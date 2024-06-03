@@ -1,9 +1,7 @@
 import {
   Drawer,
-  DrawerDivider,
   DrawerIcon,
   DrawerItem,
-  DrawerSectionHeader,
   DrawerTitle,
 } from "@/src/ui/components/drawer";
 import type { Meta, StoryObj } from "@storybook/react";
@@ -24,36 +22,16 @@ const DrawerWithHooks = () => {
   return (
     <Drawer className="w-80">
       <DrawerTitle>Drawer Title</DrawerTitle>
-      <DrawerItem
-        onClick={() => setSelected("inbox")}
-        selected={selected === "inbox"}
-      >
-        <DrawerIcon>inbox</DrawerIcon>
-        Drawer Item
-      </DrawerItem>
-      <DrawerItem
-        onClick={() => setSelected("send")}
-        selected={selected === "send"}
-      >
-        <DrawerIcon>send</DrawerIcon>
-        Drawer Item
-      </DrawerItem>
-      <DrawerItem
-        onClick={() => setSelected("favorite_border")}
-        selected={selected === "favorite_border"}
-      >
-        <DrawerIcon>favorite_border</DrawerIcon>
-        Drawer Item
-      </DrawerItem>
-      <DrawerDivider />
-      <DrawerSectionHeader>Section Header</DrawerSectionHeader>
-      <DrawerItem
-        onClick={() => setSelected("delete")}
-        selected={selected === "delete"}
-      >
-        <DrawerIcon>delete</DrawerIcon>
-        Drawer Item
-      </DrawerItem>
+      {["inbox", "send", "favorite_border", "delete"].map((icon) => (
+        <DrawerItem
+          key={icon}
+          onClick={() => setSelected(icon)}
+          selected={selected === icon}
+        >
+          <DrawerIcon>{icon}</DrawerIcon>
+          Drawer Item
+        </DrawerItem>
+      ))}
     </Drawer>
   );
 };
