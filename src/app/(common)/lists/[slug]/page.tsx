@@ -4,6 +4,7 @@ import DUMMY from "@/src/dummy";
 import PageContainer from "@/src/shared/components/layout/page-container";
 import Button from "@/src/shared/components/ui/button";
 import { toKoreanDateString } from "@/src/shared/lib/utils";
+import { Metadata } from "next";
 import Link from "next/link";
 
 interface ListDetailPageProperties {
@@ -14,6 +15,17 @@ interface ListDetailPageProperties {
 
 function getList(slug: string) {
   return DUMMY.LiST_DETAILS.find((list) => list.slug === slug);
+}
+
+export function generateMetadata({
+  params,
+}: ListDetailPageProperties): Metadata {
+  const decodedSlug = decodeURIComponent(params.slug);
+  const list = getList(decodedSlug);
+
+  return {
+    title: list?.name || "리스트를 찾을 수 없습니다.",
+  };
 }
 
 export default function ListDetailPage({ params }: ListDetailPageProperties) {

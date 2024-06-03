@@ -1,7 +1,13 @@
 import LogoutButton from "@/src/app/(common)/account/logout-button";
 import RefreshButton from "@/src/app/(common)/account/refresh-button";
 import { getProfile } from "@/src/user/api";
+import { Metadata } from "next";
 import { cookies } from "next/headers";
+
+export const metadata: Metadata = {
+  title: "Account",
+};
+
 export default async function AccountPage() {
   const cookieStore = cookies();
   const token = cookieStore.get("access_token");

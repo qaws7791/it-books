@@ -7,12 +7,23 @@ import NextImage from "@/src/shared/components/next-image";
 import Button from "@/src/shared/components/ui/button";
 import { toKoreanDateString } from "@/src/shared/lib/utils";
 import Tags from "@/src/tags/components/tags";
+import { Metadata } from "next";
 import Link from "next/link";
 import { Fragment, Suspense } from "react";
 
 interface BookDetailPageProperties {
   params: {
     slug: string;
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: BookDetailPageProperties): Promise<Metadata> {
+  const decodedQuery = decodeURIComponent(params.slug || "");
+  const book = await GetBookBySlug(decodedQuery);
+  return {
+    title: book.title,
   };
 }
 

@@ -1,6 +1,7 @@
 import BooksClient from "@/src/app/(common)/books/books-client";
 import getBooksPagination from "@/src/books/api/get-books-pagination";
 import PageContainer from "@/src/shared/components/layout/page-container";
+import { Metadata } from "next";
 
 interface BooksPageProps {
   searchParams: {
@@ -8,6 +9,10 @@ interface BooksPageProps {
     limit?: string;
   };
 }
+
+export const metadata: Metadata = {
+  title: "책 목록",
+};
 
 export default async function BooksPage({ searchParams }: BooksPageProps) {
   const page = searchParams.page ? Number.parseInt(searchParams.page) : 1;

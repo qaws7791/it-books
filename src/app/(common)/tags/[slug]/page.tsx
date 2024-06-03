@@ -1,11 +1,22 @@
-import PageContainer from "@/src/shared/components/layout/page-container";
 import DUMMY from "@/src/dummy";
-import Link from "next/link";
+import PageContainer from "@/src/shared/components/layout/page-container";
 import NextImage from "@/src/shared/components/next-image";
+import { Metadata } from "next";
+import Link from "next/link";
 
 interface BookDetailPageProperties {
   params: {
     slug: string;
+  };
+}
+
+export function generateMetadata({
+  params,
+}: BookDetailPageProperties): Metadata {
+  const decodedQuery = decodeURIComponent(params.slug || "");
+
+  return {
+    title: `#${decodedQuery}`,
   };
 }
 

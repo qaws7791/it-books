@@ -1,11 +1,22 @@
 import SearchClient from "@/src/app/(common)/search/search-client";
 import PageContainer from "@/src/shared/components/layout/page-container";
+import { Metadata } from "next";
 
 interface SearchPageProperties {
   searchParams: {
     query?: string;
     page?: string;
     limit?: string;
+  };
+}
+
+export function generateMetadata({
+  searchParams,
+}: SearchPageProperties): Metadata {
+  const decodedQuery = decodeURIComponent(searchParams.query || "");
+
+  return {
+    title: `"${decodedQuery}" 검색 결과`,
   };
 }
 
