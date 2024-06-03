@@ -10,12 +10,12 @@ export default function AdminLayout({
 }>) {
   return (
     <>
-      <Header />
-      <div className="flex h-full flex-auto">
-        <div className="w-0 lg:w-20 transition-all overflow-hidden">
-          <Sidebar links={DUMMY.ADMIN_SIDEBAR_LINKS} />
-        </div>
-        <main className="flex-auto flex p-4 pt-0 h-main">{children}</main>
+      <div className="w-0 lg:w-20 transition-all overflow-hidden">
+        <Sidebar links={DUMMY.ADMIN_SIDEBAR_LINKS} />
+      </div>
+      <div className="h-full flex-auto">
+        <Header />
+        <main className="flex-auto flex md:p-4 md:pt-0 h-main">{children}</main>
       </div>
     </>
   );
