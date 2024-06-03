@@ -14,7 +14,7 @@ const meta = {
   argTypes: {
     variant: {
       control: "radio",
-      options: ["default", "secondary", "outline", "ghost"],
+      options: ["default", "secondary", "tertiary", "outline", "ghost"],
     },
     disabled: {
       control: "boolean",
@@ -33,6 +33,12 @@ export const Secondary: Story = {
   },
 };
 
+export const Tertiary: Story = {
+  args: {
+    variant: "tertiary",
+  },
+};
+
 export const Outline: Story = {
   args: {
     variant: "outline",
@@ -42,5 +48,13 @@ export const Outline: Story = {
 export const GhostText: Story = {
   args: {
     variant: "ghost",
+  },
+};
+
+export const Icon: Story = {
+  args: {
+    children: <span className="material-icons">add</span>,
+    variant: "ghost",
+    size: "icon",
   },
 };
