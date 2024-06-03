@@ -1,4 +1,5 @@
 import { BookDetail } from "@/src/feature/books/types";
+import NextImage from "@/src/feature/shared/components/next-image";
 import { Variants, motion } from "framer-motion";
 
 const PREVIEW_MAX_ITEMS = 3;
@@ -25,7 +26,7 @@ export default function BookCoversPreview({
   books,
   count,
 }: {
-  books: BookDetail[];
+  books: Pick<BookDetail, "title" | "id" | "coverImage">[];
   count: number;
 }): JSX.Element {
   const items = books.slice(0, PREVIEW_MAX_ITEMS);
@@ -49,7 +50,9 @@ export default function BookCoversPreview({
             className="cursor-pointer w-60 relative -mr-48"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <NextImage
+              width={200}
+              height={240}
               src={book.coverImage}
               alt="book cover"
               className="object-contain rounded-md shadow max-h-60"

@@ -1,22 +1,33 @@
-import { BookWithCategory } from "@/src/feature/books/types";
+import { BookDetail } from "@/src/feature/books/types";
 
-export interface List {
+export interface ListItem {
   id: number;
-  name: string;
+  itemOrder: number;
+  book: Pick<BookDetail, "id" | "title" | "coverImage">;
+}
+
+export interface ListItemDetail {
+  id: number;
+  itemOrder: number;
+  book: BookDetail;
+}
+
+export interface ListPreview {
+  id: number;
+  title: string;
   slug: string;
-  description: string;
-  books: BookWithCategory[];
-  count: number;
+  listItems: ListItem[];
+  bookCount: number;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface ListDetails {
   id: number;
-  name: string;
+  title: string;
+  slug: string;
   description: string;
-  books: BookWithCategory[];
-  count: number;
+  listItems: ListItemDetail[];
   createdAt: string;
   updatedAt: string;
 }
