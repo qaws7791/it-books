@@ -1,18 +1,19 @@
 "use client";
 
-import { GetBookByIdOutput } from "@/src/books/api/get-book-by-id";
-import getBookImagePresignedUrl from "@/src/books/api/get-book-image-presigned-url";
-import putBook, { PutBookInput } from "@/src/books/api/put-book";
-import { BOOK_STATUS, BOOK_STATUS_KEYS } from "@/src/books/constants";
-import { useCategoriesQuery } from "@/src/categories/queries";
-import { ApiError } from "@/src/shared/api";
-import NextImage from "@/src/shared/components/next-image";
-import Button from "@/src/shared/components/ui/button";
-import Description from "@/src/shared/components/ui/description";
-import ErrorMessage from "@/src/shared/components/ui/error-message";
-import { FormColumn, FormRow } from "@/src/shared/components/ui/form";
-import { Input } from "@/src/shared/components/ui/input";
-import Label from "@/src/shared/components/ui/label";
+import { GetBookByIdOutput } from "@/src/feature/books/api/get-book-by-id";
+import getBookImagePresignedUrl from "@/src/feature/books/api/get-book-image-presigned-url";
+import putBook, { PutBookInput } from "@/src/feature/books/api/put-book";
+import { BOOK_STATUS, BOOK_STATUS_KEYS } from "@/src/feature/books/constants";
+import { useCategoriesQuery } from "@/src/feature/categories/queries";
+import { ApiError } from "@/src/feature/shared/api";
+import NextImage from "@/src/feature/shared/components/next-image";
+import { stringToArrayByComma } from "@/src/feature/shared/utils";
+import Button from "@/src/ui/components/button";
+import Description from "@/src/ui/components/description";
+import ErrorMessage from "@/src/ui/components/error-message";
+import { FormColumn, FormRow } from "@/src/ui/components/form";
+import { Input } from "@/src/ui/components/input";
+import Label from "@/src/ui/components/label";
 import {
   Select,
   SelectContent,
@@ -21,10 +22,9 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/src/shared/components/ui/select";
-import TagInput from "@/src/shared/components/ui/tag-input";
-import { Textarea } from "@/src/shared/components/ui/textarea";
-import { stringToArrayByComma } from "@/src/shared/utils";
+} from "@/src/ui/components/select";
+import TagInput from "@/src/ui/components/tag-input";
+import { Textarea } from "@/src/ui/components/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Controller, useForm } from "react-hook-form";

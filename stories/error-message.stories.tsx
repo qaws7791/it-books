@@ -1,5 +1,5 @@
+import ErrorMessage from "@/src/ui/components/error-message";
 import type { Meta, StoryObj } from "@storybook/react";
-import ErrorMessage from "@/src/shared/components/ui/error-message";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

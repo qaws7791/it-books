@@ -1,12 +1,12 @@
-import Button from "@/src/shared/components/ui/button";
-import FloatingButton from "@/src/shared/components/ui/floating-button";
+import Button from "@/src/ui/components/button";
+import FloatingButton from "@/src/ui/components/floating-button";
 import {
   NavigationRail,
   NavigationRailHeader,
   NavigationRailIcon,
   NavigationRailItem,
   NavigationRailList,
-} from "@/src/shared/components/ui/navigation-rail";
+} from "@/src/ui/components/navigation-rail";
 import type { Meta, StoryObj } from "@storybook/react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

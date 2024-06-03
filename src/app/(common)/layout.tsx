@@ -1,6 +1,6 @@
 import DUMMY from "@/src/dummy";
-import Header from "@/src/shared/components/layout/header";
-import Sidebar from "@/src/shared/components/layout/sidebar";
+import Header from "@/src/feature/shared/components/layout/header";
+import Sidebar from "@/src/feature/shared/components/layout/sidebar";
 import React from "react";
 
 export default function CommonLayout({

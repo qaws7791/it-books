@@ -1,6 +1,6 @@
 import CategoryForm from "@/src/app/(admin)/admin/categories/_components/category-form";
 import CategoryList from "@/src/app/(admin)/admin/categories/_components/category-list";
-import PageContainer from "@/src/shared/components/layout/page-container";
+import PageContainer from "@/src/feature/shared/components/layout/page-container";
 
 export default function AdminCategoriesPage() {
   return (

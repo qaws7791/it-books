@@ -1,9 +1,9 @@
 import ListClient from "@/src/app/(common)/lists/[slug]/list-client";
 import ShareButton from "@/src/app/(common)/lists/[slug]/share-button";
 import DUMMY from "@/src/dummy";
-import PageContainer from "@/src/shared/components/layout/page-container";
-import Button from "@/src/shared/components/ui/button";
-import { toKoreanDateString } from "@/src/shared/lib/utils";
+import PageContainer from "@/src/feature/shared/components/layout/page-container";
+import { toKoreanDateString } from "@/src/feature/shared/lib/utils";
+import Button from "@/src/ui/components/button";
 import { Metadata } from "next";
 import Link from "next/link";
 

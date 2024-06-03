@@ -1,6 +1,6 @@
 import BooksClient from "@/src/app/(common)/books/books-client";
-import getBooksPagination from "@/src/books/api/get-books-pagination";
-import PageContainer from "@/src/shared/components/layout/page-container";
+import getBooksPagination from "@/src/feature/books/api/get-books-pagination";
+import PageContainer from "@/src/feature/shared/components/layout/page-container";
 import { Metadata } from "next";
 
 interface BooksPageProps {

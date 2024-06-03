@@ -1,6 +1,6 @@
 "use client";
 
-import { useCategoriesQuery } from "@/src/categories/queries";
+import { useCategoriesQuery } from "@/src/feature/categories/queries";
 
 export default function CategoryList() {
   const { data } = useCategoriesQuery();

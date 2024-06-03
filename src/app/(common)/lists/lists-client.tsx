@@ -1,6 +1,6 @@
 "use client";
-import BookCoversPreview from "@/src/books/components/book-covers-preview";
 import DUMMY from "@/src/dummy";
+import BookCoversPreview from "@/src/feature/books/components/book-covers-preview";
 import Link from "next/link";
 
 export default function ListsClient() {

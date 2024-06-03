@@ -1,12 +1,12 @@
 "use client";
 import BookTableActions from "@/src/app/(admin)/admin/books/book-table-actions";
-import { BOOK_STATUS } from "@/src/books/constants";
-import { useBooksPagination } from "@/src/books/queries";
-import { BookWithCategory } from "@/src/books/types";
-import NextImage from "@/src/shared/components/next-image";
-import Button from "@/src/shared/components/ui/button";
-import { Input } from "@/src/shared/components/ui/input";
-import Label from "@/src/shared/components/ui/label";
+import { BOOK_STATUS } from "@/src/feature/books/constants";
+import { useBooksPagination } from "@/src/feature/books/queries";
+import { BookWithCategory } from "@/src/feature/books/types";
+import NextImage from "@/src/feature/shared/components/next-image";
+import Button from "@/src/ui/components/button";
+import { Input } from "@/src/ui/components/input";
+import Label from "@/src/ui/components/label";
 import {
   Select,
   SelectContent,
@@ -15,7 +15,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/src/shared/components/ui/select";
+} from "@/src/ui/components/select";
 import {
   Table,
   TableBody,
@@ -23,7 +23,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/src/shared/components/ui/table";
+} from "@/src/ui/components/table";
 import {
   createColumnHelper,
   flexRender,

@@ -5,7 +5,7 @@ import {
   DrawerItem,
   DrawerSectionHeader,
   DrawerTitle,
-} from "@/src/shared/components/ui/drawer";
+} from "@/src/ui/components/drawer";
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 

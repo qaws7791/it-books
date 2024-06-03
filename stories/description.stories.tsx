@@ -1,5 +1,5 @@
+import Description from "@/src/ui/components/description";
 import type { Meta, StoryObj } from "@storybook/react";
-import Description from "@/src/shared/components/ui/description";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

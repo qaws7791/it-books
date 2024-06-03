@@ -1,5 +1,5 @@
 import SearchClient from "@/src/app/(common)/search/search-client";
-import PageContainer from "@/src/shared/components/layout/page-container";
+import PageContainer from "@/src/feature/shared/components/layout/page-container";
 import { Metadata } from "next";
 
 interface SearchPageProperties {

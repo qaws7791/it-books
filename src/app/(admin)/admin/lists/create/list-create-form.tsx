@@ -1,17 +1,17 @@
 "use client";
 
 import BookSelectDialog from "@/src/app/(admin)/admin/lists/create/book-select-dialog";
-import { useBookById } from "@/src/books/queries";
-import createList from "@/src/lists/api/create-list";
-import NextImage from "@/src/shared/components/next-image";
-import Button from "@/src/shared/components/ui/button";
-import ErrorMessage from "@/src/shared/components/ui/error-message";
-import { FormRow } from "@/src/shared/components/ui/form";
-import { Input } from "@/src/shared/components/ui/input";
-import Label from "@/src/shared/components/ui/label";
-import { Textarea } from "@/src/shared/components/ui/textarea";
-import useBoolean from "@/src/shared/hooks/use-boolean";
-import { cn } from "@/src/shared/lib/utils";
+import { useBookById } from "@/src/feature/books/queries";
+import createList from "@/src/feature/lists/api/create-list";
+import NextImage from "@/src/feature/shared/components/next-image";
+import useBoolean from "@/src/feature/shared/hooks/use-boolean";
+import { cn } from "@/src/feature/shared/lib/utils";
+import Button from "@/src/ui/components/button";
+import ErrorMessage from "@/src/ui/components/error-message";
+import { FormRow } from "@/src/ui/components/form";
+import { Input } from "@/src/ui/components/input";
+import Label from "@/src/ui/components/label";
+import { Textarea } from "@/src/ui/components/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { Suspense } from "react";

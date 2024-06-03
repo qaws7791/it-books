@@ -1,6 +1,6 @@
 import LogoutButton from "@/src/app/(common)/account/logout-button";
 import RefreshButton from "@/src/app/(common)/account/refresh-button";
-import { getProfile } from "@/src/user/api";
+import { getProfile } from "@/src/feature/user/api";
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 

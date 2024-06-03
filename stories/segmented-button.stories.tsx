@@ -1,7 +1,7 @@
 import {
   SegmentedButtonGroup,
   SegmentedButtonItem,
-} from "@/src/shared/components/ui/segmented-button";
+} from "@/src/ui/components/segmented-button";
 import type { Meta, StoryObj } from "@storybook/react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

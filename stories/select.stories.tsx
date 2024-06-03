@@ -1,4 +1,3 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import {
   Select,
   SelectContent,
@@ -7,7 +6,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/src/shared/components/ui/select";
+} from "@/src/ui/components/select";
+import type { Meta, StoryObj } from "@storybook/react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

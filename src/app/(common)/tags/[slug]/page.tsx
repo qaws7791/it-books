@@ -1,6 +1,6 @@
 import DUMMY from "@/src/dummy";
-import PageContainer from "@/src/shared/components/layout/page-container";
-import NextImage from "@/src/shared/components/next-image";
+import PageContainer from "@/src/feature/shared/components/layout/page-container";
+import NextImage from "@/src/feature/shared/components/next-image";
 import { Metadata } from "next";
 import Link from "next/link";
 

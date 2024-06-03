@@ -1,4 +1,4 @@
-import FloatingButton from "@/src/shared/components/ui/floating-button";
+import FloatingButton from "@/src/ui/components/floating-button";
 import type { Meta, StoryObj } from "@storybook/react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export

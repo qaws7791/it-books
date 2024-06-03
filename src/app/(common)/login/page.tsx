@@ -1,5 +1,5 @@
-import GoogleLoginButton from "@/src/auth/components/google-login-button";
-import PageContainer from "@/src/shared/components/layout/page-container";
+import GoogleLoginButton from "@/src/feature/auth/components/google-login-button";
+import PageContainer from "@/src/feature/shared/components/layout/page-container";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

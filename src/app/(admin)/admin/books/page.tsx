@@ -1,6 +1,6 @@
 import BookTable from "@/src/app/(admin)/admin/books/book-table";
-import PageContainer from "@/src/shared/components/layout/page-container";
-import Button from "@/src/shared/components/ui/button";
+import PageContainer from "@/src/feature/shared/components/layout/page-container";
+import Button from "@/src/ui/components/button";
 import Link from "next/link";
 import { Suspense } from "react";
 

@@ -1,13 +1,13 @@
 "use client";
-import { List } from "@/src/lists/types";
-import Button from "@/src/shared/components/ui/button";
+import { List } from "@/src/feature/lists/types";
+import Button from "@/src/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/src/shared/components/ui/dropdown-menu";
+} from "@/src/ui/components/dropdown-menu";
 import { useRouter } from "next/navigation";
 
 interface ListTableActionsProps {

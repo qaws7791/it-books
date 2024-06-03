@@ -1,7 +1,10 @@
 "use client";
 
-import { BookWithCategory } from "@/src/books/types";
-import { arrayToStringWithComma, imageLoader } from "@/src/shared/utils";
+import { BookWithCategory } from "@/src/feature/books/types";
+import {
+  arrayToStringWithComma,
+  imageLoader,
+} from "@/src/feature/shared/utils";
 import Image from "next/image";
 import Link from "next/link";
 

@@ -1,4 +1,4 @@
-import { BookDetail } from "@/src/books/types";
+import { BookDetail } from "@/src/feature/books/types";
 
 const CATEGORIES = [
   {

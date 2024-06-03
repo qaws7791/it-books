@@ -1,4 +1,4 @@
-import { List, ListItem } from "@/src/shared/components/ui/list";
+import { List, ListItem } from "@/src/ui/components/list";
 import Link from "next/link";
 
 interface SidebarItem {

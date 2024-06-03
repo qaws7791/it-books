@@ -1,6 +1,5 @@
 "use client";
-import Button from "@/src/shared/components/ui/button";
-import React from "react";
+import Button from "@/src/ui/components/button";
 import { toast } from "sonner";
 
 interface ShareButtonProperties {

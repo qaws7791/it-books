@@ -1,9 +1,9 @@
 "use client";
-import { useBooksPagination } from "@/src/books/queries";
-import NextImage from "@/src/shared/components/next-image";
-import Button from "@/src/shared/components/ui/button";
-import { Input } from "@/src/shared/components/ui/input";
-import useBoolean from "@/src/shared/hooks/use-boolean";
+import { useBooksPagination } from "@/src/feature/books/queries";
+import NextImage from "@/src/feature/shared/components/next-image";
+import useBoolean from "@/src/feature/shared/hooks/use-boolean";
+import Button from "@/src/ui/components/button";
+import { Input } from "@/src/ui/components/input";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
 

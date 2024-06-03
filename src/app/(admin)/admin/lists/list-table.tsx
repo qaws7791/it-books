@@ -1,10 +1,10 @@
 "use client";
 import ListTableActions from "@/src/app/(admin)/admin/lists/list-table-actions";
 import DUMMY from "@/src/dummy";
-import { List } from "@/src/lists/types";
-import Button from "@/src/shared/components/ui/button";
-import { Input } from "@/src/shared/components/ui/input";
-import Label from "@/src/shared/components/ui/label";
+import { List } from "@/src/feature/lists/types";
+import Button from "@/src/ui/components/button";
+import { Input } from "@/src/ui/components/input";
+import Label from "@/src/ui/components/label";
 import {
   Select,
   SelectContent,
@@ -13,7 +13,7 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/src/shared/components/ui/select";
+} from "@/src/ui/components/select";
 import {
   Table,
   TableBody,
@@ -21,7 +21,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/src/shared/components/ui/table";
+} from "@/src/ui/components/table";
 import {
   createColumnHelper,
   flexRender,

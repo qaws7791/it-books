@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import "./globals.css";
 // import "@material-design-icons/font";
-import { GoogleLoginProvider } from "@/src/auth/hooks/use-google-login";
-import QueryProvider from "@/src/shared/components/query-provider";
-import { ThemeProvider } from "@/src/shared/components/theme-provider";
-import SonnerToaster from "@/src/shared/components/ui/sonner-toaster";
+import { GoogleLoginProvider } from "@/src/feature/auth/hooks/use-google-login";
+import QueryProvider from "@/src/feature/shared/components/query-provider";
+import { ThemeProvider } from "@/src/feature/shared/components/theme-provider";
 import {
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_URL,
-} from "@/src/shared/constants/site-config.constant";
+} from "@/src/feature/shared/constants/site-config.constant";
+import SonnerToaster from "@/src/ui/components/sonner-toaster";
 import Head from "next/head";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";

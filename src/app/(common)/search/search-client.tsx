@@ -1,7 +1,7 @@
 "use client";
-import { useBooksPagination } from "@/src/books/queries";
-import NextImage from "@/src/shared/components/next-image";
-import { arrayToStringWithComma } from "@/src/shared/utils";
+import { useBooksPagination } from "@/src/feature/books/queries";
+import NextImage from "@/src/feature/shared/components/next-image";
+import { arrayToStringWithComma } from "@/src/feature/shared/utils";
 import Link from "next/link";
 
 interface SearchClientProperties {

@@ -1,13 +1,13 @@
 "use client";
-import { BookWithCategory } from "@/src/books/types";
-import Button from "@/src/shared/components/ui/button";
+import { BookWithCategory } from "@/src/feature/books/types";
+import Button from "@/src/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/src/shared/components/ui/dropdown-menu";
+} from "@/src/ui/components/dropdown-menu";
 import { useRouter } from "next/navigation";
 
 interface BookTableActionsProps {

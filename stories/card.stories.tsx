@@ -1,5 +1,5 @@
-import Avatar from "@/src/shared/components/ui/avatar";
-import Button from "@/src/shared/components/ui/button";
+import Avatar from "@/src/ui/components/avatar";
+import Button from "@/src/ui/components/button";
 import Card, {
   CardActions,
   CardContent,
@@ -8,7 +8,7 @@ import Card, {
   CardSubTitle,
   CardText,
   CardTitle,
-} from "@/src/shared/components/ui/card";
+} from "@/src/ui/components/card";
 
 import type { Meta, StoryObj } from "@storybook/react";
 
