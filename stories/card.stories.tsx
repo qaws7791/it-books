@@ -56,6 +56,8 @@ export const Default: Story = {
         src="https://placehold.co/360x240"
         alt="Image"
         className="rounded-none"
+        width={360}
+        height={240}
       />
       <CardContent>
         <CardTitle>Title</CardTitle>
@@ -77,7 +79,12 @@ export const Default: Story = {
 export const Small: Story = {
   render: (arguments_) => (
     <Card className="w-40" {...arguments_}>
-      <CardImage src="https://placehold.co/128x128" alt="Image" />
+      <CardImage
+        src="https://placehold.co/128x128"
+        alt="Image"
+        width={128}
+        height={128}
+      />
       <CardContent>
         <CardTitle>New Music Friday</CardTitle>
         <CardText className="mt-1">From your favorite artists</CardText>
@@ -89,34 +96,20 @@ export const Small: Story = {
 export const Grid: Story = {
   render: (arguments_) => (
     <div className="grid grid-cols-2 gap-4 max-w-lg">
-      <Card {...arguments_}>
-        <CardImage src="https://placehold.co/128x128" alt="Image" />
-        <CardContent>
-          <CardTitle>New Music Friday</CardTitle>
-          <CardText className="mt-1">From your favorite artists</CardText>
-        </CardContent>
-      </Card>
-      <Card {...arguments_}>
-        <CardImage src="https://placehold.co/128x128" alt="Image" />
-        <CardContent>
-          <CardTitle>New Music Friday</CardTitle>
-          <CardText className="mt-1">From your favorite artists</CardText>
-        </CardContent>
-      </Card>
-      <Card {...arguments_}>
-        <CardImage src="https://placehold.co/128x128" alt="Image" />
-        <CardContent>
-          <CardTitle>New Music Friday</CardTitle>
-          <CardText className="mt-1">From your favorite artists</CardText>
-        </CardContent>
-      </Card>
-      <Card {...arguments_}>
-        <CardImage src="https://placehold.co/128x128" alt="Image" />
-        <CardContent>
-          <CardTitle>New Music Friday</CardTitle>
-          <CardText className="mt-1">From your favorite artists</CardText>
-        </CardContent>
-      </Card>
+      {Array.from({ length: 4 }).map((_, index) => (
+        <Card {...arguments_} key={index}>
+          <CardImage
+            src="https://placehold.co/128x128"
+            alt="Image"
+            width={128}
+            height={128}
+          />
+          <CardContent>
+            <CardTitle>New Music Friday</CardTitle>
+            <CardText className="mt-1">From your favorite artists</CardText>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   ),
 };

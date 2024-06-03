@@ -1,4 +1,4 @@
-import { cn } from "../shared/lib/utils";
+import { cn } from "@/src/feature/shared/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, VariantProps } from "class-variance-authority";
 
@@ -79,12 +79,22 @@ export function CardText({
   );
 }
 
+interface CardImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  asChild?: boolean;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 export function CardImage({
   className,
+  asChild = false,
   ...props
-}: React.ImgHTMLAttributes<HTMLImageElement>) {
+}: CardImageProps) {
+  const Comp = asChild ? Slot : "img";
   return (
-    <img
+    <Comp
       className={cn("w-full object-cover rounded-xl", className)}
       {...props}
     />
