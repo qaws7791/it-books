@@ -1,11 +1,8 @@
 "use client";
 
 import { BookWithCategory } from "@/src/feature/books/types";
-import {
-  arrayToStringWithComma,
-  imageLoader,
-} from "@/src/feature/shared/utils";
-import Image from "next/image";
+import NextImage from "@/src/feature/shared/components/next-image";
+import { arrayToStringWithComma } from "@/src/feature/shared/utils";
 import Link from "next/link";
 
 interface BooksClientProps {
@@ -23,8 +20,7 @@ export default function BooksClient({ books }: BooksClientProps) {
         >
           <div className="flex justify-center">
             <div className="relative book-border">
-              <Image
-                loader={imageLoader}
+              <NextImage
                 src={book.coverImage}
                 alt={book.title}
                 className="relative overflow-hidden mx-auto shadow-elevation shadow-black/15"
