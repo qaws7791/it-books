@@ -79,7 +79,7 @@ export default function SidebarModalButton({
               >
                 <Drawer className="h-full transition-all rounded-l-none">
                   <Dialog.Close asChild>
-                    <Button variant="ghost" size="icon" className="lg:hidden">
+                    <Button variant="ghost" size="icon">
                       <span className="material-icons-outlined">
                         {open ? "menu_open" : "menu"}
                       </span>
