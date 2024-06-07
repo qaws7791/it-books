@@ -14,7 +14,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="w-full h-header flex gap-8 items-center justify-between px-3">
+      <div className="fixed w-full h-header bg-surface flex gap-8 items-center justify-between px-3 z-50">
         <nav className="flex items-center gap-4">
           <SidebarModalButton isAdmin={isAdmin} />
           <Link href={"/"}>
@@ -32,6 +32,7 @@ export default function Header() {
           <UserButton />
         </div>
       </div>
+      <div className="h-header" />
     </>
   );
 }
