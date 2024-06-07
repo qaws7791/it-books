@@ -13,7 +13,7 @@ export function NavigationRail({
   const Compo = asChild ? Slot : "nav";
   return (
     <Compo
-      className={`flex flex-col gap-2 w-20 text-on-surface ${className}`}
+      className={`flex flex-col gap-2 w-24 items-center text-on-surface ${className}`}
       {...props}
     >
       {children}
