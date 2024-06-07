@@ -59,7 +59,7 @@ export const PaginationLink = ({ isActive, ...props }: PaginationLinkProps) => {
 
 export const PaginationPrevious = ({ ...props }: PaginationLinkProps) => {
   return (
-    <PaginationLink {...props} aria-label="Previous page">
+    <PaginationLink {...props} aria-label="Previous page" title="Previous page">
       <span className="material-icons">chevron_left</span>
     </PaginationLink>
   );
@@ -67,7 +67,7 @@ export const PaginationPrevious = ({ ...props }: PaginationLinkProps) => {
 
 export const PaginationNext = ({ ...props }: PaginationLinkProps) => {
   return (
-    <PaginationLink {...props} aria-label="Next page">
+    <PaginationLink {...props} aria-label="Next page" title="Next page">
       <span className="material-icons">chevron_right</span>
     </PaginationLink>
   );
