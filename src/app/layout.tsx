@@ -12,7 +12,6 @@ import {
 import SonnerToaster from "@/src/ui/components/sonner-toaster";
 import Head from "next/head";
 import { Suspense } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 
 export const metadata: Metadata = {
   title: {
@@ -34,18 +33,16 @@ export default function RootLayout({
         <meta name="referrer" content="no-referrer-when-downgrade" />
       </Head>
       <body className="bg-surface min-h-screen flex text-on-background">
-        <ErrorBoundary fallback={<div>Something went wrong</div>}>
-          <ThemeProvider>
-            <QueryProvider>
-              <GoogleLoginProvider>
-                <Suspense fallback="loading...">
-                  <SonnerToaster />
-                  {children}
-                </Suspense>
-              </GoogleLoginProvider>
-            </QueryProvider>
-          </ThemeProvider>
-        </ErrorBoundary>
+        <ThemeProvider>
+          <QueryProvider>
+            <GoogleLoginProvider>
+              <Suspense fallback="loading...">
+                <SonnerToaster />
+                {children}
+              </Suspense>
+            </GoogleLoginProvider>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
