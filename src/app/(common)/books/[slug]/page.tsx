@@ -116,26 +116,26 @@ export default async function BooksDetailPage({
           </section>
 
           <h2 className="text-2xl mt-8">출판 정보</h2>
-          <dl className="mt-2">
-            <div className="flex gap-4">
-              <dt>출판일</dt>
+          <dl className="mt-2 gap-4  grid grid-cols-2 p-4">
+            <div className="inline-flex gap-4 border border-outline flex-col p-2 rounded-xl flex-1 text-center">
+              <dt className="font-bold">상태</dt>
+              <dd>{BOOK_STATUS[book.status].label}</dd>
+            </div>
+            <div className="inline-flex gap-4 border border-outline flex-col p-2 rounded-xl flex-1 text-center">
+              <dt className="font-bold">출판일</dt>
               <dd>
                 <time dateTime={book.publishedDate}>
                   {toKoreanDateString(book.publishedDate)}
                 </time>
               </dd>
             </div>
-            <div className="flex gap-4">
-              <dt>ISBN</dt>
+            <div className="inline-flex gap-4 border border-outline flex-col p-2 rounded-xl flex-1 text-center">
+              <dt className="font-bold">쪽 수</dt>
+              <dd>{book.pages}</dd>
+            </div>
+            <div className="inline-flex gap-4 border border-outline flex-col p-2 rounded-xl flex-1 text-center">
+              <dt className="font-bold">ISBN</dt>
               <dd>{book.isbn}</dd>
-            </div>
-            <div className="flex gap-4">
-              <dt>상태</dt>
-              <dd>{BOOK_STATUS[book.status].label}</dd>
-            </div>
-            <div className="flex gap-4">
-              <dt>페이지 수</dt>
-              <dd>{book.pages} 페이지</dd>
             </div>
           </dl>
 
