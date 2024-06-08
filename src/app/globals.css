@@ -158,13 +158,11 @@
 }
 
 @layer components {
-  .scrollbar {
-    overflow-y: auto;
-  }
+
 
   @supports (scrollbar-width: auto) {
     .scrollbar {
-      scrollbar-color: rgb(var(--color-primary)) transparent;
+      scrollbar-color: rgb(var(--color-secondary)) transparent;
       scrollbar-width: auto;
     }
   }
@@ -172,7 +170,7 @@
   /* Legacy browsers with `::-webkit-scrollbar-*` support */
   @supports selector(::-webkit-scrollbar) {
     .scrollbar::-webkit-scrollbar-thumb {
-      background: rgb(var(--color-primary));
+      background: rgb(var(--color-secondary));
     }
     .scrollbar::-webkit-scrollbar-track {
       background: transparent;
