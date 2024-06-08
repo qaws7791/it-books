@@ -34,7 +34,7 @@ export default function SearchModalWrapper({
               initial={{ opacity: 0.5 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="fixed inset-0 bg-shadow/30"
+              className="fixed inset-0 bg-shadow/30 z-50"
             ></motion.div>
           </Dialog.Overlay>
 
@@ -43,7 +43,7 @@ export default function SearchModalWrapper({
               initial={{ y: 0 }}
               animate={{ y: 0 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="fixed top-1/4 left-0 right-0 px-6 mx-auto max-w-screen-md z-40"
+              className="fixed top-1/4 left-0 right-0 px-6 mx-auto max-w-screen-md z-50"
             >
               <Search
                 size="lg"

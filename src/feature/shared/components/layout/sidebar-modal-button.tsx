@@ -65,7 +65,7 @@ export default function SidebarModalButton({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="fixed inset-0 bg-black/20"
+                className="fixed inset-0 bg-black/20 z-50"
               ></motion.div>
             </Dialog.Overlay>
 
@@ -75,7 +75,7 @@ export default function SidebarModalButton({
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: "-50%", opacity: 0.3 }}
                 transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="fixed left-0 h-screen z-40 w-sidebar"
+                className="fixed left-0 h-screen z-50 w-sidebar"
               >
                 <Drawer className="h-full transition-all rounded-l-none">
                   <Dialog.Close asChild>
