@@ -43,12 +43,13 @@ const config: Config = {
     },
     extend: {
       gridTemplateColumns: {
-        card: "repeat(auto-fill, minmax(250px, 1fr))",
+        card: "repeat(auto-fill, minmax(256px, 1fr))",
         "card-lg": "repeat(auto-fill, minmax(400px, 1fr))",
       },
       width: {
         sidebar: "18rem",
         4.5: "1.125rem",
+        header: "calc(100% - 6rem)",
       },
       height: {
         header: "4rem",
