@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning className="scrollbar">
       <Head>
         <meta name="referrer" content="no-referrer-when-downgrade" />
       </Head>
