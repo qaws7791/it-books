@@ -7,7 +7,10 @@ export default function PageContainer({
   ...properties
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("w-full", className)} {...properties}>
+    <div
+      className={cn("w-full max-w-screen-xl mx-auto p-2 md:p-4", className)}
+      {...properties}
+    >
       <div>{children}</div>
     </div>
   );
