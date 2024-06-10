@@ -15,7 +15,7 @@ export default function BookList({ page, limit }: BooksListProps) {
   } = useBooksPagination({ page, limit });
 
   return (
-    <div>
+    <div className="mt-12">
       <div className="grid grid-cols-card gap-4">
         {books.map((book) => (
           <BookPreview key={book.slug} book={book} />
