@@ -86,7 +86,7 @@ const columns = [
 export default function BookTable() {
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 5,
+    pageSize: 10,
   });
   const [pageInput, setPageInput] = useState<number>(1);
 
@@ -192,7 +192,7 @@ export default function BookTable() {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>페이지 사이즈</SelectLabel>
-              {[1, 2, 3, 4, 5].map((pageSize) => (
+              {[10, 20, 30, 40, 50].map((pageSize) => (
                 <SelectItem key={pageSize} value={pageSize.toString()}>
                   {pageSize}개씩 보기
                 </SelectItem>
