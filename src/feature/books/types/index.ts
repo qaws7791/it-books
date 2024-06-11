@@ -31,4 +31,5 @@ export interface BookDetail extends Book {
 
 export interface BookSearchParams extends PaginationCommonInput {
   query?: string;
+  categorySlug?: string;
 }
