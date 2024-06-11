@@ -1,5 +1,6 @@
 "use client";
-import CategoryTableActions from "@/src/app/(admin)/admin/categories/_components/category-table-actions";
+
+import CategoryTableActions from "@/src/feature/categories/components/category-table/category-table-actions";
 import { useCategoriesQuery } from "@/src/feature/categories/queries";
 import { Category } from "@/src/feature/categories/types";
 import Button from "@/src/ui/components/button";
@@ -104,7 +105,6 @@ export default function CategoryTable() {
     },
     manualPagination: true,
   });
-  console.log(table.getState().pagination);
 
   return (
     <div>
