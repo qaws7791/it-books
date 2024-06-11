@@ -7,7 +7,7 @@ interface TagInputProps extends React.HTMLAttributes<HTMLLabelElement> {
   maxTags?: number;
   maxChars?: number;
   onChangeTag?: (tags: string[]) => void;
-  defaultValue?: string[];
+  value: string[];
 }
 
 const TagInput = ({
@@ -16,9 +16,8 @@ const TagInput = ({
   maxTags = 20,
   maxChars,
   onChangeTag,
-  defaultValue,
+  value,
 }: TagInputProps) => {
-  const [tags, setTags] = useState<string[]>(defaultValue || []);
   const [tagInput, setTagInput] = useState("");
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,21 +26,19 @@ const TagInput = ({
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && tagInput) {
-      const isTagExists = tags.includes(tagInput.trim());
-      if (isTagExists || tags.length >= maxTags) {
-        return;
+      const isTagExists = value.includes(tagInput.trim());
+      const isOverMaxTags = value.length > maxTags;
+      if (!isTagExists && !isOverMaxTags) {
+        const newTags = [...value, tagInput.trim()];
+        setTagInput("");
+        onChangeTag && onChangeTag(newTags);
       }
-      const newTags = [...tags, tagInput.trim()];
-      setTags(newTags);
-      setTagInput("");
-      onChangeTag && onChangeTag(newTags);
     }
   };
 
   const removeTag = (index: number) => {
-    const newTags = [...tags];
+    const newTags = [...value];
     newTags.splice(index, 1);
-    setTags(newTags);
     onChangeTag && onChangeTag(newTags);
   };
 
@@ -53,8 +50,8 @@ const TagInput = ({
         className,
       )}
     >
-      {tags.map((tag, index) => (
-        <Chip key={index} onClick={() => removeTag(index)}>
+      {value.map((tag, index) => (
+        <Chip key={tag} onRemove={() => removeTag(index)}>
           {tag}
         </Chip>
       ))}
