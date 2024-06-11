@@ -38,6 +38,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
 
     return (
       <Compo
+        type="button"
         onClick={handleClick}
         className={cn(chipVariants({ className }), onClick && "cursor-pointer")}
         ref={ref}
@@ -50,6 +51,7 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
               variant="ghost"
               size="iconSmall"
               className="material-icons m-1"
+              type="button"
               onClick={handleRemove}
             >
               close
