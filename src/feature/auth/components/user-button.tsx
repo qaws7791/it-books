@@ -40,7 +40,7 @@ export const NotLoggedInUserButton = () => {
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
-            <Link href="/policy/privacy" target="_blank">
+            <Link href="/privacy" target="_blank">
               개인정보처리방침
               <DropdownMenuShortcut>
                 <span className="material-icons">open_in_new</span>
@@ -48,7 +48,7 @@ export const NotLoggedInUserButton = () => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/policy/terms" target="_blank">
+            <Link href="/terms" target="_blank">
               이용약관
               <DropdownMenuShortcut>
                 <span className="material-icons">open_in_new</span>
@@ -109,7 +109,7 @@ export const LoggedInUserButton = ({ user }: { user: UserProfile }) => {
             <Link href="/account">계정</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/policy/privacy" target="_blank">
+            <Link href="/privacy" target="_blank">
               개인정보처리방침
               <DropdownMenuShortcut>
                 <span className="material-icons">open_in_new</span>
@@ -117,7 +117,7 @@ export const LoggedInUserButton = ({ user }: { user: UserProfile }) => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/policy/terms" target="_blank">
+            <Link href="/terms" target="_blank">
               이용약관
               <DropdownMenuShortcut>
                 <span className="material-icons">open_in_new</span>
