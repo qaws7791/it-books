@@ -1,6 +1,12 @@
 import { PaginationCommonInput } from "@/src/feature/shared/type/api";
 
-export interface CreateCategoryDto {
+export interface CreateCategoryInput {
+  name: string;
+  slug: string;
+}
+
+export interface UpdateCategoryInput {
+  id: number;
   name: string;
   slug: string;
 }
@@ -16,3 +22,9 @@ export interface Category {
 export interface CategorySearchParams extends PaginationCommonInput {
   query?: string;
 }
+
+export type LocalCategory = {
+  name: string;
+  slug: string;
+  iconName: string;
+};
