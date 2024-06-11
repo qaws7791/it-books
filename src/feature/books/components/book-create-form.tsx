@@ -1,10 +1,15 @@
-"use client";
-
-import createBook, {
+import {
   CreateBookInput,
+  useCreateBookMutation,
 } from "@/src/feature/books/api/create-book";
+import { GetBookByIdOutput } from "@/src/feature/books/api/get-book-by-id";
 import getBookImagePresignedUrl from "@/src/feature/books/api/get-book-image-presigned-url";
-import { BOOK_STATUS, BOOK_STATUS_KEYS } from "@/src/feature/books/constants";
+import { useUpdateBookMutation } from "@/src/feature/books/api/update-book";
+import { BOOK_STATUS } from "@/src/feature/books/constants";
+import {
+  createBookSchema,
+  CreateBookSchema,
+} from "@/src/feature/books/helpers/schema/create-book";
 import { useCategoriesQuery } from "@/src/feature/categories/queries";
 import { ApiError } from "@/src/feature/shared/api";
 import NextImage from "@/src/feature/shared/components/next-image";
@@ -28,27 +33,9 @@ import TagInput from "@/src/ui/components/tag-input";
 import { Textarea } from "@/src/ui/components/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
-
-const bookSchema = z.object({
-  title: z.string().min(2, "책 제목은 2글자 이상이어야 합니다."),
-  categoryId: z.string().min(1, "카테고리를 선택해주세요."),
-  slug: z.string().min(2, "URL 슬러그는 2글자 이상이어야 합니다."),
-  authors: z.string().min(1, "저자 이름을 입력해주세요."),
-  isbn: z
-    .string()
-    .min(13, "ISBN은 13자리여야 합니다.")
-    .max(13, "ISBN은 13자리여야 합니다."),
-  publisher: z.string().min(1, "출판사를 입력해주세요."),
-  publishedDate: z.string().date("날짜를 선택해주세요."),
-  tags: z.array(z.string()),
-  coverImage: z.string().min(1, "이미지 URL을 입력해주세요."),
-  description: z.string().min(10),
-  translator: z.string().optional(),
-  status: z.enum(BOOK_STATUS_KEYS),
-  pages: z.number().int().positive(),
-});
 
 const checkKeydown = (event: React.KeyboardEvent<HTMLFormElement>) => {
   if (event.key === "Enter") {
@@ -56,28 +43,57 @@ const checkKeydown = (event: React.KeyboardEvent<HTMLFormElement>) => {
   }
 };
 
-export default function BookCreateForm() {
-  const { data: categories } = useCategoriesQuery();
+interface BookCreateFormProps {
+  book?: GetBookByIdOutput;
+}
+
+export default function BookCreateForm({ book }: BookCreateFormProps) {
+  const router = useRouter();
+  const { data: categories } = useCategoriesQuery({
+    page: 1,
+    limit: 100,
+  });
   const {
     setValue,
     watch,
     register,
     handleSubmit,
+    reset,
     control,
     formState: { errors },
-  } = useForm<z.infer<typeof bookSchema>>({
-    resolver: zodResolver(bookSchema),
-    defaultValues: {
-      title: "",
-      categoryId: "",
-      slug: "",
-      coverImage: "",
-      tags: [],
-      status: BOOK_STATUS.FOR_SALE.key,
-    },
+  } = useForm<CreateBookSchema>({
+    resolver: zodResolver(createBookSchema),
+    defaultValues: book
+      ? {
+          title: book.title,
+          categoryId: book.category.id.toString(),
+          slug: book.slug,
+          coverImage: book.coverImage,
+          tags: book.tags.map((tag) => tag.name),
+          status: book.status,
+          authors: book.authors.join(", "),
+          pages: book.pages,
+          isbn: book.isbn,
+          publisher: book.publisher,
+          publishedDate: new Date(book.publishedDate)
+            .toISOString()
+            .split("T")[0],
+          description: book.description,
+          translator: book.translator?.join(", ") || "",
+        }
+      : {
+          title: "",
+          categoryId: "",
+          slug: "",
+          coverImage: "",
+          tags: [],
+          status: BOOK_STATUS.FOR_SALE.key,
+        },
   });
+  const { mutate: createBook } = useCreateBookMutation();
+  const { mutate: updateBook } = useUpdateBookMutation();
 
-  const onSubmit = handleSubmit(async (data: z.infer<typeof bookSchema>) => {
+  const onSubmit = handleSubmit((data: CreateBookSchema) => {
     try {
       const authorsArray = stringToArrayByComma(data.authors);
       const translatorArray = stringToArrayByComma(data.translator || "");
@@ -90,8 +106,25 @@ export default function BookCreateForm() {
         publishedDate: new Date(data.publishedDate).toISOString(),
       };
 
-      await createBook(requestData);
-      alert("책이 성공적으로 등록되었습니다.");
+      if (book) {
+        updateBook(
+          {
+            id: book.id,
+            ...requestData,
+          },
+          {
+            onSuccess: () => {
+              router.push("/admin/books");
+            },
+          },
+        );
+      } else {
+        createBook(requestData, {
+          onSuccess: () => {
+            reset();
+          },
+        });
+      }
     } catch (error) {
       if (error instanceof ApiError) {
         alert(error.message);
@@ -167,7 +200,7 @@ export default function BookCreateForm() {
             return (
               <Select onValueChange={field.onChange} value={field.value}>
                 <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select a fruit" />
+                  <SelectValue placeholder="카테고리 선택" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
@@ -308,6 +341,7 @@ export default function BookCreateForm() {
       <FormRow>
         <Label htmlFor="tags">태그</Label>
         <TagInput
+          value={watch("tags")}
           onChangeTag={(tags) => {
             setValue("tags", tags);
           }}
@@ -316,7 +350,9 @@ export default function BookCreateForm() {
         <ErrorMessage>{getErrorMessage("tags")}</ErrorMessage>
       </FormRow>
 
-      <Button type="submit">카테고리 등록</Button>
+      <FormRow>
+        <Button type="submit">도서 등록</Button>
+      </FormRow>
     </form>
   );
 }
