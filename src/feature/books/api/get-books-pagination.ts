@@ -8,9 +8,10 @@ export interface GetBooksPaginationOutput {
 }
 
 export default function getBooksPagination({
-  page = 1,
-  limit = 10,
+  page,
+  limit,
   query,
+  categorySlug,
 }: BookSearchParams): Promise<GetBooksPaginationOutput> {
-  return api.get("/books", { params: { page, limit, query } });
+  return api.get("/books", { params: { page, limit, query, categorySlug } });
 }

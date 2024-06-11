@@ -31,10 +31,15 @@ export function useBooksPagination({
   page = 1,
   limit = 10,
   query,
+  categorySlug,
 }: BookSearchParams) {
   return useSuspenseQuery({
-    queryKey: bookQueryKeys.fetchBooksPagination({ page, limit, query })
-      .queryKey,
-    queryFn: () => getBooksPagination({ page, limit, query }),
+    queryKey: bookQueryKeys.fetchBooksPagination({
+      page,
+      limit,
+      query,
+      categorySlug,
+    }).queryKey,
+    queryFn: () => getBooksPagination({ page, limit, query, categorySlug }),
   });
 }
