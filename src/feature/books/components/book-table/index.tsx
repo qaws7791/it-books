@@ -1,5 +1,6 @@
 "use client";
-import BookTableActions from "@/src/app/(admin)/admin/books/book-table-actions";
+
+import BookTableActions from "@/src/feature/books/components/book-table/book-table-actions";
 import { BOOK_STATUS } from "@/src/feature/books/constants";
 import { useBooksPagination } from "@/src/feature/books/queries";
 import { BookWithCategory } from "@/src/feature/books/types";
@@ -32,7 +33,7 @@ import {
   PaginationState,
   useReactTable,
 } from "@tanstack/react-table";
-import React, { useState } from "react";
+import React, { useDeferredValue, useEffect, useState } from "react";
 
 const columnHelper = createColumnHelper<BookWithCategory>();
 
@@ -104,9 +105,10 @@ export default function BookTable() {
     }
   };
 
+  const deferredPage = useDeferredValue(pagination);
   const booksQuery = useBooksPagination({
-    page: pagination.pageIndex + 1,
-    limit: pagination.pageSize,
+    page: deferredPage.pageIndex + 1,
+    limit: deferredPage.pageSize,
   });
 
   const table = useReactTable({
@@ -121,6 +123,10 @@ export default function BookTable() {
     },
     manualPagination: true,
   });
+
+  useEffect(() => {
+    setPageInput(pagination.pageIndex + 1);
+  }, [pagination.pageIndex]);
 
   return (
     <div>
