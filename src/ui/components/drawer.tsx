@@ -2,7 +2,7 @@ import { cn } from "@/src/feature/shared/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 import React, { createContext } from "react";
 
-export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DrawerProps extends React.ComponentPropsWithoutRef<"div"> {
   asChild?: boolean;
 }
 
@@ -27,7 +27,7 @@ export function Drawer({
 }
 
 export interface DrawerTitleProps
-  extends React.HTMLAttributes<HTMLSpanElement> {
+  extends React.ComponentPropsWithoutRef<"span"> {
   asChild?: boolean;
 }
 export function DrawerTitle({
@@ -44,8 +44,7 @@ export function DrawerTitle({
   );
 }
 
-export interface DrawerItemProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
+export interface DrawerItemProps extends React.ComponentPropsWithRef<"button"> {
   asChild?: boolean;
   selected?: boolean;
 }
@@ -80,7 +79,7 @@ DrawerItem.displayName = "DrawerItem";
 export function DrawerIcon({
   className,
   ...props
-}: React.HTMLAttributes<HTMLSpanElement>) {
+}: React.ComponentPropsWithoutRef<"span">) {
   const { selected } = React.useContext(DrawerItemContext);
   return (
     <span
@@ -95,7 +94,7 @@ export function DrawerIcon({
 }
 
 export interface DrawerSectionHeaderProps
-  extends React.HTMLAttributes<HTMLSpanElement> {
+  extends React.ComponentPropsWithoutRef<"span"> {
   asChild?: boolean;
 }
 

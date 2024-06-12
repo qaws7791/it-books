@@ -1,7 +1,7 @@
 import { cn } from "@/src/feature/shared/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
 import React, { createContext } from "react";
-interface NavigationRailProps extends React.HTMLAttributes<HTMLDivElement> {
+interface NavigationRailProps extends React.ComponentPropsWithoutRef<"nav"> {
   asChild?: boolean;
 }
 export function NavigationRail({
@@ -22,7 +22,7 @@ export function NavigationRail({
 }
 
 interface NavigationRailItemProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
+  extends React.ComponentPropsWithRef<"button"> {
   children: React.ReactNode;
   asChild?: boolean;
   selected?: boolean;
@@ -55,14 +55,11 @@ export const NavigationRailItem = React.forwardRef<
 });
 NavigationRailItem.displayName = "NavigationRailItem";
 
-interface NavigationRailIconProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
-
 export function NavigationRailIcon({
   className,
   children,
   ...props
-}: NavigationRailIconProps) {
+}: React.ComponentPropsWithoutRef<"div">) {
   const { selected } = React.useContext(NavigationRailItemContext);
   return (
     <div
@@ -81,7 +78,7 @@ export function NavigationRailIcon({
 export function NavigationRailHeader({
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div
       className={cn(
@@ -93,7 +90,8 @@ export function NavigationRailHeader({
   );
 }
 
-interface NavigationRailListProps extends React.HTMLAttributes<HTMLDivElement> {
+interface NavigationRailListProps
+  extends React.ComponentPropsWithoutRef<"div"> {
   align?: "start" | "center" | "end";
 }
 

@@ -10,7 +10,7 @@ const chipVariants = cva(
 );
 
 export interface ChipProps
-  extends React.HTMLAttributes<HTMLButtonElement>,
+  extends React.ComponentPropsWithRef<"button">,
     VariantProps<typeof chipVariants> {
   asChild?: boolean;
   onRemove?: () => void;

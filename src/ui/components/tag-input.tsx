@@ -3,7 +3,7 @@ import { cn } from "@/src/feature/shared/lib/utils";
 import Chip from "@/src/ui/components/chip";
 import React, { useState } from "react";
 
-interface TagInputProps extends React.HTMLAttributes<HTMLLabelElement> {
+interface TagInputProps extends React.ComponentPropsWithoutRef<"label"> {
   placeholder?: string;
   maxTags?: number;
   maxChars?: number;

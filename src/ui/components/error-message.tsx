@@ -3,7 +3,7 @@ import * as React from "react";
 
 const ErrorMessage = React.forwardRef<
   HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
+  React.ComponentPropsWithoutRef<"p">
 >(({ className, ...props }, ref) => (
   <p
     className={cn("text-sm text-error leading-none", className)}

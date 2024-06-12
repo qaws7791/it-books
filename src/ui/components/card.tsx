@@ -25,7 +25,7 @@ const cardVariants = cva(
 );
 
 export interface CardProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends React.ComponentPropsWithoutRef<"div">,
     VariantProps<typeof cardVariants> {
   asChild?: boolean;
 }
@@ -49,28 +49,28 @@ function Card({
 export function CardHeader({
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: React.ComponentPropsWithoutRef<"header">) {
   return <header className={cn("p-4", className)} {...props} />;
 }
 
 export function CardTitle({
   className,
   ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
+}: React.ComponentPropsWithoutRef<"h5">) {
   return <h5 className={cn("font-bold text-lg", className)} {...props} />;
 }
 
 export function CardSubTitle({
   className,
   ...props
-}: React.HTMLAttributes<HTMLHeadingElement>) {
+}: React.ComponentPropsWithoutRef<"h6">) {
   return <h6 className={cn("text-base", className)} {...props} />;
 }
 
 export function CardText({
   className,
   ...props
-}: React.HTMLAttributes<HTMLParagraphElement>) {
+}: React.ComponentPropsWithoutRef<"p">) {
   return (
     <p
       className={cn("text-sm text-on-surface-variant", className)}
@@ -79,7 +79,7 @@ export function CardText({
   );
 }
 
-interface CardImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface CardImageProps extends React.ComponentPropsWithoutRef<"img"> {
   asChild?: boolean;
   src: string;
   alt: string;
@@ -104,21 +104,21 @@ export function CardImage({
 export function CardContent({
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: React.ComponentPropsWithoutRef<"div">) {
   return <div className={cn("p-4", className)} {...props} />;
 }
 
 export function CardMedia({
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: React.ComponentPropsWithoutRef<"div">) {
   return <div className={cn("relative", className)} {...props} />;
 }
 
 export function CardActions({
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: React.ComponentPropsWithoutRef<"div">) {
   return <div className={cn("flex justify-end gap-2", className)} {...props} />;
 }
 

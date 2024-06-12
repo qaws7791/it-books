@@ -28,7 +28,7 @@ const getSelectedLink = (links: Link[], pathname: string) => {
   });
 };
 
-interface SidebarProperties extends React.HTMLAttributes<HTMLDivElement> {
+interface SidebarProperties extends React.ComponentPropsWithRef<"nav"> {
   links: {
     name: string;
     href: string;

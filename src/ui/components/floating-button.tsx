@@ -31,7 +31,7 @@ const floatingButtonVariants = cva(
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends React.ComponentPropsWithRef<"button">,
     VariantProps<typeof floatingButtonVariants> {
   asChild?: boolean;
   icon?: string;

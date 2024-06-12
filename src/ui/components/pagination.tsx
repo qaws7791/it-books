@@ -3,9 +3,10 @@ import Button from "@/src/ui/components/button";
 import Link from "next/link";
 import React from "react";
 
-interface PaginationProps extends React.HTMLAttributes<HTMLElement> {}
-
-export const Pagination = ({ className, ...props }: PaginationProps) => {
+export const Pagination = ({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<"nav">) => {
   return (
     <nav
       role="navigation"
@@ -16,22 +17,17 @@ export const Pagination = ({ className, ...props }: PaginationProps) => {
   );
 };
 
-interface PaginationContentProps
-  extends React.HTMLAttributes<HTMLUListElement> {}
-
 export const PaginationContent = ({
   className,
   ...props
-}: PaginationContentProps) => {
+}: React.ComponentPropsWithoutRef<"ul">) => {
   return <ul className={cn("flex space-x-1", className)} {...props} />;
 };
-
-interface PaginationItemProps extends React.HTMLAttributes<HTMLLIElement> {}
 
 export const PaginationItem = ({
   className,
   ...props
-}: PaginationItemProps) => {
+}: React.ComponentPropsWithoutRef<"li">) => {
   return (
     <li
       className={cn("flex items-center justify-center", className)}
@@ -75,7 +71,7 @@ export const PaginationNext = ({ ...props }: PaginationLinkProps) => {
 
 export const PaginationEllipsis = ({
   ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
+}: React.ComponentPropsWithoutRef<"span">) => {
   return (
     <span
       aria-hidden="true"

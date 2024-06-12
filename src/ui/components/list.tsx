@@ -5,7 +5,7 @@ import * as React from "react";
 export function List({
   className,
   ...props
-}: React.HTMLAttributes<HTMLUListElement>): JSX.Element {
+}: React.ComponentPropsWithoutRef<"ul">): JSX.Element {
   return (
     <ul
       className={cn(
@@ -17,7 +17,7 @@ export function List({
   );
 }
 
-interface ListItemProps extends React.LiHTMLAttributes<HTMLLIElement> {
+interface ListItemProps extends React.ComponentPropsWithoutRef<"li"> {
   asChild?: boolean;
 }
 

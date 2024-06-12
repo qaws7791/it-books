@@ -1,14 +1,13 @@
 "use client";
 import { imageLoader } from "@/src/feature/shared/utils";
-import Image from "next/image";
-import React from "react";
+import Image, { ImageProps } from "next/image";
 
-interface NextImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+type NextImageProps = {
   src: string;
   alt: string;
   width: number;
   height: number;
-}
+} & ImageProps;
 
 export default function NextImage({
   src,

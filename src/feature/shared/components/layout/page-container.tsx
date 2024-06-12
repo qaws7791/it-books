@@ -5,7 +5,7 @@ export default function PageContainer({
   className,
   children,
   ...properties
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: React.ComponentPropsWithoutRef<"div">) {
   return (
     <div
       className={cn(
