@@ -1,10 +1,10 @@
 import { categoryQueryKeys } from "@/src/feature/categories/queries";
-import { Category, CreateCategoryInput } from "@/src/feature/categories/types";
+import { CreateCategoryInput } from "@/src/feature/categories/types";
 import api from "@/src/feature/shared/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-const createCategory = (dto: CreateCategoryInput): Promise<Category> => {
+const createCategory = (dto: CreateCategoryInput): Promise<void> => {
   return api.post("/categories", dto);
 };
 

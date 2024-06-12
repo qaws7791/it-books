@@ -1,5 +1,5 @@
 import { categoryQueryKeys } from "@/src/feature/categories/queries";
-import { Category, UpdateCategoryInput } from "@/src/feature/categories/types";
+import { UpdateCategoryInput } from "@/src/feature/categories/types";
 import api from "@/src/feature/shared/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
@@ -7,7 +7,7 @@ import { toast } from "sonner";
 const updateCategory = ({
   id,
   ...input
-}: UpdateCategoryInput): Promise<Category> => {
+}: UpdateCategoryInput): Promise<void> => {
   return api.put(`/categories/${id}`, input);
 };
 
