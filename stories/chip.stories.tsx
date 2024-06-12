@@ -1,4 +1,4 @@
-import Chip from "@/src/ui/components/chip";
+import Chip, { ChipRemoveIcon } from "@/src/ui/components/chip";
 import type { Meta, StoryObj } from "@storybook/react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -19,7 +19,18 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const WithRemove: Story = {
-  args: {
-    onRemove: () => alert("remove"),
-  },
+  render: ({ children, ...arguments_ }) => (
+    <Chip {...arguments_}>
+      {children}
+      <ChipRemoveIcon />
+    </Chip>
+  ),
+};
+
+export const AsChild: Story = {
+  render: (...arguments_) => (
+    <Chip {...arguments_} asChild>
+      <a href="#">Label</a>
+    </Chip>
+  ),
 };

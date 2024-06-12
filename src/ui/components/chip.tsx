@@ -6,18 +6,17 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
 const chipVariants = cva(
-  "h-8 whitespace-nowrap gap-2 border border-outline rounded-lg text-sm leading-5 text-on-surface-variant font-medium bg-transparent state-layer hover:after:bg-on-surface-variant/8 focus:after:bg-on-surface-variant/12 active:after:bg-on-surface-variant/12",
+  "h-8 flex items-center whitespace-nowrap gap-2 border border-outline rounded-lg text-sm leading-5 py-1 px-3 text-on-surface-variant font-medium bg-transparent state-layer hover:after:bg-on-surface-variant/8 focus:after:bg-on-surface-variant/12 active:after:bg-on-surface-variant/12 has-[button]:pr-2",
 );
 
 export interface ChipProps
   extends React.ComponentPropsWithRef<"button">,
     VariantProps<typeof chipVariants> {
   asChild?: boolean;
-  onRemove?: () => void;
 }
 
 const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
-  ({ className, asChild, children, onRemove, onClick, ...props }, ref) => {
+  ({ className, asChild, children, onClick, type, ...props }, ref) => {
     const Compo = asChild ? Slot : "button";
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -28,40 +27,36 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
       }
     };
 
-    const handleRemove = (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.stopPropagation();
-      if (onRemove) {
-        event.preventDefault();
-        onRemove();
-      }
-    };
-
     return (
       <Compo
-        type="button"
+        type={type ?? (Compo === "button" ? "button" : undefined)}
         onClick={handleClick}
         className={cn(chipVariants({ className }), onClick && "cursor-pointer")}
         ref={ref}
         {...props}
       >
-        <div className="inline-flex items-center">
-          <span className={cn(onRemove ? "pl-4" : "px-4")}>{children}</span>
-          {onRemove && (
-            <Button
-              variant="ghost"
-              size="iconSmall"
-              className="material-icons m-1"
-              type="button"
-              onClick={handleRemove}
-            >
-              close
-            </Button>
-          )}
-        </div>
+        {children}
       </Compo>
     );
   },
 );
 Chip.displayName = "Chip";
 
+const ChipRemoveIcon = React.forwardRef<
+  HTMLButtonElement,
+  React.ComponentPropsWithRef<"button">
+>(({ className, ...props }, ref) => (
+  <Button
+    variant="ghost"
+    size="iconSmall"
+    className={cn("material-icons", className)}
+    ref={ref}
+    {...props}
+  >
+    close
+  </Button>
+));
+ChipRemoveIcon.displayName = "ChipRemoveIcon";
+
 export default Chip;
+export { ChipRemoveIcon };

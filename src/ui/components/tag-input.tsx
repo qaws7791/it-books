@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/src/feature/shared/lib/utils";
-import Chip from "@/src/ui/components/chip";
+import Chip, { ChipRemoveIcon } from "@/src/ui/components/chip";
 import React, { useState } from "react";
 
 interface TagInputProps extends React.ComponentPropsWithoutRef<"label"> {
@@ -52,8 +52,9 @@ const TagInput = ({
       )}
     >
       {value.map((tag, index) => (
-        <Chip key={tag} onRemove={() => removeTag(index)}>
+        <Chip key={tag}>
           {tag}
+          <ChipRemoveIcon onClick={() => removeTag(index)} />
         </Chip>
       ))}
       <input
