@@ -11,9 +11,7 @@ export default function Tags({ tags }: TagsProps) {
     <div className="flex gap-4 flex-wrap">
       {tags.map((tag) => (
         <Chip key={tag.id} asChild>
-          <Link href={`/tags/${tag.name}`} className="px-4 py-1">
-            {tag.name}
-          </Link>
+          <Link href={`/tags/${tag.name}`}>{tag.name}</Link>
         </Chip>
       ))}
     </div>
