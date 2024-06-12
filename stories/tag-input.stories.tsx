@@ -1,5 +1,6 @@
 import TagInput from "@/src/ui/components/tag-input";
 import type { Meta, StoryObj } from "@storybook/react";
+import { useState } from "react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -11,15 +12,21 @@ const meta = {
   },
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
-  // More on argTypes: https://storybook.js.org/docs/api/argtypes
   args: {
-    placeholder: "Add a tag",
+    value: [],
+    onChangeTag: (tags: string[]) => {
+      console.log(tags);
+    },
   },
+  // More on argTypes: https://storybook.js.org/docs/api/argtypes
 } satisfies Meta<typeof TagInput>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  render: (arguments_) => <TagInput {...arguments_} />,
+  render: () => {
+    const [tags, setTags] = useState<string[]>([]);
+    return <TagInput value={tags} onChangeTag={setTags} />;
+  },
 };
