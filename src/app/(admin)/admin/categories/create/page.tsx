@@ -1,5 +1,10 @@
-import CategoryCreateForm from "@/src/app/(admin)/admin/categories/create/_components/category-create-form";
+import CategoryCreateForm from "@/src/feature/categories/components/category-create-form";
 import PageContainer from "@/src/feature/shared/components/layout/page-container";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "카테고리 추가",
+};
 
 export default function AdminCategoryCreatePage() {
   return (
