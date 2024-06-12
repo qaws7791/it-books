@@ -1,8 +1,13 @@
-import BookTable from "@/src/app/(admin)/admin/books/book-table";
+import BookTable from "@/src/feature/books/components/book-table";
 import PageContainer from "@/src/feature/shared/components/layout/page-container";
 import Button from "@/src/ui/components/button";
+import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "책 관리",
+};
 
 export default function AdminBooksPage() {
   return (
