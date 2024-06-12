@@ -7,12 +7,17 @@ import CommonPagination from "@/src/feature/shared/components/common-pagination"
 interface BooksListProps {
   page?: number;
   limit?: number;
+  categorySlug?: string;
 }
 
-export default function BookList({ page, limit }: BooksListProps) {
+export default function BookList({
+  page,
+  limit,
+  categorySlug,
+}: BooksListProps) {
   const {
     data: { data: books, pagination },
-  } = useBooksPagination({ page, limit });
+  } = useBooksPagination({ page, limit, categorySlug });
 
   return (
     <div className="mt-12">
