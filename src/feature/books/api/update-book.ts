@@ -21,25 +21,7 @@ export interface UpdateBookInput {
   pages: number;
 }
 
-interface UpdateBookOutput {
-  id: number;
-  title: string;
-  slug: string;
-  isbn: string;
-  description: string;
-  coverImage: string;
-  authors: string[];
-  translator: string[];
-  publisher: string;
-  publishedDate: string;
-  status: BookStatus;
-  pages: number;
-}
-
-export default function updateBook({
-  id,
-  ...input
-}: UpdateBookInput): Promise<UpdateBookOutput> {
+function updateBook({ id, ...input }: UpdateBookInput): Promise<void> {
   return api.put("/books/" + id, input);
 }
 

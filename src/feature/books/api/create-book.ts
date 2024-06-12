@@ -20,24 +20,7 @@ export interface CreateBookInput {
   pages: number;
 }
 
-interface CreateBookOutput {
-  id: number;
-  title: string;
-  slug: string;
-  isbn: string;
-  description: string;
-  coverImage: string;
-  authors: string[];
-  translator: string[];
-  publisher: string;
-  publishedDate: string;
-  status: BookStatus;
-  pages: number;
-}
-
-export default function createBook(
-  input: CreateBookInput,
-): Promise<CreateBookOutput> {
+function createBook(input: CreateBookInput): Promise<void> {
   return api.post("/books", input);
 }
 
