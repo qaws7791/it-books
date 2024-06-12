@@ -10,7 +10,6 @@ export interface Book {
   title: string;
   slug: string;
   isbn: string;
-  description: string;
   coverImage: string;
   authors: string[];
   translator: string[];
@@ -18,15 +17,14 @@ export interface Book {
   publishedDate: string;
   status: BookStatus;
   pages: number;
-}
-
-export interface BookWithCategory extends Book {
   category: Category;
 }
+
+export interface BookWithCategory extends Book {}
 
 export interface BookDetail extends Book {
-  category: Category;
   tags: Tag[];
+  description: string;
 }
 
 export interface BookSearchParams extends PaginationCommonInput {
