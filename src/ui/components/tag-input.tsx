@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/src/feature/shared/lib/utils";
 import Chip from "@/src/ui/components/chip";
 import React, { useState } from "react";
