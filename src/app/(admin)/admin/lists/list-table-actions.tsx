@@ -18,7 +18,7 @@ export default function ListTableActions({ row }: ListTableActionsProps) {
   const router = useRouter();
 
   const editList = () => {
-    router.push(`/admin/lists/update?ListId=${row.id}`);
+    router.push(`/admin/lists/update?listId=${row.id}`);
   };
 
   const deleteList = () => {
