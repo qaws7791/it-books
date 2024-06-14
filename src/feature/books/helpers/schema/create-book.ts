@@ -15,7 +15,7 @@ export const createBookSchema = z.object({
   tags: z.array(z.string()),
   coverImage: z.string().min(1, "이미지 URL을 입력해주세요."),
   description: z.string().min(10),
-  translator: z.string().optional(),
+  translators: z.string().optional(),
   status: z.enum(BOOK_STATUS_KEYS),
   pages: z.number().int().positive(),
 });

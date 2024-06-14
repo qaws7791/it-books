@@ -11,7 +11,7 @@ export interface CreateBookInput {
   description: string;
   coverImage: string;
   authors: string[];
-  translator: string[];
+  translators: string[];
   publisher: string;
   publishedDate: string;
   categoryId: number;

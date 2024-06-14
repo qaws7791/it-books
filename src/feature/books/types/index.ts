@@ -12,7 +12,7 @@ export interface Book {
   isbn: string;
   coverImage: string;
   authors: string[];
-  translator: string[];
+  translators: string[];
   publisher: string;
   publishedDate: string;
   status: BookStatus;

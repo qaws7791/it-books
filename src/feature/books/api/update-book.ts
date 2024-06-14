@@ -12,7 +12,7 @@ export interface UpdateBookInput {
   description: string;
   coverImage: string;
   authors: string[];
-  translator: string[];
+  translators: string[];
   publisher: string;
   publishedDate: string;
   categoryId: number;

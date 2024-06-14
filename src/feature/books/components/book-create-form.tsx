@@ -80,7 +80,7 @@ export default function BookCreateForm({ book }: BookCreateFormProps) {
             .toISOString()
             .split("T")[0],
           description: book.description,
-          translator: book.translator?.join(", ") || "",
+          translators: book.translators?.join(", ") || "",
         }
       : {
           title: "",
@@ -97,12 +97,12 @@ export default function BookCreateForm({ book }: BookCreateFormProps) {
   const onSubmit = handleSubmit((data: CreateBookSchema) => {
     try {
       const authorsArray = stringToArrayByComma(data.authors);
-      const translatorArray = stringToArrayByComma(data.translator || "");
+      const translatorsArray = stringToArrayByComma(data.translators || "");
 
       const requestData: CreateBookInput = {
         ...data,
         authors: authorsArray,
-        translator: translatorArray,
+        translators: translatorsArray,
         categoryId: Number(data.categoryId),
         publishedDate: new Date(data.publishedDate).toISOString(),
       };
@@ -300,10 +300,10 @@ export default function BookCreateForm({ book }: BookCreateFormProps) {
           <ErrorMessage>{getErrorMessage("authors")}</ErrorMessage>
         </FormRow>
         <FormRow>
-          <Label htmlFor="translator">번역가</Label>
-          <Input id="translator" {...register("translator")} />
+          <Label htmlFor="translators">번역가</Label>
+          <Input id="translators" {...register("translators")} />
           <Description>번역가는 선택사항입니다.</Description>
-          <ErrorMessage>{getErrorMessage("translator")}</ErrorMessage>
+          <ErrorMessage>{getErrorMessage("translators")}</ErrorMessage>
         </FormRow>
       </FormColumn>
 
