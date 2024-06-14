@@ -50,22 +50,23 @@ export default async function BooksDetailPage({
     <PageContainer>
       <div className="flex flex-col max-w-screen-xl mx-auto gap-12 lg:flex-row justify-center">
         <div className="flex-1 p-4">
-          <figure className="sticky top-0">
+          <figure className="sticky top-24">
             <NextImage
               src={book.coverImage}
               alt={book.title + "책 표지"}
               width={500}
               height={642}
-              className="mx-auto"
+              className="mx-auto shadow-elevation shadow-shadow/10 rounded-lg border-outline"
             />
             <figcaption className="sr-only">{book.title} 표지</figcaption>
           </figure>
         </div>
-        <article className="flex flex-col flex-1">
+        <article className="flex flex-col flex-1 p-2">
           <header>
-            <h1 className="text-4xl font-medium">{book.title}</h1>
-            <div className="text-xl mt-3">
-              <h2 className="inline-block">
+            <h1 className="text-2xl md:text-3xl">{book.title}</h1>
+            <div className="text-base md:text-xl mt-3">
+              <h2 className="sr-only">저자</h2>
+              <div className="inline-block  text-on-surface-variant/70">
                 {book.authors.map((author, index) => (
                   <Fragment key={author}>
                     <Link
@@ -77,12 +78,11 @@ export default async function BooksDetailPage({
                     {index !== book.authors.length - 1 && ", "}
                   </Fragment>
                 ))}
-              </h2>
-              &nbsp;
-              {book.translator.length > 0 && (
-                <span>
-                  (번역:
-                  {book.translator.map((translator, index) => (
+              </div>
+              {book.translators.length > 0 ? (
+                <div className="text-on-surface-variant/70 mt-4 text-base">
+                  <span>번역: </span>
+                  {book.translators.map((translator) => (
                     <Fragment key={translator}>
                       <Link
                         key={translator}
@@ -90,13 +90,12 @@ export default async function BooksDetailPage({
                       >
                         {translator}
                       </Link>
-                      {index !== book.translator.length - 1 && ", "}
                     </Fragment>
                   ))}
-                  )
-                </span>
-              )}
-              <h2 className="text-base mt-1">
+                </div>
+              ) : null}
+
+              <h2 className="text-lg mt-1">
                 <Link
                   href={`/search?query=${encodeURIComponent(book.publisher)}`}
                 >
