@@ -11,8 +11,8 @@ export const debounce = <F extends (...arguments_: unknown[]) => void>(
   };
 };
 
-export const imageLoader = ({ src }: { src: string }) => {
-  return `https://${process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN}/${src}`;
+export const imageLoader = ({ src, width }: { src: string; width: number }) => {
+  return `https://${process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN}/${src}?w=${width.toString()}`;
 };
 
 // string input to array of string
