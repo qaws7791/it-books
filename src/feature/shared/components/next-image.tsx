@@ -5,8 +5,8 @@ import Image, { ImageProps } from "next/image";
 type NextImageProps = {
   src: string;
   alt: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 } & ImageProps;
 
 export default function NextImage({
