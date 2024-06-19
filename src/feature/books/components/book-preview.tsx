@@ -21,7 +21,7 @@ export default function BookPreview({ book }: BookPreviewProps) {
             alt={book.title}
             className="relative overflow-hidden mx-auto shadow-elevation shadow-black/15"
             width={200}
-            height={300}
+            height={257}
           />
         </div>
       </div>
