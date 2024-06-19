@@ -134,6 +134,50 @@ const config: Config = {
         "surface-container-highest":
           "rgb(var(--color-surface-container-highest))",
       },
+      keyframes: {
+        enterFromRight: {
+          from: { transform: "translateX(100px)" },
+          to: { transform: "translateX(0)" },
+        },
+        enterFromLeft: {
+          from: { transform: "translateX(-100%)" },
+          to: { transform: "translateX(0%)" },
+        },
+        exitToRight: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(100px)" },
+        },
+        exitToLeft: {
+          from: { transform: "translate3d(0, 0, 0)" },
+          to: { transform: "translate3d(-100%, 0, 0)" },
+        },
+        scaleIn: {
+          from: { transform: "rotateX(-10deg) scale(0.9)" },
+          to: { transform: "rotateX(0deg) scale(1)" },
+        },
+        scaleOut: {
+          from: { transform: "rotateX(0deg) scale(1)" },
+          to: { transform: "rotateX(-10deg) scale(0.95)" },
+        },
+        fadeIn: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        fadeOut: {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
+      },
+    },
+    animation: {
+      scaleIn: "scaleIn 300ms ease",
+      scaleOut: "scaleOut 300ms ease",
+      fadeIn: "fadeIn 300ms ease",
+      fadeOut: "fadeOut 300ms ease",
+      enterFromLeft: "enterFromLeft 350ms ease",
+      enterFromRight: "enterFromRight 350ms ease",
+      exitToLeft: "exitToLeft 350ms ease",
+      exitToRight: "exitToRight 350ms ease",
     },
   },
   plugins: [],
