@@ -11,10 +11,11 @@ export default function CommonLayout({
 }>) {
   return (
     <>
-      <div className="w-0 lg:w-24 transition-all overflow-hidden fixed">
+      <div className="hidden lg:flex transition-all fixed z-30">
         <Sidebar links={DUMMY.SIDEBAR_LINKS} />
       </div>
-      <div className="h-full flex-auto ml-0 lg:ml-24">
+
+      <div className="h-full flex-auto pl-0 lg:pl-24 pt-16">
         <Header />
         <div>
           <main className="flex-auto flex">{children}</main>
