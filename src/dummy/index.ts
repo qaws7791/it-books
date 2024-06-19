@@ -1,4 +1,6 @@
 import { BookDetail } from "@/src/feature/books/types";
+import LOCAL_CATEGORIES from "@/src/feature/categories/constants/local-categories";
+import { ParentLink } from "@/src/feature/shared/components/layout/sidebar";
 
 const CATEGORIES = [
   {
@@ -53,21 +55,23 @@ const CATEGORIES = [
   },
 ];
 
-const SIDEBAR_LINKS = [
+const SIDEBAR_LINKS: ParentLink[] = [
   {
-    id: 0,
     name: "홈",
     href: "/",
     icon: "home",
   },
   {
-    id: 1,
     name: "책 찾기",
     href: "/books",
     icon: "book",
+    children: LOCAL_CATEGORIES.map((category) => ({
+      name: category.name,
+      href: `/books?category=${category.slug}`,
+      icon: category.iconName,
+    })),
   },
   {
-    id: 2,
     name: "리스트 찾기",
     href: "/lists",
     icon: "library_books",
