@@ -16,15 +16,23 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/src/ui/components/dropdown-menu";
+import { useScrollbarMargin } from "@/src/ui/hooks/use-scrollbar-margin";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export const NotLoggedInUserButton = () => {
   const currentPath = useCurrentPath();
+  const [open, setOpen] = useState(false);
+  const { setStatus } = useScrollbarMargin();
+
+  useEffect(() => {
+    setStatus(open ? "hide" : "show");
+  }, [open, setStatus]);
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon">
           <Avatar>
@@ -77,7 +85,7 @@ export const LoggedInUserButton = ({ user }: { user: UserProfile }) => {
   };
 
   return (
-    <DropdownMenu>
+    <DropdownMenu modal={true}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon">
           <Avatar>

@@ -10,6 +10,7 @@ import {
   SITE_URL,
 } from "@/src/feature/shared/constants/site-config.constant";
 import SonnerToaster from "@/src/ui/components/sonner-toaster";
+import { ScrollbarMarginProvider } from "@/src/ui/hooks/use-scrollbar-margin";
 import Head from "next/head";
 import { Suspense } from "react";
 
@@ -32,13 +33,13 @@ export default function RootLayout({
       <Head>
         <meta name="referrer" content="no-referrer-when-downgrade" />
       </Head>
-      <body className="bg-surface min-h-screen flex text-on-background">
+      <body className="bg-surface min-h-screen text-on-background relative">
         <ThemeProvider>
           <QueryProvider>
             <GoogleLoginProvider>
               <Suspense fallback="loading...">
                 <SonnerToaster />
-                {children}
+                <ScrollbarMarginProvider>{children}</ScrollbarMarginProvider>
               </Suspense>
             </GoogleLoginProvider>
           </QueryProvider>
