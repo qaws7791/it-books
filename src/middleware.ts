@@ -10,10 +10,15 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
 
-    const user = await getUserProfile(token);
-    console.log("middleware 2. user:", user);
-    if (!user.roles.includes("ADMIN")) {
-      return NextResponse.rewrite(new URL("/not-found", request.url));
+    try {
+      const user = await getUserProfile(token);
+      console.log("middleware 2. user:", user);
+      if (!user.roles.includes("ADMIN")) {
+        return NextResponse.rewrite(new URL("/not-found", request.url));
+      }
+    } catch (error) {
+      console.error("middleware 3. error:", error);
+      return NextResponse.redirect(new URL("/login", request.url));
     }
   }
 
