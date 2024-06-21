@@ -29,13 +29,16 @@ export const config = {
 };
 
 async function getUserProfile(token: string) {
-  const response = await fetch("http://localhost:4000/api/users/me", {
-    headers: {
-      Cookie: `access_token=${token}`,
-      "Content-Type": "application/json",
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL!}/api/users/me`,
+    {
+      headers: {
+        Cookie: `access_token=${token}`,
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
     },
-    credentials: "include",
-  });
+  );
   const user = (await response.json()) as UserProfile;
   return user;
 }
