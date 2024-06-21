@@ -5,13 +5,13 @@ import { NextResponse } from "next/server";
 export async function middleware(request: NextRequest) {
   if (request.nextUrl.pathname.startsWith("/admin")) {
     const token = request.cookies.get("access_token")?.value;
-
+    console.log("middleware 1.token:", token);
     if (!token) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
 
     const user = await getUserProfile(token);
-
+    console.log("middleware 2. user:", user);
     if (!user.roles.includes("ADMIN")) {
       return NextResponse.rewrite(new URL("/not-found", request.url));
     }
