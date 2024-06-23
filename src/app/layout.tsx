@@ -35,7 +35,7 @@ export default function RootLayout({
         <meta name="referrer" content="no-referrer-when-downgrade" />
       </Head>
       <body className="bg-surface min-h-screen text-on-background relative">
-        <ThemeProvider>
+        <ThemeProvider enableSystem>
           <QueryProvider>
             <GoogleLoginProvider>
               <Suspense

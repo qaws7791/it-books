@@ -17,12 +17,14 @@ const toggleButtonVariants: Variants = {
 export default function ThemeToggleButton({
   type = "icon-only",
 }: ThemeToggleButtonProps) {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, systemTheme } = useTheme();
   const mounted = useMounted();
 
   if (!mounted) {
     return null;
   }
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   return (
     <Button
@@ -31,7 +33,7 @@ export default function ThemeToggleButton({
       onClick={() => setTheme(theme === "light" ? "dark" : "light")}
       title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
-      {theme === "light" && (
+      {currentTheme === "light" ? (
         <motion.span
           variants={toggleButtonVariants}
           initial="initial"
@@ -41,8 +43,7 @@ export default function ThemeToggleButton({
         >
           dark_mode
         </motion.span>
-      )}
-      {theme === "dark" && (
+      ) : (
         <motion.span
           variants={toggleButtonVariants}
           initial="initial"
