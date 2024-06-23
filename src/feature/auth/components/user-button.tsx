@@ -70,6 +70,13 @@ export const NotLoggedInUserButton = () => {
 };
 
 export const LoggedInUserButton = ({ user }: { user: UserProfile }) => {
+  const [open, setOpen] = useState(false);
+  const { setStatus } = useScrollbarMargin();
+
+  useEffect(() => {
+    setStatus(open ? "hide" : "show");
+  }, [open, setStatus]);
+
   const queryClient = useQueryClient();
 
   const handleLogout = async () => {
@@ -85,7 +92,7 @@ export const LoggedInUserButton = ({ user }: { user: UserProfile }) => {
   };
 
   return (
-    <DropdownMenu modal={true}>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon">
           <Avatar>
