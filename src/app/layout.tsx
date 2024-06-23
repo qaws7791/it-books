@@ -10,6 +10,7 @@ import {
   SITE_URL,
 } from "@/src/feature/shared/constants/site-config.constant";
 import SonnerToaster from "@/src/ui/components/sonner-toaster";
+import Spinner from "@/src/ui/components/spinner";
 import { ScrollbarMarginProvider } from "@/src/ui/hooks/use-scrollbar-margin";
 import Head from "next/head";
 import { Suspense } from "react";
@@ -37,7 +38,15 @@ export default function RootLayout({
         <ThemeProvider>
           <QueryProvider>
             <GoogleLoginProvider>
-              <Suspense fallback="loading...">
+              <Suspense
+                fallback={
+                  <Spinner
+                    className="
+                      fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+                    "
+                  />
+                }
+              >
                 <SonnerToaster />
                 <ScrollbarMarginProvider>{children}</ScrollbarMarginProvider>
               </Suspense>
