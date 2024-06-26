@@ -49,7 +49,10 @@ const config: Config = {
       width: {
         sidebar: "18rem",
         4.5: "1.125rem",
-        header: "calc(100% - 6rem)",
+        22: "5.5rem",
+      },
+      padding: {
+        22: "5.5rem",
       },
       height: {
         header: "4rem",
