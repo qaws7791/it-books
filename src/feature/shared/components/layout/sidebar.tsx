@@ -84,7 +84,7 @@ export default function Sidebar({
                   </NavigationRailLink>
                 </NavigationRailTrigger>
                 <NavigationRailContent className="h-full">
-                  <Drawer className="h-full rounded-l-none shadow-1 bg-surface-container border-l w-60">
+                  <Drawer className="h-full rounded-l-none shadow-1 bg-surface-container border-l border-outline w-60">
                     {link.children.map((child) => (
                       <DrawerItem key={child.href} asChild>
                         <NavigationRailLink asChild>
