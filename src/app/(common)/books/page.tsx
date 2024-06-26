@@ -1,6 +1,5 @@
 import BookList from "@/src/app/(common)/books/book-list";
-import getBooksPagination from "@/src/feature/books/api/get-books-pagination";
-import { bookQueryKeys } from "@/src/feature/books/queries";
+import { booksOptions } from "@/src/feature/books/hooks/queries";
 import LocalCategoryList from "@/src/feature/categories/components/local-category-list";
 import { getLocalCategory } from "@/src/feature/categories/helpers";
 import PageContainer from "@/src/feature/shared/components/layout/page-container";
@@ -38,14 +37,7 @@ export default async function BooksPage({ searchParams }: BooksPageProps) {
   const category = categorySlug ? getLocalCategory(categorySlug) : undefined;
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: bookQueryKeys.fetchBooksPagination({
-      page,
-      limit: 12,
-      categorySlug,
-    }).queryKey,
-    queryFn: () => getBooksPagination({ page, limit: 12, categorySlug }),
-  });
+  await queryClient.prefetchQuery(booksOptions({ page, categorySlug }));
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

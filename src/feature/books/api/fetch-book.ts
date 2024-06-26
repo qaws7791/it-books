@@ -1,7 +1,7 @@
 import { BookStatus } from "@/src/feature/books/constants";
 import api from "@/src/feature/shared/api";
 
-export interface GetBookByIdOutput {
+export interface FetchBookOutput {
   id: number;
   createdAt: string;
   updatedAt: string;
@@ -30,8 +30,6 @@ export interface GetBookByIdOutput {
   }[];
 }
 
-export default function getBookById(
-  bookId: number,
-): Promise<GetBookByIdOutput> {
+export default function fetchBook(bookId: number): Promise<FetchBookOutput> {
   return api.get("/books/" + bookId);
 }

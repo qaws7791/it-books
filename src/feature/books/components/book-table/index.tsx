@@ -2,7 +2,7 @@
 
 import BookTableActions from "@/src/feature/books/components/book-table/book-table-actions";
 import { BOOK_STATUS } from "@/src/feature/books/constants";
-import { useBooksPagination } from "@/src/feature/books/queries";
+import { booksOptions } from "@/src/feature/books/hooks/queries";
 import { BookWithCategory } from "@/src/feature/books/types";
 import NextImage from "@/src/feature/shared/components/next-image";
 import Button from "@/src/ui/components/button";
@@ -25,6 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/src/ui/components/table";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   createColumnHelper,
   flexRender,
@@ -106,10 +107,12 @@ export default function BookTable() {
   };
 
   const deferredPage = useDeferredValue(pagination);
-  const booksQuery = useBooksPagination({
-    page: deferredPage.pageIndex + 1,
-    limit: deferredPage.pageSize,
-  });
+  const booksQuery = useSuspenseQuery(
+    booksOptions({
+      page: deferredPage.pageIndex + 1,
+      limit: deferredPage.pageSize,
+    }),
+  );
 
   const table = useReactTable({
     columns: columns,

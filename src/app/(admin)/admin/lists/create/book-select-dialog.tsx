@@ -1,10 +1,12 @@
 "use client";
-import { useBooksPagination } from "@/src/feature/books/queries";
+
+import { booksOptions } from "@/src/feature/books/hooks/queries";
 import NextImage from "@/src/feature/shared/components/next-image";
 import useBoolean from "@/src/feature/shared/hooks/use-boolean";
 import Button from "@/src/ui/components/button";
 import { Input } from "@/src/ui/components/input";
 import * as Dialog from "@radix-ui/react-dialog";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { Suspense, useDeferredValue, useState } from "react";
 
 interface BookSelectDialogProps {
@@ -83,11 +85,9 @@ function BookSearchResult({
   selectedBookIds,
   query,
 }: SearchBookProps) {
-  const { data: bookResult } = useBooksPagination({
-    page: 1,
-    limit: 12,
-    query,
-  });
+  const { data: bookResult } = useSuspenseQuery(
+    booksOptions({ page: 1, limit: 12, query }),
+  );
 
   return (
     <ul className="flex flex-col gap-4 mt-4 h-full overflow-y-auto w-full">

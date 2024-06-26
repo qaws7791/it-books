@@ -1,16 +1,16 @@
 "use client";
-import {
-  CreateBookInput,
-  useCreateBookMutation,
-} from "@/src/feature/books/api/create-book";
-import { GetBookByIdOutput } from "@/src/feature/books/api/get-book-by-id";
-import getBookImagePresignedUrl from "@/src/feature/books/api/get-book-image-presigned-url";
-import { useUpdateBookMutation } from "@/src/feature/books/api/update-book";
+import { CreateBookInput } from "@/src/feature/books/api/create-book";
+import { FetchBookOutput } from "@/src/feature/books/api/fetch-book";
+import getBookImagePresignedUrl from "@/src/feature/books/api/fetch-book-image-presigned-url";
 import { BOOK_STATUS } from "@/src/feature/books/constants";
 import {
   createBookSchema,
   CreateBookSchema,
 } from "@/src/feature/books/helpers/schema/create-book";
+import {
+  useCreateBookMutation,
+  useUpdateBookMutation,
+} from "@/src/feature/books/hooks/mutations";
 import { useCategoriesQuery } from "@/src/feature/categories/queries";
 import { ApiError } from "@/src/feature/shared/api";
 import NextImage from "@/src/feature/shared/components/next-image";
@@ -45,7 +45,7 @@ const checkKeydown = (event: React.KeyboardEvent<HTMLFormElement>) => {
 };
 
 interface BookCreateFormProps {
-  book?: GetBookByIdOutput;
+  book?: FetchBookOutput;
 }
 
 export default function BookCreateForm({ book }: BookCreateFormProps) {

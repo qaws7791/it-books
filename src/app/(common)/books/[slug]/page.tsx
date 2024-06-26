@@ -1,4 +1,4 @@
-import GetBookBySlug from "@/src/feature/books/api/get-book-by-slug";
+import GetBookBySlug from "@/src/feature/books/api/fetch-book-by-slug";
 import BookBuyLinks from "@/src/feature/books/components/book-buy-links";
 import { BOOK_STATUS } from "@/src/feature/books/constants";
 import BookLikeViewer from "@/src/feature/likes/components/book-like-viewer";
