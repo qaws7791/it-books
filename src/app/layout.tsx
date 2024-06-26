@@ -11,7 +11,6 @@ import {
 } from "@/src/feature/shared/constants/site-config.constant";
 import SonnerToaster from "@/src/ui/components/sonner-toaster";
 import Spinner from "@/src/ui/components/spinner";
-import { ScrollbarMarginProvider } from "@/src/ui/hooks/use-scrollbar-margin";
 import Head from "next/head";
 import { Suspense } from "react";
 
@@ -48,7 +47,7 @@ export default function RootLayout({
                 }
               >
                 <SonnerToaster />
-                <ScrollbarMarginProvider>{children}</ScrollbarMarginProvider>
+                {children}
               </Suspense>
             </GoogleLoginProvider>
           </QueryProvider>
