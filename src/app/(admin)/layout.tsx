@@ -13,7 +13,7 @@ export default function AdminLayout({
       <div className="hidden lg:flex transition-all fixed z-30">
         <Sidebar links={DUMMY.ADMIN_SIDEBAR_LINKS} />
       </div>
-      <div className="h-full flex-auto pl-0 lg:pl-24 pt-16">
+      <div className="h-full flex-auto pl-0 lg:pl-22">
         <Header />
         <main className="flex-auto flex">{children}</main>
       </div>

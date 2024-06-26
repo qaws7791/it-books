@@ -15,7 +15,7 @@ export default function CommonLayout({
         <Sidebar links={DUMMY.SIDEBAR_LINKS} />
       </div>
 
-      <div className="h-full flex-auto pl-0 lg:pl-24 pt-16">
+      <div className="h-full flex-auto pl-0 lg:pl-22">
         <Header />
         <div>
           <main className="flex-auto flex">{children}</main>
