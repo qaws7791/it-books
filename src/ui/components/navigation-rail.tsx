@@ -9,12 +9,12 @@ export const NavigationRail = React.forwardRef<
 >(({ children, className, ...props }, ref) => (
   <NavigationMenuPrimitive.Root
     ref={ref}
-    className={cn("flex flex-col w-24 h-full relative", className)}
+    className={cn("flex flex-col w-22 h-full relative", className)}
     {...props}
   >
     <div
       className="
-    w-24 h-full items-center text-on-surface bg-surface-container absolute z-20
+    w-22 h-full items-center text-on-surface bg-surface-container absolute z-20
     "
     >
       {children}

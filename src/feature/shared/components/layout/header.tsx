@@ -3,9 +3,7 @@
 import UserButton from "@/src/feature/auth/components/user-button";
 import SearchModalButton from "@/src/feature/shared/components/layout/search-modal-button";
 import SidebarModalButton from "@/src/feature/shared/components/layout/sidebar-modal-button";
-import { cn } from "@/src/feature/shared/lib/utils";
 import Button from "@/src/ui/components/button";
-import { useScrollbarMargin } from "@/src/ui/hooks/use-scrollbar-margin";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
@@ -13,17 +11,10 @@ import { useSelectedLayoutSegment } from "next/navigation";
 export default function Header() {
   const segment = useSelectedLayoutSegment();
   const isAdmin = segment === "admin";
-  const { status } = useScrollbarMargin();
   return (
     <>
-      <div
-        className={cn(
-          "fixed w-full lg:w-header  z-20 bg-surface top-0",
-
-          status === "hide" && "pr-[17px]",
-        )}
-      >
-        <div className="flex items-center justify-between h-header px-4">
+      <div className="sticky w-full z-20 top-0 backdrop-blur border-b border-outline/20 bg-surface/70">
+        <div className="flex items-center justify-between h-14 px-4">
           <nav className="flex items-center gap-4">
             <SidebarModalButton isAdmin={isAdmin} />
             <Link href={"/"}>
