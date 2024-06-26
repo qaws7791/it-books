@@ -1,11 +1,13 @@
 "use client";
 
-import { useCreateCategoryMutation } from "@/src/feature/categories/api/create-category";
-import { useUpdateCategoryMutation } from "@/src/feature/categories/api/update-category";
 import {
   CreateCategorySchema,
   createCategorySchema,
 } from "@/src/feature/categories/helpers/schema/create-category";
+import {
+  useCreateCategoryMutation,
+  useUpdateCategoryMutation,
+} from "@/src/feature/categories/hooks/mutations";
 import { Category } from "@/src/feature/categories/types";
 import Button from "@/src/ui/components/button";
 import ErrorMessage from "@/src/ui/components/error-message";

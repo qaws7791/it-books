@@ -11,7 +11,8 @@ import {
   useCreateBookMutation,
   useUpdateBookMutation,
 } from "@/src/feature/books/hooks/mutations";
-import { useCategoriesQuery } from "@/src/feature/categories/queries";
+import { categoriesOptions } from "@/src/feature/categories/hooks/queries";
+
 import { ApiError } from "@/src/feature/shared/api";
 import NextImage from "@/src/feature/shared/components/next-image";
 import { stringToArrayByComma } from "@/src/feature/shared/utils";
@@ -33,6 +34,7 @@ import {
 import TagInput from "@/src/ui/components/tag-input";
 import { Textarea } from "@/src/ui/components/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -50,10 +52,12 @@ interface BookCreateFormProps {
 
 export default function BookCreateForm({ book }: BookCreateFormProps) {
   const router = useRouter();
-  const { data: categories } = useCategoriesQuery({
-    page: 1,
-    limit: 100,
-  });
+  const { data: categories } = useSuspenseQuery(
+    categoriesOptions({
+      page: 1,
+      limit: 100,
+    }),
+  );
   const {
     setValue,
     watch,
