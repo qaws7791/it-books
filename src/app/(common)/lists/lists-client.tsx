@@ -1,7 +1,8 @@
 "use client";
 import BookCoversPreview from "@/src/feature/books/components/book-covers-preview";
-import { useListsPagination } from "@/src/feature/lists/queries";
+import { listsOptions } from "@/src/feature/lists/hooks/queries";
 import CommonPagination from "@/src/feature/shared/components/common-pagination";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
 interface ListsClientProps {
@@ -12,7 +13,8 @@ interface ListsClientProps {
 export default function ListsClient({ page, limit }: ListsClientProps) {
   const {
     data: { data: lists, pagination },
-  } = useListsPagination({ page, limit });
+  } = useSuspenseQuery(listsOptions({ page, limit }));
+
   return (
     <div>
       <div className="grid grid-cols-card-lg gap-4">

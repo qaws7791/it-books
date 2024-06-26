@@ -1,6 +1,6 @@
 import ShareButton from "@/src/app/(common)/lists/[slug]/share-button";
 import BookPreview from "@/src/feature/books/components/book-preview";
-import getListBySlug from "@/src/feature/lists/api/get-list-by-slug";
+import fetchListBySlug from "@/src/feature/lists/api/fetch-list-by-slug";
 import PageContainer from "@/src/feature/shared/components/layout/page-container";
 import { SITE_URL } from "@/src/feature/shared/constants/site-config.constant";
 import { toKoreanDateString } from "@/src/feature/shared/lib/utils";
@@ -18,7 +18,7 @@ export async function generateMetadata({
 }: ListDetailPageProperties): Promise<Metadata> {
   const decodedSlug = decodeURIComponent(params.slug);
   try {
-    const list = await getListBySlug(decodedSlug);
+    const list = await fetchListBySlug(decodedSlug);
     return {
       title: list.title,
     };
@@ -34,7 +34,7 @@ export default async function ListDetailPage({
 }: ListDetailPageProperties) {
   const decodedSlug = decodeURIComponent(params.slug);
   try {
-    const list = await getListBySlug(decodedSlug);
+    const list = await fetchListBySlug(decodedSlug);
     return (
       <PageContainer>
         <div className="flex flex-col max-w-screen-lg mx-auto gap-12">

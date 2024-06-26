@@ -5,14 +5,14 @@ import {
   PaginationResponse,
 } from "@/src/feature/shared/type/api";
 
-export interface GetListsPaginationOutput {
+export interface FetchListsOutput {
   data: ListPreview[];
   pagination: PaginationResponse;
 }
 
-export default function getListsPagination({
+export default function fetchLists({
   page = 1,
   limit = 10,
-}: PaginationCommonInput): Promise<GetListsPaginationOutput> {
+}: PaginationCommonInput): Promise<FetchListsOutput> {
   return api.get("/lists", { params: { page, limit } });
 }
