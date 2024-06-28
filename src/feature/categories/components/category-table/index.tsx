@@ -1,7 +1,7 @@
 "use client";
 
 import CategoryTableActions from "@/src/feature/categories/components/category-table/category-table-actions";
-import { useCategoriesQuery } from "@/src/feature/categories/queries";
+import { categoriesOptions } from "@/src/feature/categories/hooks/queries";
 import { Category } from "@/src/feature/categories/types";
 import Button from "@/src/ui/components/button";
 import { Input } from "@/src/ui/components/input";
@@ -23,6 +23,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/src/ui/components/table";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   createColumnHelper,
   flexRender,
@@ -79,10 +80,12 @@ export default function CategoryTable() {
     }
   };
 
-  const categoriesQuery = useCategoriesQuery({
-    page: pagination.pageIndex + 1,
-    limit: pagination.pageSize,
-  });
+  const categoriesQuery = useSuspenseQuery(
+    categoriesOptions({
+      page: pagination.pageIndex + 1,
+      limit: pagination.pageSize,
+    }),
+  );
 
   const refetchPage = async () => {
     try {

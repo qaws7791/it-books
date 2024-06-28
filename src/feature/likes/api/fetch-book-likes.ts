@@ -1,6 +1,6 @@
 import api from "@/src/feature/shared/api";
 
-export interface GetBookLikesResponse {
+export interface FetchBookLikesResponse {
   bookId: number;
   count: number;
   currentUser: {
@@ -9,8 +9,8 @@ export interface GetBookLikesResponse {
   } | null;
 }
 
-export default function getBookLikes(
+export default function fetchBookLikes(
   bookId: number,
-): Promise<GetBookLikesResponse> {
+): Promise<FetchBookLikesResponse> {
   return api.get(`/likes?bookId=${bookId}`);
 }

@@ -1,7 +1,8 @@
 "use client";
-import { useBooksPagination } from "@/src/feature/books/queries";
+import { booksOptions } from "@/src/feature/books/hooks/queries";
 import NextImage from "@/src/feature/shared/components/next-image";
 import { arrayToStringWithComma } from "@/src/feature/shared/utils";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
 interface SearchClientProperties {
@@ -15,7 +16,9 @@ export default function SearchClient({
   limit,
   query,
 }: SearchClientProperties) {
-  const { data: books } = useBooksPagination({ page, limit, query });
+  const { data: books } = useSuspenseQuery(
+    booksOptions({ page, limit, query }),
+  );
 
   return (
     <div className="grid grid-cols-card gap-4">

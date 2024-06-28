@@ -1,7 +1,7 @@
 "use client";
 
-import { usePostBookLike } from "@/src/feature/likes/api/post-book-like";
-import { useBookLikes } from "@/src/feature/likes/queries";
+import { useUpdateBookLikeMutation } from "@/src/feature/likes/hooks/mutations";
+import { useBookLikes } from "@/src/feature/likes/hooks/queries";
 import Button from "@/src/ui/components/button";
 
 interface BookLikeViewerProperties {
@@ -10,7 +10,7 @@ interface BookLikeViewerProperties {
 
 export default function BookLikeViewer({ bookId }: BookLikeViewerProperties) {
   const { data: likes } = useBookLikes(bookId);
-  const likeMutation = usePostBookLike();
+  const likeMutation = useUpdateBookLikeMutation();
 
   const liked = likes.currentUser?.liked;
 

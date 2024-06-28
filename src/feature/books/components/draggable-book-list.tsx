@@ -1,8 +1,9 @@
-import { useBookById } from "@/src/feature/books/queries";
+import { bookByIdOptions } from "@/src/feature/books/hooks/queries";
 import NextImage from "@/src/feature/shared/components/next-image";
 import useBoolean from "@/src/feature/shared/hooks/use-boolean";
 import { cn } from "@/src/feature/shared/lib/utils";
 import Button from "@/src/ui/components/button";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { Suspense } from "react";
 
@@ -122,7 +123,7 @@ export default function DraggableBookList({
 }
 
 function BookItem({ bookId, onRemove, onDragStart }: BookItemProps) {
-  const { data: book, isError } = useBookById(bookId);
+  const { data: book, isError } = useSuspenseQuery(bookByIdOptions(bookId));
 
   if (!book || isError) {
     return (

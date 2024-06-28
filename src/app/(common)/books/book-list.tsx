@@ -1,8 +1,9 @@
 "use client";
 
 import BookPreview from "@/src/feature/books/components/book-preview";
-import { useBooksPagination } from "@/src/feature/books/queries";
+import { booksOptions } from "@/src/feature/books/hooks/queries";
 import CommonPagination from "@/src/feature/shared/components/common-pagination";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 interface BooksListProps {
   page?: number;
@@ -17,7 +18,7 @@ export default function BookList({
 }: BooksListProps) {
   const {
     data: { data: books, pagination },
-  } = useBooksPagination({ page, limit, categorySlug });
+  } = useSuspenseQuery(booksOptions({ page, limit, categorySlug }));
 
   return (
     <div className="mt-12">

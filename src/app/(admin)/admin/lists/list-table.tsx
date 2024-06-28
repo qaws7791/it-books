@@ -1,6 +1,6 @@
 "use client";
 import ListTableActions from "@/src/app/(admin)/admin/lists/list-table-actions";
-import { useListsPagination } from "@/src/feature/lists/queries";
+import { listsOptions } from "@/src/feature/lists/hooks/queries";
 import { ListPreview } from "@/src/feature/lists/types";
 import Button from "@/src/ui/components/button";
 import { Input } from "@/src/ui/components/input";
@@ -22,6 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/src/ui/components/table";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import {
   createColumnHelper,
   flexRender,
@@ -76,11 +77,12 @@ export default function ListTable() {
       setPagination((previous) => ({ ...previous, pageIndex: pageInput - 1 }));
     }
   };
-
-  const listsQuery = useListsPagination({
-    page: pagination.pageIndex + 1,
-    limit: pagination.pageSize,
-  });
+  const listsQuery = useSuspenseQuery(
+    listsOptions({
+      page: pagination.pageIndex + 1,
+      limit: pagination.pageSize,
+    }),
+  );
 
   const table = useReactTable({
     columns: columns,
