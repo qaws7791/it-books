@@ -2,7 +2,11 @@
 
 import BookSelectDialog from "@/src/app/(admin)/admin/lists/create/book-select-dialog";
 import DraggableBookList from "@/src/feature/books/components/draggable-book-list";
-import createList from "@/src/feature/lists/api/create-list";
+import {
+  useCreateListMutation,
+  useUpdateListMutation,
+} from "@/src/feature/lists/hooks/mutations";
+import { ListDetails } from "@/src/feature/lists/types";
 import Button from "@/src/ui/components/button";
 import ErrorMessage from "@/src/ui/components/error-message";
 import { FormRow } from "@/src/ui/components/form";
@@ -10,9 +14,9 @@ import { Input } from "@/src/ui/components/input";
 import Label from "@/src/ui/components/label";
 import { Textarea } from "@/src/ui/components/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { Suspense } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { z } from "zod";
 
 const listSchema = z.object({
@@ -22,29 +26,52 @@ const listSchema = z.object({
   bookIds: z.array(z.number()),
 });
 
-export default function ListCreateForm() {
+interface ListCreateFormProperties {
+  list?: ListDetails;
+}
+
+export default function ListCreateForm({ list }: ListCreateFormProperties) {
+  const router = useRouter();
+  const { mutate: createList } = useCreateListMutation();
+  const { mutate: updateList } = useUpdateListMutation();
   const {
     register,
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<z.infer<typeof listSchema>>({
     resolver: zodResolver(listSchema),
-    defaultValues: {
-      title: "",
-      description: "",
-      bookIds: [],
-    },
+    defaultValues: list
+      ? {
+          title: list.title,
+          description: list.description,
+          slug: list.slug,
+          bookIds: list.listItems.map((item) => item.book.id),
+        }
+      : {
+          title: "",
+          description: "",
+          bookIds: [],
+        },
   });
-  const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-    try {
-      const response = await createList(data);
-      toast.success(`리스트(id:${response.id})가 생성되었습니다.`);
-    } catch (error) {
-      console.error(error);
-      toast.error("리스트 생성에 실패했습니다.");
+  const onSubmit = handleSubmit((data) => {
+    if (list) {
+      updateList(
+        { id: list.id, ...data },
+        {
+          onSuccess: () => {
+            router.push("/admin/lists");
+          },
+        },
+      );
+    } else {
+      createList(data, {
+        onSuccess: () => {
+          reset();
+        },
+      });
     }
   });
 
@@ -108,7 +135,7 @@ export default function ListCreateForm() {
         </Suspense>
       </FormRow>
       <FormRow>
-        <Button type="submit">리스트 생성</Button>
+        <Button type="submit">{list ? "수정" : "생성"}</Button>
       </FormRow>
     </form>
   );
