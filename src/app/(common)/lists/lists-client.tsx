@@ -1,7 +1,12 @@
 "use client";
-import BookCoversPreview from "@/src/feature/books/components/book-covers-preview";
 import { listsOptions } from "@/src/feature/lists/hooks/queries";
 import CommonPagination from "@/src/feature/shared/components/common-pagination";
+import NextImage from "@/src/feature/shared/components/next-image";
+import Card, {
+  CardContent,
+  CardSubTitle,
+  CardTitle,
+} from "@/src/ui/components/card";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
@@ -21,18 +26,32 @@ export default function ListsClient({ page, limit }: ListsClientProps) {
         {lists.map((list) => {
           const books = list.listItems.flatMap((item) => item.book);
           return (
-            <Link
-              href={`/lists/${list.slug}`}
-              key={list.id}
-              className="rounded-xl overflow-hidden hover:bg-outline/10 flex flex-col shadow"
-            >
-              <div className="p-4 rounded-xl ">
-                <BookCoversPreview books={books} count={list.bookCount} />
-              </div>
-              <h2 className="font-medium text-left text-xl p-4">
-                {list.title}
-              </h2>
-            </Link>
+            <Card variant="elevated" key={list.id} asChild>
+              <Link
+                href={`/lists/${list.slug}`}
+                key={list.id}
+                className="cursor-pointer"
+              >
+                <div className="rounded-xl flex h-40">
+                  {books.map((book) => (
+                    <div key={book.id} className="flex-1">
+                      <NextImage
+                        key={book.id}
+                        src={book.coverImage}
+                        alt={book.title}
+                        width={200}
+                        height={300}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
+                  ))}
+                </div>
+                <CardContent>
+                  <CardTitle>{list.title}</CardTitle>
+                  <CardSubTitle>{list.bookCount} 권</CardSubTitle>
+                </CardContent>
+              </Link>
+            </Card>
           );
         })}
       </div>

@@ -44,7 +44,7 @@ const config: Config = {
     extend: {
       gridTemplateColumns: {
         card: "repeat(auto-fill, minmax(256px, 1fr))",
-        "card-lg": "repeat(auto-fill, minmax(400px, 1fr))",
+        "card-lg": "repeat(auto-fill, minmax(320px, 1fr))",
       },
       width: {
         sidebar: "18rem",
