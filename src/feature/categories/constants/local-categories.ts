@@ -1,6 +1,7 @@
 import { LocalCategory } from "@/src/feature/categories/types";
 
 const LOCAL_CATEGORIES: LocalCategory[] = [
+  { name: "전체", slug: "all", iconName: "all_inclusive" },
   { name: "소프트웨어 공학", slug: "소프트웨어-공학", iconName: "engineering" },
   { name: "웹 개발", slug: "웹-개발", iconName: "web" },
   { name: "데이터 베이스", slug: "데이터-베이스", iconName: "storage" },
