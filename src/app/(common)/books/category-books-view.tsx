@@ -1,5 +1,6 @@
 "use client";
 import BookList from "@/src/app/(common)/books/book-list";
+import CategoryChip from "@/src/app/(common)/books/category-chip";
 import { booksOptions } from "@/src/feature/books/hooks/queries";
 import { LocalCategory } from "@/src/feature/categories/types";
 import CommonPagination from "@/src/feature/shared/components/common-pagination";
@@ -32,6 +33,9 @@ export default function CategoryBooksView({
       <p className="text-2xl my-4 text-center">
         {category.name} - {pagination.total}권의 책
       </p>
+      <div id="filters" className="p-4 flex justify-center items-center">
+        <CategoryChip category={category} />
+      </div>
       <BookList books={books} />
       <CommonPagination currentPage={page} totalPages={pagination.lastPage} />
     </div>
