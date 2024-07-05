@@ -94,7 +94,7 @@ export const BottomSheetsContent = React.forwardRef<
                 initial={{ y }}
                 animate={{ y: 0 }}
                 exit={{ y }}
-                transition={{ duration }}
+                transition={{ duration, ease: "easeOut" }}
                 className={cn(
                   "fixed bottom-0  left-1/2 h-full max-h-[95%] bg-surface-container-low z-40 p-4 shadow-1 rounded-t-3xl w-full max-w-screen-sm",
                   className,
