@@ -6,7 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
 const chipVariants = cva(
-  "h-8 flex items-center whitespace-nowrap gap-2 rounded-lg text-sm leading-5 px-4 text-on-surface-variant font-medium bg-transparent state-layer hover:after:bg-on-surface-variant/8 focus:after:bg-on-surface-variant/12 active:after:bg-on-surface-variant/12 border",
+  "h-8 flex items-center whitespace-nowrap gap-2 rounded-lg text-sm leading-5 px-4 text-on-surface-variant font-medium bg-transparent state-layer hover:after:bg-on-surface-variant/8 focus:after:bg-on-surface-variant/12 active:after:bg-on-surface-variant/12 border transition-spacing duration-100 ease-out	",
   {
     variants: {
       status: {
