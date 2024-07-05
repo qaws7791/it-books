@@ -8,6 +8,7 @@ import {
 } from "@/src/ui/components/bottom-sheets";
 import Chip from "@/src/ui/components/chip";
 import type { Meta, StoryObj } from "@storybook/react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -70,7 +71,7 @@ export const Filter: Story = {
     },
   },
   render: () => {
-    const [selected, , toggle] = useBoolean(false);
+    const [selected, , toggle] = useBoolean(true);
 
     return (
       <Chip
@@ -78,9 +79,42 @@ export const Filter: Story = {
         onClick={toggle}
         className={selected ? "pl-2" : ""}
       >
-        {selected && (
-          <span className="material-icons text-lg leading-none">check</span>
-        )}
+        <AnimatePresence>
+          {selected ? (
+            <motion.svg
+              width="600"
+              height="600"
+              viewBox="0 0 600 600"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-4.5 h-4.5"
+              initial={{ width: 0 }}
+              animate={{ width: 18 }}
+              exit={{ width: 0 }}
+              transition={{
+                duration: 0.1,
+                ease: "easeOut",
+              }}
+            >
+              <motion.path
+                d="M103 319L222 438L498 162"
+                fill="transparent"
+                stroke="currentColor"
+                strokeWidth="60"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                strokeLinecap={"round"}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeInOut",
+                  type: "spring",
+                  bounce: 0.25,
+                }}
+                custom={0}
+              />
+            </motion.svg>
+          ) : null}
+        </AnimatePresence>
         Soft
       </Chip>
     );
@@ -102,7 +136,7 @@ export const Menu: Story = {
     return (
       <BottomSheets>
         <BottomSheetsTrigger asChild>
-          <Chip status={"unselected"} className="pl-2">
+          <Chip status={menu ? "selected" : "unselected"} className="pl-2">
             <span className="material-icons text-lg leading-none">
               calendar_today
             </span>
