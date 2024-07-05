@@ -1,4 +1,6 @@
 import BookList from "@/src/app/(common)/books/book-list";
+import CategoryBooksView from "@/src/app/(common)/books/category-books-view";
+import fetchBooks from "@/src/feature/books/api/fetch-books";
 import { booksOptions } from "@/src/feature/books/hooks/queries";
 import LocalCategoryList from "@/src/feature/categories/components/local-category-list";
 import { getLocalCategory } from "@/src/feature/categories/helpers";
@@ -32,35 +34,49 @@ export function generateMetadata({ searchParams }: BooksPageProps): Metadata {
 }
 
 export default async function BooksPage({ searchParams }: BooksPageProps) {
-  const page = searchParams.page ? Number.parseInt(searchParams.page) : 1;
   const categorySlug = searchParams["category"];
   const category = categorySlug ? getLocalCategory(categorySlug) : undefined;
-  const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(booksOptions({ page, categorySlug }));
+  // books in category page
+  if (category) {
+    const queryClient = new QueryClient();
+    await queryClient.prefetchQuery(
+      booksOptions({ page: 1, limit: 12, categorySlug }),
+    );
+    return (
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <PageContainer>
+          <CategoryBooksView
+            category={category}
+            page={Number.parseInt(searchParams.page || "1", 10)}
+            limit={12}
+          />
+        </PageContainer>
+      </HydrationBoundary>
+    );
+  }
+
+  // books in home page
+  const { data: books } = await fetchBooks({ page: 1, limit: 12 });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <PageContainer>
-        <h1 className="sr-only">Books</h1>
-        <section className="flex items-center justify-center w-full h-96 rounded-3xl bg-surface-container mb-16 ">
-          <h2 className="text-4xl font-bold">
-            {category ? category.name : "책 목록"}
-          </h2>
-        </section>
-        <h2 className="text-2xl font-bold my-8">카테고리</h2>
-        <LocalCategoryList currentCategory={category} />
-        <h2 className="text-2xl font-bold my-8">책 목록</h2>
-        <Suspense
-          fallback={
-            <div className="flex justify-center">
-              <Spinner />
-            </div>
-          }
-        >
-          <BookList page={page} limit={12} categorySlug={categorySlug} />
-        </Suspense>
-      </PageContainer>
-    </HydrationBoundary>
+    <PageContainer>
+      <h1 className="sr-only">Books</h1>
+      <section className="flex items-center justify-center w-full h-96 rounded-3xl bg-surface-container mb-16 ">
+        <h2 className="text-4xl font-bold">책 목록</h2>
+      </section>
+      <h2 className="text-2xl font-bold my-8">카테고리</h2>
+      <LocalCategoryList />
+      <h2 className="text-2xl font-bold my-8">책 목록</h2>
+      <Suspense
+        fallback={
+          <div className="flex justify-center">
+            <Spinner />
+          </div>
+        }
+      >
+        <BookList books={books} />
+      </Suspense>
+    </PageContainer>
   );
 }

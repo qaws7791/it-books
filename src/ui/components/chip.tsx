@@ -6,7 +6,19 @@ import { cva, type VariantProps } from "class-variance-authority";
 import React from "react";
 
 const chipVariants = cva(
-  "h-8 flex items-center whitespace-nowrap gap-2 border border-outline rounded-lg text-sm leading-5 py-1 px-3 text-on-surface-variant font-medium bg-transparent state-layer hover:after:bg-on-surface-variant/8 focus:after:bg-on-surface-variant/12 active:after:bg-on-surface-variant/12 has-[button]:pr-2",
+  "h-8 flex items-center whitespace-nowrap gap-2 rounded-lg text-sm leading-5 px-4 text-on-surface-variant font-medium bg-transparent state-layer hover:after:bg-on-surface-variant/8 focus:after:bg-on-surface-variant/12 active:after:bg-on-surface-variant/12 border transition-spacing duration-100 ease-out	",
+  {
+    variants: {
+      status: {
+        unselected: "border-outline",
+        selected:
+          "border-transparent bg-secondary-container text-on-secondary-container",
+      },
+    },
+    defaultVariants: {
+      status: "unselected",
+    },
+  },
 );
 
 export interface ChipProps
@@ -16,22 +28,13 @@ export interface ChipProps
 }
 
 const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
-  ({ className, asChild, children, onClick, type, ...props }, ref) => {
+  ({ className, asChild, children, type, status, ...props }, ref) => {
     const Compo = asChild ? Slot : "button";
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.stopPropagation();
-      if (onClick) {
-        event.preventDefault();
-        onClick(event);
-      }
-    };
 
     return (
       <Compo
         type={type ?? (Compo === "button" ? "button" : undefined)}
-        onClick={handleClick}
-        className={cn(chipVariants({ className }), onClick && "cursor-pointer")}
+        className={cn(chipVariants({ className, status }))}
         ref={ref}
         {...props}
       >
