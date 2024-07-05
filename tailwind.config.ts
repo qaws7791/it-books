@@ -192,6 +192,9 @@ const config: Config = {
         "6": "6px",
         "8": "8px",
       },
+      transitionProperty: {
+        spacing: "margin, padding",
+      },
     },
   },
   plugins: [],
