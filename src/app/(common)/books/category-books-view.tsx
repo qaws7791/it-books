@@ -23,7 +23,8 @@ export default function CategoryBooksView({
     data: { data: books, pagination },
   } = useSuspenseQuery(booksOptions({ page, limit, categorySlug }));
 
-  if (pagination.count === 0 || pagination.currentPage > pagination.lastPage) {
+  // 만약 페이지가 마지막 페이지보다 크다면 첫 페이지로 리다이렉트
+  if (pagination.currentPage > pagination.lastPage) {
     redirect(`/books?category=${category.slug}&page=1`);
   }
 

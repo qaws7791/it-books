@@ -1,4 +1,5 @@
 "use client";
+import useWindowSize from "@/src/feature/shared/hooks/use-window-size";
 import { cn } from "@/src/feature/shared/lib/utils";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { AnimatePresence, HTMLMotionProps, motion } from "framer-motion";
@@ -72,8 +73,8 @@ export const BottomSheetsContent = React.forwardRef<
     { className, children, height = 0, duration = 0.3, ...props },
     forwardedRef,
   ) => {
-    const y = window.innerHeight - height;
-
+    const { height: windowHeight } = useWindowSize();
+    const y = Math.max(windowHeight - height, 0);
     const { open, setOpen } = useBottomSheet();
     return (
       <AnimatePresence>
@@ -91,22 +92,22 @@ export const BottomSheetsContent = React.forwardRef<
             <DialogPrimitive.Content asChild>
               <motion.div
                 ref={forwardedRef}
-                initial={{ y }}
-                animate={{ y: 0 }}
-                exit={{ y }}
-                transition={{ duration, ease: "easeOut" }}
+                initial={{ y: windowHeight }}
+                animate={{ y }}
+                exit={{ y: windowHeight }}
+                transition={{ duration, ease: "easeInOut" }}
                 className={cn(
-                  "fixed bottom-0  left-1/2 h-full max-h-[95%] bg-surface-container-low z-40 p-4 shadow-1 rounded-t-3xl w-full max-w-screen-sm",
+                  "fixed top-0  left-1/2 h-[200vh] bg-surface-container-low z-40 p-4 shadow-1 rounded-t-3xl w-full max-w-screen-sm",
                   className,
                 )}
                 style={{
-                  translateY: y,
                   translateX: "-50%",
                 }}
                 drag="y"
-                dragConstraints={{ top: 0, bottom: 0 }}
+                dragConstraints={{ top: y, bottom: y }}
                 onDragEnd={(_event, info) => {
-                  if (info.offset.y > 50) setOpen(false);
+                  if (info.offset.y > 50 || info.velocity.y > 200)
+                    setOpen(false);
                 }}
                 {...props}
               >
