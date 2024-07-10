@@ -9,7 +9,8 @@ import {
   BottomSheetsTrigger,
 } from "@/src/ui/components/bottom-sheets";
 import Chip from "@/src/ui/components/chip";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 
 interface CategoryChipProps {
   category?: LocalCategory;
@@ -17,7 +18,18 @@ interface CategoryChipProps {
 
 export default function CategoryChip({ category }: CategoryChipProps) {
   const router = useRouter();
-  console.log("category", category);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
+
   const hasCategory = category?.name !== "전체";
   return (
     <BottomSheets>
@@ -35,7 +47,11 @@ export default function CategoryChip({ category }: CategoryChipProps) {
             <BottomSheetsClose asChild key={category.slug}>
               <li
                 onClick={() => {
-                  router.push(`/books?category=${category.slug}`);
+                  router.push(
+                    pathname +
+                      "?" +
+                      createQueryString("category", category.slug),
+                  );
                 }}
                 className="cursor-pointer mx-auto py-4 text-center hover:bg-surface-container-high flex items-center justify-start gap-4 rounded-2xl p-4"
               >
