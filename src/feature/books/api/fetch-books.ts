@@ -13,8 +13,10 @@ export default function fetchBooks({
   query,
   categorySlug,
   tag,
+  orderBy,
+  order,
 }: BookSearchParams): Promise<FetchBooksOutput> {
   return api.get("/books", {
-    params: { page, limit, query, categorySlug, tag },
+    params: { page, limit, query, categorySlug, tag, orderBy, order },
   });
 }

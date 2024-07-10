@@ -25,8 +25,18 @@ export const booksOptions = ({
   query,
   categorySlug,
   tag,
+  orderBy,
+  order,
 }: BookSearchParams) => {
-  const bookSearchParams = { page, limit, query, categorySlug, tag };
+  const bookSearchParams = {
+    page,
+    limit,
+    query,
+    categorySlug,
+    tag,
+    orderBy,
+    order,
+  };
   return queryOptions({
     queryKey: bookQueryKeys.fetchBooks(bookSearchParams).queryKey,
     queryFn: () => fetchBooks(bookSearchParams),
