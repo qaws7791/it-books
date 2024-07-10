@@ -38,3 +38,41 @@ export const BOOK_STATUS: Record<
     label: "미발간",
   },
 };
+
+export type SortOption = {
+  label: string;
+  value: string;
+  orderBy: "createdAt" | "publishedDate" | "pages";
+  order: "ASC" | "DESC";
+  iconName: string;
+  default: boolean;
+};
+
+export const sortOptions: Record<string, SortOption> = {
+  latest: {
+    label: "최신순",
+    value: "latest",
+    orderBy: "createdAt",
+    order: "DESC",
+    iconName: "sort",
+    default: true,
+  },
+  publishedAt: {
+    label: "출간일순",
+    value: "publishedAt",
+    orderBy: "publishedDate",
+    order: "DESC",
+    iconName: "calendar_today",
+    default: false,
+  },
+  pageLow: {
+    label: "페이지 적은 순",
+    value: "pageLow",
+    orderBy: "pages",
+    order: "ASC",
+    iconName: "format_list_numbered",
+    default: false,
+  },
+};
+
+export const sortOptionArray = Object.values(sortOptions);
