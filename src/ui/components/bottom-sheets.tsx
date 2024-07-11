@@ -105,6 +105,10 @@ export const BottomSheetsContent = React.forwardRef<
                 }}
                 drag="y"
                 dragConstraints={{ top: y, bottom: y }}
+                dragElastic={{
+                  top: 0.001,
+                  bottom: 0.5,
+                }}
                 onDragEnd={(_event, info) => {
                   if (info.offset.y > 50 || info.velocity.y > 200)
                     setOpen(false);
