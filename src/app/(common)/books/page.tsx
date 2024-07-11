@@ -1,6 +1,7 @@
 import BookList from "@/src/app/(common)/books/book-list";
 import CategoryBooksView from "@/src/app/(common)/books/category-books-view";
 import fetchBooks from "@/src/feature/books/api/fetch-books";
+import { sortOptions } from "@/src/feature/books/constants";
 import { booksOptions } from "@/src/feature/books/hooks/queries";
 import LocalCategoryList from "@/src/feature/categories/components/local-category-list";
 import { getLocalCategory } from "@/src/feature/categories/helpers";
@@ -13,6 +14,7 @@ import {
 } from "@tanstack/react-query";
 import { Metadata } from "next";
 import { Suspense } from "react";
+import { z } from "zod";
 
 // categories about it books
 
@@ -20,6 +22,7 @@ interface BooksPageProps {
   searchParams: {
     page?: string;
     category?: string;
+    sort?: "latest" | "publishedAt" | "pageLow";
   };
 }
 
@@ -36,17 +39,25 @@ export function generateMetadata({ searchParams }: BooksPageProps): Metadata {
 export default async function BooksPage({ searchParams }: BooksPageProps) {
   const categorySlug = searchParams["category"];
   const category = categorySlug ? getLocalCategory(categorySlug) : undefined;
+  const sort =
+    z.enum(["latest", "publishedAt", "pageLow"]).safeParse(searchParams["sort"])
+      ?.data ?? "latest";
+
+  const sortOption = sortOptions[sort];
+  const orderBy = sortOption.orderBy;
+  const order = sortOption.order;
 
   // books in category page
   if (category) {
     const queryClient = new QueryClient();
     await queryClient.prefetchQuery(
-      booksOptions({ page: 1, limit: 12, categorySlug }),
+      booksOptions({ page: 1, limit: 12, categorySlug, orderBy, order }),
     );
     return (
       <HydrationBoundary state={dehydrate(queryClient)}>
         <PageContainer>
           <CategoryBooksView
+            sort={sortOption}
             category={category}
             page={Number.parseInt(searchParams.page || "1", 10)}
             limit={12}

@@ -1,6 +1,8 @@
 "use client";
 import BookList from "@/src/app/(common)/books/book-list";
 import CategoryChip from "@/src/app/(common)/books/category-chip";
+import SortChip from "@/src/app/(common)/books/sort-chip";
+import { SortOption } from "@/src/feature/books/constants";
 import { booksOptions } from "@/src/feature/books/hooks/queries";
 import { LocalCategory } from "@/src/feature/categories/types";
 import CommonPagination from "@/src/feature/shared/components/common-pagination";
@@ -11,17 +13,27 @@ interface CategoryBooksViewProps {
   category: LocalCategory;
   page: number;
   limit: number;
+  sort: SortOption;
 }
 
 export default function CategoryBooksView({
   category,
   page,
   limit,
+  sort,
 }: CategoryBooksViewProps) {
   const categorySlug = category.name === "전체" ? undefined : category.slug;
   const {
     data: { data: books, pagination },
-  } = useSuspenseQuery(booksOptions({ page, limit, categorySlug }));
+  } = useSuspenseQuery(
+    booksOptions({
+      page,
+      limit,
+      categorySlug,
+      orderBy: sort.orderBy,
+      order: sort.order,
+    }),
+  );
 
   // 만약 페이지가 마지막 페이지보다 크다면 첫 페이지로 리다이렉트
   if (pagination.currentPage > pagination.lastPage) {
@@ -36,6 +48,7 @@ export default function CategoryBooksView({
       </p>
       <div id="filters" className="p-4 flex justify-center items-center">
         <CategoryChip category={category} />
+        <SortChip />
       </div>
       <BookList books={books} />
       <CommonPagination currentPage={page} totalPages={pagination.lastPage} />
