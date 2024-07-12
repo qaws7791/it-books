@@ -6,6 +6,7 @@ import { booksOptions } from "@/src/feature/books/hooks/queries";
 import LocalCategoryList from "@/src/feature/categories/components/local-category-list";
 import { getLocalCategory } from "@/src/feature/categories/helpers";
 import PageContainer from "@/src/feature/shared/components/layout/page-container";
+import QueryString from "@/src/feature/shared/utils/querystring";
 import Spinner from "@/src/ui/components/spinner";
 import {
   dehydrate,
@@ -49,9 +50,10 @@ export default async function BooksPage({ searchParams }: BooksPageProps) {
 
   // books in category page
   if (category) {
+    const page = QueryString.toNumber(searchParams.page) ?? 1;
     const queryClient = new QueryClient();
     await queryClient.prefetchQuery(
-      booksOptions({ page: 1, limit: 12, categorySlug, orderBy, order }),
+      booksOptions({ limit: 12, page, categorySlug, orderBy, order }),
     );
     return (
       <HydrationBoundary state={dehydrate(queryClient)}>
@@ -59,7 +61,7 @@ export default async function BooksPage({ searchParams }: BooksPageProps) {
           <CategoryBooksView
             sort={sortOption}
             category={category}
-            page={Number.parseInt(searchParams.page || "1", 10)}
+            page={page}
             limit={12}
           />
         </PageContainer>

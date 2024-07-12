@@ -1,17 +1,19 @@
 import BookUpdateForm from "@/src/app/(admin)/admin/books/update/book-update-form";
 import PageContainer from "@/src/feature/shared/components/layout/page-container";
+import QueryString from "@/src/feature/shared/utils/querystring";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 interface AdminBookUpdatePageProperties {
   searchParams: {
-    bookId: number;
+    bookId?: string;
   };
 }
 
 export default function AdminBookUpdatePage({
-  searchParams: { bookId },
+  searchParams,
 }: AdminBookUpdatePageProperties) {
+  const bookId = QueryString.toNumber(searchParams?.bookId);
   if (!bookId) {
     return <PageContainer>책 ID가 필요합니다.</PageContainer>;
   }

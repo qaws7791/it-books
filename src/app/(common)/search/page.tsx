@@ -1,5 +1,6 @@
 import SearchClient from "@/src/app/(common)/search/search-client";
 import PageContainer from "@/src/feature/shared/components/layout/page-container";
+import QueryString from "@/src/feature/shared/utils/querystring";
 import { Metadata } from "next";
 
 interface SearchPageProperties {
@@ -30,21 +31,14 @@ export default function SearchPage({ searchParams }: SearchPageProperties) {
   }
 
   const decodedQuery = decodeURIComponent(searchParams.query);
-
+  const page = QueryString.toNumber(searchParams.page);
+  const limit = QueryString.toNumber(searchParams.limit);
   return (
     <PageContainer>
       <h1 className="text-4xl text-center">
         &quot;{decodedQuery}&quot; 검색 결과
       </h1>
-      <SearchClient
-        query={decodedQuery}
-        page={
-          searchParams.page ? Number.parseInt(searchParams.page) : undefined
-        }
-        limit={
-          searchParams.limit ? Number.parseInt(searchParams.limit) : undefined
-        }
-      />
+      <SearchClient query={decodedQuery} page={page} limit={limit} />
     </PageContainer>
   );
 }

@@ -1,5 +1,6 @@
 import ListsClient from "@/src/app/(common)/lists/lists-client";
 import PageContainer from "@/src/feature/shared/components/layout/page-container";
+import QueryString from "@/src/feature/shared/utils/querystring";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,7 +14,7 @@ interface ListsPageProps {
 }
 
 export default function CollectionsPage({ searchParams }: ListsPageProps) {
-  const page = searchParams.page ? Number.parseInt(searchParams.page) : 1;
+  const page = QueryString.toNumber(searchParams.page);
   return (
     <PageContainer>
       <h1 className="sr-only">Collections</h1>
