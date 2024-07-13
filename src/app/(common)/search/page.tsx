@@ -15,9 +15,9 @@ export function generateMetadata({
   searchParams,
 }: SearchPageProperties): Metadata {
   const decodedQuery = decodeURIComponent(searchParams.query || "");
-
+  const page = QueryString.toNumber(searchParams.page);
   return {
-    title: `"${decodedQuery}" 검색 결과`,
+    title: `"${decodedQuery}" 검색 결과` + (page ? ` - ${page} 페이지` : ""),
   };
 }
 

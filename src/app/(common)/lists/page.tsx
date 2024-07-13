@@ -3,9 +3,12 @@ import PageContainer from "@/src/feature/shared/components/layout/page-container
 import QueryString from "@/src/feature/shared/utils/querystring";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "리스트 목록",
-};
+export function generateMetadata({ searchParams }: ListsPageProps): Metadata {
+  const page = QueryString.toNumber(searchParams.page);
+  return {
+    title: "리스트" + (page ? ` - ${page} 페이지` : ""),
+  };
+}
 
 interface ListsPageProps {
   searchParams: {

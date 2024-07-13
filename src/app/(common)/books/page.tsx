@@ -31,9 +31,10 @@ export function generateMetadata({ searchParams }: BooksPageProps): Metadata {
   const category = searchParams.category
     ? getLocalCategory(searchParams.category)
     : null;
+  const page = QueryString.toNumber(searchParams.page);
   const title = category ? `${category.name}` : "책 목록";
   return {
-    title: title,
+    title: title + (page ? ` - ${page} 페이지` : ""),
   };
 }
 
