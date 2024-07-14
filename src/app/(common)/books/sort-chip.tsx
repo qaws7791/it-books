@@ -1,6 +1,5 @@
 "use client";
-import LOCAL_CATEGORIES from "@/src/feature/categories/constants/local-categories";
-import { LocalCategory } from "@/src/feature/categories/types";
+import { sortOptionArray, sortOptions } from "@/src/feature/books/constants";
 import {
   BottomSheets,
   BottomSheetsClose,
@@ -11,15 +10,17 @@ import {
 import Chip from "@/src/ui/components/chip";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
+import { z } from "zod";
 
-interface CategoryChipProps {
-  category?: LocalCategory;
-}
-
-export default function CategoryChip({ category }: CategoryChipProps) {
+export default function SortChip() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const sort =
+    z
+      .enum(["latest", "publishedAt", "pageLow"])
+      .safeParse(searchParams.get("sort"))?.data ?? "latest";
+
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -30,35 +31,35 @@ export default function CategoryChip({ category }: CategoryChipProps) {
     [searchParams],
   );
 
-  const hasCategory = category?.name !== "전체";
   return (
     <BottomSheets>
       <BottomSheetsTrigger asChild>
-        <Chip status={hasCategory ? "selected" : "unselected"} className="pl-2">
-          <span className="material-icons text-lg leading-none">category</span>
-          {category?.name ?? "카테고리"}
+        <Chip
+          status={sort === "latest" ? "unselected" : "selected"}
+          className="pl-2"
+        >
+          <span className="material-icons text-lg leading-none">sort</span>
+          {sortOptions[sort].label}
         </Chip>
       </BottomSheetsTrigger>
       <BottomSheetsContent height={650} duration={0.5}>
         <BottomSheetsHandle />
-        <h1 className="font-bold px-4 py-2">카테고리</h1>
+        <h1 className="font-bold px-4 py-2">정렬</h1>
         <ul>
-          {LOCAL_CATEGORIES.map((category) => (
-            <BottomSheetsClose asChild key={category.slug}>
+          {sortOptionArray.map((option) => (
+            <BottomSheetsClose asChild key={option.value}>
               <li
                 onClick={() => {
                   router.push(
-                    pathname +
-                      "?" +
-                      createQueryString("category", category.slug),
+                    pathname + "?" + createQueryString("sort", option.value),
                   );
                 }}
                 className="cursor-pointer mx-auto py-4 text-center hover:bg-surface-container-high flex items-center justify-start gap-4 rounded-2xl p-4"
               >
                 <span className="material-icons w-10 h-10 rounded-full bg-on-tertiary-container/20 flex items-center justify-center flex-shrink-0">
-                  {category.iconName}
+                  {option.iconName}
                 </span>
-                {category.name}
+                {option.label}
               </li>
             </BottomSheetsClose>
           ))}

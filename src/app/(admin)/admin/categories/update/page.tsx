@@ -1,12 +1,13 @@
 import CategoryEditForm from "@/src/app/(admin)/admin/categories/update/category-edit-form";
 import PageContainer from "@/src/feature/shared/components/layout/page-container";
+import QueryString from "@/src/feature/shared/utils/querystring";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 interface AdminCategoryUpdatePageProperties {
   searchParams: {
-    categoryId: number;
+    categoryId?: string;
   };
 }
 
@@ -15,8 +16,10 @@ export const metadata: Metadata = {
 };
 
 export default function AdminCategoryUpdatePage({
-  searchParams: { categoryId },
+  searchParams,
 }: AdminCategoryUpdatePageProperties) {
+  const categoryId = QueryString.toNumber(searchParams?.categoryId);
+
   if (!categoryId) {
     return <PageContainer>카테고리 ID가 필요합니다.</PageContainer>;
   }
