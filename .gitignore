@@ -36,7 +36,6 @@ yarn-error.log*
 next-env.d.ts
 
 # storybook
-.storybook
 *storybook.log
 
 # environment variables
