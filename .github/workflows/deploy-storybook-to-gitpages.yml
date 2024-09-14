@@ -17,8 +17,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - id: build-publish
-      uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
-      with:
-        path: build # change to your build folder
-        install_command: npm install
+      - id: build-publish
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        with:
+          install_command: npm install
+          build_command: npm run build-storybook
+          path: storybook-static
+          checkout: false
