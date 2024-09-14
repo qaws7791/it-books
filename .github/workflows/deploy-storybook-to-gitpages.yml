@@ -23,4 +23,3 @@ jobs:
           install_command: npm install
           build_command: npm run build-storybook
           path: storybook-static
-          checkout: false
