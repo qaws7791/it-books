@@ -14,7 +14,6 @@ import {
 import { categoriesOptions } from "@/src/feature/categories/hooks/queries";
 
 import { ApiError } from "@/src/feature/shared/api";
-import NextImage from "@/src/feature/shared/components/next-image";
 import { stringToArrayByComma } from "@/src/feature/shared/utils";
 import Button from "@/src/ui/components/button";
 import Description from "@/src/ui/components/description";
@@ -177,13 +176,19 @@ export default function BookCreateForm({ book }: BookCreateFormProps) {
   return (
     <form onSubmit={onSubmit} onKeyDown={checkKeydown}>
       <div className="w-80 h-80">
-        <NextImage
-          src={watch("coverImage") || ""}
-          alt="이미지 미리보기"
-          className="w-80 h-80 object-contain rounded-md"
-          width={200}
-          height={200}
-        />
+        {watch("coverImage") ? (
+          <img
+            src={watch("coverImage")}
+            alt="이미지 미리보기"
+            className="w-80 h-80 object-contain rounded-md"
+            width={200}
+            height={200}
+          />
+        ) : (
+          <div className="w-80 h-80 bg-surface-container-low flex justify-center items-center rounded-md">
+            <p className="text-on-surface-variant">이미지 미리보기</p>
+          </div>
+        )}
       </div>
 
       <FormRow>
