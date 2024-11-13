@@ -46,7 +46,7 @@ export default function CategoryBooksView({
       <p className="text-2xl my-4 text-center">
         {category.name} - {pagination.total}권의 책
       </p>
-      <div id="filters" className="p-4 flex justify-center items-center">
+      <div id="filters" className="p-4 flex justify-center items-center gap-4">
         <CategoryChip category={category} />
         <SortChip />
       </div>
